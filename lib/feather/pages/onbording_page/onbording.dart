@@ -4,6 +4,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:handmade/cors/theme/assets.dart';
 import 'package:handmade/cors/theme/colors.dart';
 import 'package:handmade/feather/pages/Auth/presentaion/views/login_page.dart';
+import 'package:handmade/feather/pages/Auth/presentaion/views/register_pagee.dart';
 import 'package:handmade/feather/pages/onbording_page/widgets/on_bording_items.dart';
 import 'package:handmade/feather/pages/onbording_page/widgets/onbording_image.dart';
 
@@ -43,7 +44,9 @@ class _OnborordingState extends State<Onborording> {
         speed: 1.8,
         pageBackgroundColor: Colors.white,
         finishButtonText: 'Register',
-        onFinish: () {},
+        onFinish: () {
+          Navigator.pushNamed(context, Registerpage.nameKey);
+        },
         finishButtonStyle: const FinishButtonStyle(
           backgroundColor: primary,
         ),
