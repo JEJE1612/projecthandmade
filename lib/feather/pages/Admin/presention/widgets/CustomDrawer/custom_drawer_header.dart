@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:handmade/feather/pages/Admin/presention/widgets/CustomDrawer/owner_Avatar.dart';
+import 'package:handmade/cors/theme/colors.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/CustomDrawer/owner_avatar.dart';
 
 class CustomDrawerHeader extends StatefulWidget {
   final bool isCollapsable;
@@ -28,8 +29,8 @@ class _CustomDrawerHeaderState extends State<CustomDrawerHeader> {
             Expanded(
               child: Text(
                 "Admin",
-                style: const TextStyle(
-                  color: Colors.white,
+                style: TextStyle(
+                  color: textBlack,
                   fontWeight: FontWeight.w600,
                   fontSize: 20,
                 ),

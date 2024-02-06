@@ -92,10 +92,23 @@ class LoginBody extends StatelessWidget {
                               Flexible(
                                 child: TextFormField(
                                   validator: (value) {
-                                    if (value!.isEmpty) {
-                                      return "This field cant Empty";
+                                    if (value == null || value.isEmpty) {
+                                      return "Can't be empty";
+                                    } else if (value.length < 8) {
+                                      return "password must be at least 8 characters";
+                                    } else if (!value
+                                        .contains(RegExp(r'[A-Z]'))) {
+                                      return "Password contains at least one uppercase letter";
+                                    } else if (!value
+                                        .contains(RegExp(r'[a-z]'))) {
+                                      return "Password contains at least one lowercase letter";
                                     }
-                                    return '';
+
+                                    if (!value.contains(
+                                        RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
+                                      return "Password contains at least one special character";
+                                    }
+                                    return null;
                                   },
                                   controller: password,
                                   obscureText:

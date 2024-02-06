@@ -10,7 +10,7 @@ class OwnerAvatar extends StatelessWidget {
       width: 50,
       decoration: BoxDecoration(
           color: primary, borderRadius: BorderRadius.circular(50)),
-      child: Text(
+      child: const Text(
         "C",
         textAlign: TextAlign.center,
         style: TextStyle(

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:handmade/cors/theme/colors.dart';
 
 class CustomListTile extends StatelessWidget {
   final bool isCollapsed;
@@ -37,12 +38,12 @@ class CustomListTile extends StatelessWidget {
                 count: infoCount,
                 isLabelVisible: infoCount > 0,
                 textStyle: const TextStyle(
-                  color: Colors.white,
+                  color: success,
                   overflow: TextOverflow.ellipsis,
                   fontWeight: FontWeight.w600,
                   fontSize: 10,
                 ),
-                child: Icon(icon, color: Colors.white),
+                child: Icon(icon, color: primary),
               ),
               if (isCollapsed) ...[
                 const Expanded(
@@ -54,7 +55,7 @@ class CustomListTile extends StatelessWidget {
                     title,
                     overflow: TextOverflow.ellipsis,
                     style: const TextStyle(
-                      color: Colors.white,
+                      color: textBlack,
                       fontWeight: FontWeight.w600,
                       fontSize: 14,
                     ),

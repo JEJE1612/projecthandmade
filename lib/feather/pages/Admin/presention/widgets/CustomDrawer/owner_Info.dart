@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:handmade/feather/pages/Admin/presention/widgets/CustomDrawer/owner_Avatar.dart';
+import 'package:handmade/cors/theme/colors.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/CustomDrawer/owner_avatar.dart';
 
 class OwnerInfo extends StatelessWidget {
   final bool isCollapsed;
@@ -30,7 +31,7 @@ class OwnerInfo extends StatelessWidget {
                     child: OwnerAvatar(),
                   ),
                   const SizedBox(width: 10),
-                  Expanded(
+                  const Expanded(
                     flex: 3,
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
@@ -43,8 +44,8 @@ class OwnerInfo extends StatelessWidget {
                             "Ahmed",
                             overflow: TextOverflow.clip,
                             maxLines: 1,
-                            style: const TextStyle(
-                              color: Colors.white,
+                            style: TextStyle(
+                              color: textBlack,
                               fontWeight: FontWeight.bold,
                               fontSize: 14,
                             ),
@@ -58,8 +59,8 @@ class OwnerInfo extends StatelessWidget {
                             "Am12200101",
                             overflow: TextOverflow.clip,
                             maxLines: 1,
-                            style: const TextStyle(
-                              color: Colors.white,
+                            style: TextStyle(
+                              color: textBlack,
                               fontSize: 12,
                             ),
                           ),
@@ -70,11 +71,11 @@ class OwnerInfo extends StatelessWidget {
                   Expanded(
                     child: IconButton(
                       onPressed: () async {
-//await AdminBloc.get(context).signOut();
+                        //await AdminBloc.get(context).signOut();
                       },
                       icon: const Icon(
                         Icons.logout,
-                        color: Colors.white,
+                        color: primary,
                       ),
                     ),
                   ),
@@ -93,7 +94,7 @@ class OwnerInfo extends StatelessWidget {
                     },
                     icon: const Icon(
                       Icons.logout,
-                      color: Colors.white,
+                      color: primary,
                     ),
                   ),
                 ),

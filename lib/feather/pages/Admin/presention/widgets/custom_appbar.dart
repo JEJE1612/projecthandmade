@@ -8,9 +8,13 @@ class MainAppBar extends StatelessWidget {
   const MainAppBar({
     Key? key,
     required this.size,
+    required this.text,
+    this.onPressed,
   }) : super(key: key);
 
   final Size size;
+  final String text;
+  final Function()? onPressed;
 
   @override
   Widget build(BuildContext context) {
@@ -33,9 +37,18 @@ class MainAppBar extends StatelessWidget {
                   children: [
                     Row(
                       children: [
-                        const Text(
-                          "Delivery Details",
-                          style: TextStyle(
+                        IconButton(
+                          onPressed: onPressed,
+                          icon: const Icon(
+                            Icons.reorder_outlined,
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 10,
+                        ),
+                        Text(
+                          text,
+                          style: const TextStyle(
                               color: textBlack,
                               fontSize: 18,
                               fontWeight: FontWeight.bold),

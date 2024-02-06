@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:handmade/feather/pages/Admin/presention/widgets/CustomDrawer/custom_DrawerHeader.dart';
-import 'package:handmade/feather/pages/Admin/presention/widgets/CustomDrawer/custom_ListTile.dart';
+import 'package:handmade/cors/theme/colors.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/CustomDrawer/custom_drawer_header.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/CustomDrawer/custom_list_tile.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/CustomDrawer/owner_Info.dart';
 
 class CustomDrawer extends StatefulWidget {
@@ -24,7 +25,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
           bottomRight: Radius.circular(10),
           topRight: Radius.circular(10),
         ),
-        color: Color(0xFF141414),
+        color: textFieldBg,
       ),
       child: SafeArea(
         child: ListView(
@@ -112,7 +113,7 @@ class _CustomDrawerState extends State<CustomDrawer> {
                 splashColor: Colors.transparent,
                 icon: Icon(
                   _isCollapsed ? Icons.arrow_back_ios : Icons.arrow_forward_ios,
-                  color: Colors.white,
+                  color: primary,
                   size: 16,
                 ),
                 onPressed: () {
