@@ -6,8 +6,8 @@ import 'package:handmade/cors/theme/colors.dart';
 import 'package:handmade/cors/theme/helper.dart';
 import 'package:handmade/cors/theme/padding.dart';
 import 'package:handmade/feather/pages/Admin/presention/views/home_admin.dart';
-import 'package:handmade/feather/pages/Auth/mangment/bloc_login/LoginBloc.dart';
-import 'package:handmade/feather/pages/Auth/mangment/bloc_login/LoginState.dart';
+import 'package:handmade/feather/pages/Auth/mangment/bloc_login/login_bloc.dart';
+import 'package:handmade/feather/pages/Auth/mangment/bloc_login/login_state.dart';
 import 'package:handmade/feather/pages/Auth/presentaion/views/register_pagee.dart';
 import 'package:handmade/feather/pages/Auth/presentaion/widgets/custom_text_formfaild.dart';
 

@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:handmade/cors/theme/colors.dart';
 import 'package:handmade/cors/theme/padding.dart';
-import 'package:handmade/feather/pages/Auth/mangment/bloc_register/CreatAccoubtState.dart';
-import 'package:handmade/feather/pages/Auth/mangment/bloc_register/creatAccountBloc.dart';
+import 'package:handmade/feather/pages/Auth/mangment/bloc_register/register_blocs.dart';
+import 'package:handmade/feather/pages/Auth/mangment/bloc_register/register_state.dart';
 import 'package:handmade/feather/pages/Auth/presentaion/views/login_page.dart';
 import 'package:handmade/feather/pages/Auth/presentaion/widgets/custom_text_formfaild.dart';
 

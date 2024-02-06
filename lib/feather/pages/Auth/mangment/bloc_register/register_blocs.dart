@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:handmade/feather/pages/Auth/mangment/bloc_register/CreatAccoubtState.dart';
+import 'package:handmade/feather/pages/Auth/mangment/bloc_register/register_state.dart';
 
 class CreatAccount extends Cubit<CratAccountState> {
   CreatAccount() : super(InitalState());
