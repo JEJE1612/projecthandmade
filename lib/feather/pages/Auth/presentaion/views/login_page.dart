@@ -5,6 +5,7 @@ import 'package:handmade/cors/theme/assets.dart';
 import 'package:handmade/cors/theme/colors.dart';
 import 'package:handmade/cors/theme/helper.dart';
 import 'package:handmade/cors/theme/padding.dart';
+import 'package:handmade/feather/pages/Admin/presention/views/home_admin.dart';
 import 'package:handmade/feather/pages/Auth/mangment/bloc_login/LoginBloc.dart';
 import 'package:handmade/feather/pages/Auth/mangment/bloc_login/LoginState.dart';
 import 'package:handmade/feather/pages/Auth/presentaion/views/register_pagee.dart';
@@ -137,6 +138,7 @@ class LoginBody extends StatelessWidget {
                   const Gap(40),
                   InkWell(
                     onTap: () {
+                      Navigator.pushNamed(context, HomeAdmin.nameKey);
                       if (formkey.currentState!.validate()) {}
                     },
                     child: const CustomButtonAuth(
