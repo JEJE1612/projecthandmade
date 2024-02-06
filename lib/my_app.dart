@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:handmade/feather/pages/Auth/presentaion/views/login_page.dart';
+import 'package:handmade/feather/pages/Auth/presentaion/views/register_pagee.dart';
 import 'package:handmade/feather/pages/onbording_page/onbording.dart';
 import 'package:handmade/feather/pages/splach_screen/presentaion/views/splach.dart';
 
@@ -17,6 +18,7 @@ class MyApp extends StatelessWidget {
         SplashView.nameKey: (_) => const SplashView(),
         Onborording.nameKey: (_) => const Onborording(),
         LoginPage.nameKey: (_) => const LoginPage(),
+        Registerpage.nameKey: (_) => const Registerpage(),
       },
     );
   }
