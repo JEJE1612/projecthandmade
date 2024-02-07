@@ -5,7 +5,6 @@ import 'package:handmade/cors/theme/assets.dart';
 import 'package:handmade/cors/theme/colors.dart';
 import 'package:handmade/cors/theme/helper.dart';
 import 'package:handmade/cors/theme/padding.dart';
-import 'package:handmade/feather/pages/Admin/presention/views/home_admin.dart';
 import 'package:handmade/feather/pages/Auth/mangment/bloc_login/login_bloc.dart';
 import 'package:handmade/feather/pages/Auth/mangment/bloc_login/login_state.dart';
 import 'package:handmade/feather/pages/Auth/presentaion/views/forgetpassword.dart';
@@ -42,7 +41,7 @@ class LoginBody extends StatelessWidget {
               body: Padding(
             padding: const EdgeInsets.all(mainPadding),
             child: Form(
-              key: BlocProvider.of<LoginBloc>(context).formkey,
+              key:formkey,
               child: ListView(
                 children: [
                   SizedBox(
@@ -81,56 +80,38 @@ class LoginBody extends StatelessWidget {
                         height: 10,
                       ),
                       Container(
-                        // width: double.infinity,
-                        //height: 45,
                         decoration: BoxDecoration(
                             color: textFieldBg,
                             borderRadius: BorderRadius.circular(5)),
-                        child: Padding(
-                          padding: const EdgeInsets.only(left: 15, right: 15),
-                          child: Row(
-                            children: [
-                              Flexible(
-                                child: TextFormField(
-                                  validator: (value) {
-                                    if (value == null || value.isEmpty) {
-                                      return "Can't be empty";
-                                    } else if (value.length < 8) {
-                                      return "password must be at least 8 characters";
-                                    } else if (!value
-                                        .contains(RegExp(r'[A-Z]'))) {
-                                      return "Password contains at least one uppercase letter";
-                                    } else if (!value
-                                        .contains(RegExp(r'[a-z]'))) {
-                                      return "Password contains at least one lowercase letter";
-                                    }
-
-                                    if (!value.contains(
-                                        RegExp(r'[!@#$%^&*(),.?":{}|<>]'))) {
-                                      return "Password contains at least one special character";
-                                    }
-                                    return null;
-                                  },
-                                  controller: password,
-                                  obscureText:
-                                      LoginBloc.get(context).obscureText,
-                                  cursorColor: textBlack,
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: "Enter Password",
-                                    suffixIcon: IconButton(
-                                      onPressed: () {
-                                        LoginBloc.get(context).changepassWord();
-                                      },
-                                      icon: Icon(
-                                        LoginBloc.get(context).icon,
-                                      ),
+                        child: Row(
+                          children: [
+                            Flexible(
+                              child: TextFormField(
+                                validator: (value) {
+                                  if (value == null || value.isEmpty) {
+                                    return "Can't be empty";
+                                  }
+                                  return null;
+                                },
+                                controller: password,
+                                obscureText: LoginBloc.get(context).obscureText,
+                                cursorColor: textBlack,
+                                decoration: InputDecoration(
+                                  border: InputBorder.none,
+                                  errorBorder: const UnderlineInputBorder(),
+                                  hintText: "Enter Password",
+                                  suffixIcon: IconButton(
+                                    onPressed: () {
+                                      LoginBloc.get(context).changepassWord();
+                                    },
+                                    icon: Icon(
+                                      LoginBloc.get(context).icon,
                                     ),
                                   ),
                                 ),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ],
@@ -138,12 +119,11 @@ class LoginBody extends StatelessWidget {
                   const Gap(3),
                   InkWell(
                     onTap: () {
-                  Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ForgetPasswod(),
-                            ));
-                                               
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => const ForgetPasswod(),
+                          ));
                     },
                     child: Container(
                       margin: const EdgeInsets.only(top: 10, bottom: 20),
@@ -158,14 +138,10 @@ class LoginBody extends StatelessWidget {
                   ),
                   const Gap(40),
                   InkWell(
-                    onTap: () {
-                      Navigator.pushNamed(context, HomeAdmin.nameKey);
-                      if (formkey.currentState!.validate()) {}
-                    },
-                    child: const CustomButtonAuth(
-                      text: "login",
-                    ),
-                  ),
+                      onTap: () {
+                        LoginBloc.get(context).loginUser();
+                      },
+                      child: const CustomButtonAuth(text: "Login")),
                   const Gap(40),
                   Row(
                     children: [

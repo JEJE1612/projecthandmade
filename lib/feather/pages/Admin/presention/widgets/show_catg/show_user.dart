@@ -4,9 +4,9 @@ import 'package:handmade/cors/theme/padding.dart';
 
 import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/widgets/custom_bar.dart';
 
-class ShowCatgroies extends StatelessWidget {
+class ShowUser extends StatelessWidget {
   static const String nameKey = "ShowCatgroies";
-  const ShowCatgroies({
+  const ShowUser({
     super.key,
   });
 
@@ -16,7 +16,7 @@ class ShowCatgroies extends StatelessWidget {
       appBar: const PreferredSize(
         preferredSize: Size.fromHeight(80),
         child: CustomAppBar(
-          text: "show",
+          text: "ShowUser",
         ),
       ),
       body: GridView.builder(
@@ -41,7 +41,7 @@ class ShowCatgroies extends StatelessWidget {
                     radius: 45,
                   ),
                   Text(
-                    "Name Catroies",
+                    "name User",
                     style: TextStyle(
                       fontSize: 18,
                       color: textBlack,

@@ -6,12 +6,13 @@ import 'package:handmade/feather/pages/Auth/mangment/bloc_login/login_state.dart
 
 class LoginBloc extends Cubit<LoginState> {
   LoginBloc() : super(InitalState());
+
+  static LoginBloc get(context) => BlocProvider.of(context);
+
   TextEditingController email = TextEditingController();
 
   TextEditingController password = TextEditingController();
-
   var formkey = GlobalKey<FormState>();
-  static LoginBloc get(context) => BlocProvider.of(context);
   var formkeyforget = GlobalKey<FormState>();
   bool obscureText = false;
   IconData icon = Icons.visibility_outlined;
@@ -28,7 +29,9 @@ class LoginBloc extends Cubit<LoginState> {
     try {
       await FirebaseAuth.instance
           .signInWithEmailAndPassword(
-              email: email.text, password: password.text)
+        email: email.text,
+        password: password.text,
+      )
           .then((value) {
         emit(LoginSucssesState(
           uid: value.user!.uid,

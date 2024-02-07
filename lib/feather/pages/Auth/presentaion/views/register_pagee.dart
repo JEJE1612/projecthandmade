@@ -25,6 +25,7 @@ class Registerpage extends StatelessWidget {
           var password = BlocProvider.of<CreatAccount>(context).password;
           var name = BlocProvider.of<CreatAccount>(context).name;
           var phone = BlocProvider.of<CreatAccount>(context).phone;
+          var isCleint = BlocProvider.of<CreatAccount>(context).isClient;
           return Scaffold(
             body: Padding(
               padding: const EdgeInsets.all(mainPadding),
@@ -71,12 +72,50 @@ class Registerpage extends StatelessWidget {
                       head: "password",
                       hintText: "Enter password",
                     ),
+                    const Gap(10),
+                    Row(
+                      children: <Widget>[
+                        Expanded(
+                          child: RadioListTile(
+                            activeColor: primary,
+                            autofocus: true,
+                            selected: !isCleint,
+                            title: const Text('Owner'),
+                            value: 'Owner',
+                            onChanged: (value) {
+                              BlocProvider.of<CreatAccount>(context).type =
+                                  value!;
+                              CreatAccount.get(context).changeIsAdmin();
+                            },
+                            groupValue: isCleint ? null : 'Owner',
+                          ),
+                        ),
+                        Expanded(
+                          child: RadioListTile(
+                            selected: isCleint,
+                            title: const Text('user'),
+                            value: "user",
+                            groupValue: isCleint ? "user" : null,
+                            onChanged: (value) {
+                              BlocProvider.of<CreatAccount>(context).type =
+                                  value!;
+                              CreatAccount.get(context).changeIsAdmin();
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                     const Gap(40),
+                    IconButton(
+                        onPressed: () {
+                          CreatAccount.get(context).userRegister();
+                        },
+                        icon: Icon(Icons.add)),
                     InkWell(
-                      onTap: () {
+                      onTap: () async {
                         if (formkey.currentState!.validate()) {}
                       },
-                      child: const CustomButtonAuth(
+                      child: CustomButtonAuth(
                         text: "Create",
                       ),
                     ),

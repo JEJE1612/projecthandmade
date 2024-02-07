@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:handmade/cors/theme/colors.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/CustomDrawer/custom_drawer_header.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/CustomDrawer/custom_list_tile.dart';
-import 'package:handmade/feather/pages/Admin/presention/widgets/CustomDrawer/owner_Info.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/CustomDrawer/owner_info.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key});
@@ -36,69 +36,57 @@ class _CustomDrawerState extends State<CustomDrawer> {
               // model: AdminBloc.get(context).usermodel,
             ),
             const Divider(color: Colors.grey),
-            //MangmentCatroies
-            CustomListTile(
-              isCollapsed: _isCollapsed,
-              icon: Icons.note_add_outlined,
-              title: 'Add Categories',
-              infoCount: 0,
-              onTap: () {},
+            const Center(
+              child: Text(
+                " catg",
+                style: TextStyle(
+                    color: primary, fontSize: 18, fontWeight: FontWeight.w400),
+              ),
             ),
-
-            CustomListTile(
-              isCollapsed: _isCollapsed,
-              icon: Icons.visibility_outlined,
-              title: 'Show Categories',
-              infoCount: 0,
-              onTap: () {},
-            ),
-            CustomListTile(
-              isCollapsed: _isCollapsed,
-              icon: Icons.delete_outline,
-              title: 'Delete Categories',
-              infoCount: 0,
-              onTap: () {},
-            ),
-
             const Divider(color: Colors.grey),
-
-            //Mangment Consultant
             CustomListTile(
               isCollapsed: _isCollapsed,
-              icon: Icons.supervised_user_circle_sharp,
-              title: 'Show Consultant',
+              icon: Icons.add,
+              title: 'Add catg',
               infoCount: 0,
               onTap: () {},
             ),
             CustomListTile(
               isCollapsed: _isCollapsed,
-              icon: Icons.person_2_outlined,
-              title: 'Show User',
+              icon: Icons.delete,
+              title: 'remove catg',
               infoCount: 0,
               onTap: () {},
             ),
-            CustomListTile(
-              isCollapsed: _isCollapsed,
-              icon: Icons.contact_support_outlined,
-              title: 'Contact Us',
-              infoCount: 0,
-              onTap: () {},
-            ),
-
-            CustomListTile(
-              isCollapsed: _isCollapsed,
-              icon: Icons.delete_outline,
-              title: 'Delete User',
-              infoCount: 0,
-              onTap: () {},
-            ),
-
             const Divider(color: Colors.grey),
-
+            const Center(
+              child: Text(
+                "User",
+                style: TextStyle(
+                    color: primary, fontSize: 18, fontWeight: FontWeight.w400),
+              ),
+            ),
+            const Divider(color: Colors.grey),
             CustomListTile(
               isCollapsed: _isCollapsed,
-              icon: Icons.person_2_outlined,
-              title: 'Profile',
+              icon: Icons.delete,
+              title: 'remove user',
+              infoCount: 0,
+              onTap: () {},
+            ),
+            const Divider(color: Colors.grey),
+            const Center(
+              child: Text(
+                "profail",
+                style: TextStyle(
+                    color: primary, fontSize: 18, fontWeight: FontWeight.w400),
+              ),
+            ),
+            const Divider(color: Colors.grey),
+            CustomListTile(
+              isCollapsed: _isCollapsed,
+              icon: Icons.person,
+              title: 'Edit Profail',
               infoCount: 0,
               onTap: () {},
             ),

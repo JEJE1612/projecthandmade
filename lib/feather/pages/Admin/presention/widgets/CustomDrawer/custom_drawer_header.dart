@@ -26,7 +26,7 @@ class _CustomDrawerHeaderState extends State<CustomDrawerHeader> {
           const OwnerAvatar(),
           if (widget.isCollapsable) ...[
             const SizedBox(width: 10),
-            Expanded(
+            const Expanded(
               child: Text(
                 "Admin",
                 style: TextStyle(

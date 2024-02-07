@@ -8,7 +8,7 @@ import 'package:handmade/feather/pages/Auth/mangment/bloc_register/register_stat
 class CreatAccount extends Cubit<CratAccountState> {
   CreatAccount() : super(InitalState());
   static CreatAccount get(context) => BlocProvider.of(context);
-  String type = "client";
+  String type = "user";
   bool isClient = true;
   TextEditingController email = TextEditingController();
 
@@ -26,6 +26,7 @@ class CreatAccount extends Cubit<CratAccountState> {
   }
 
   Future<void> userRegister() async {
+    print("aaaaaaaaaaaaaaaaaa");
     emit(CreatUserLoadingState());
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(

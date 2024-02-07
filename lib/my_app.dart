@@ -12,7 +12,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Consult_me',
+      title: 'HandMade',
       debugShowCheckedModeBanner: false,
       home: const SplashView(),
       initialRoute: SplashView.nameKey,
@@ -23,7 +23,6 @@ class MyApp extends StatelessWidget {
         Registerpage.nameKey: (_) => const Registerpage(),
         HomeAdmin.nameKey: (_) => const HomeAdmin(),
         ForgetPasswod.nameKey: (_) => const ForgetPasswod(),
-   
       },
     );
   }

@@ -1,2 +1,2 @@
-const String emailadmin = "hand44made@gmail.com";
-const String password = "000000";
+const String emailadmin = "admin";
+const String passwordadmin = "000000";
