@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:gap/gap.dart';
 import 'package:handmade/cors/theme/colors.dart';
 import 'package:handmade/cors/theme/padding.dart';
@@ -18,7 +19,13 @@ class Registerpage extends StatelessWidget {
     return BlocProvider(
       create: (context) => CreatAccount(),
       child: BlocConsumer<CreatAccount, CratAccountState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is SaveDataFireStoreLoding) {
+            EasyLoading.showSuccess('Great Success!');
+            Navigator.pushNamedAndRemoveUntil(
+                context, LoginPage.nameKey, (route) => false);
+          }
+        },
         builder: (context, state) {
           var formkey = BlocProvider.of<CreatAccount>(context).formkey;
           var email = BlocProvider.of<CreatAccount>(context).email;
@@ -50,24 +57,28 @@ class Registerpage extends StatelessWidget {
                     ),
                     const Gap(25),
                     CustomTextFormFaild(
+                      keyboardType: TextInputType.name,
                       controll: name,
                       head: "Name",
                       hintText: "Enter name",
                     ),
                     const Gap(20),
                     CustomTextFormFaild(
+                      keyboardType: TextInputType.emailAddress,
                       controll: email,
                       head: "Email",
                       hintText: "Enter Email",
                     ),
                     const Gap(20),
                     CustomTextFormFaild(
+                      keyboardType: TextInputType.phone,
                       controll: phone,
                       head: "phone",
                       hintText: "Enter phone",
                     ),
                     const Gap(20),
                     CustomTextFormFaild(
+                      keyboardType: TextInputType.visiblePassword,
                       controll: password,
                       head: "password",
                       hintText: "Enter password",
@@ -106,16 +117,12 @@ class Registerpage extends StatelessWidget {
                       ],
                     ),
                     const Gap(40),
-                    IconButton(
-                        onPressed: () {
-                          CreatAccount.get(context).userRegister();
-                        },
-                        icon: Icon(Icons.add)),
                     InkWell(
-                      onTap: () async {
+                      onTap: () {
+                        CreatAccount.get(context).userRegister();
                         if (formkey.currentState!.validate()) {}
                       },
-                      child: CustomButtonAuth(
+                      child: const CustomButtonAuth(
                         text: "Create",
                       ),
                     ),

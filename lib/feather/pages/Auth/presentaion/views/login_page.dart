@@ -3,8 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:handmade/cors/theme/assets.dart';
 import 'package:handmade/cors/theme/colors.dart';
+import 'package:handmade/cors/theme/constant.dart';
 import 'package:handmade/cors/theme/helper.dart';
 import 'package:handmade/cors/theme/padding.dart';
+import 'package:handmade/feather/pages/Admin/presention/views/home_admin.dart';
 import 'package:handmade/feather/pages/Auth/mangment/bloc_login/login_bloc.dart';
 import 'package:handmade/feather/pages/Auth/mangment/bloc_login/login_state.dart';
 import 'package:handmade/feather/pages/Auth/presentaion/views/forgetpassword.dart';
@@ -32,16 +34,19 @@ class LoginBody extends StatelessWidget {
     return BlocProvider(
       create: (context) => LoginBloc(),
       child: BlocConsumer<LoginBloc, LoginState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is LoginSucssesState) {}
+        },
         builder: (context, state) {
           var email = BlocProvider.of<LoginBloc>(context).email;
           var password = BlocProvider.of<LoginBloc>(context).password;
           var formkey = BlocProvider.of<LoginBloc>(context).formkey;
+
           return Scaffold(
               body: Padding(
             padding: const EdgeInsets.all(mainPadding),
             child: Form(
-              key:formkey,
+              key: formkey,
               child: ListView(
                 children: [
                   SizedBox(
@@ -61,6 +66,7 @@ class LoginBody extends StatelessWidget {
                   ),
                   const Gap(40),
                   CustomTextFormFaild(
+                    keyboardType: TextInputType.emailAddress,
                     controll: email,
                     head: "Email",
                     hintText: "Enter Email",
@@ -139,6 +145,11 @@ class LoginBody extends StatelessWidget {
                   const Gap(40),
                   InkWell(
                       onTap: () {
+                        if (email.text == emailadmin &&
+                            password.text == passwordadmin) {
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, HomeAdmin.nameKey, (route) => false);
+                        }
                         LoginBloc.get(context).loginUser();
                       },
                       child: const CustomButtonAuth(text: "Login")),

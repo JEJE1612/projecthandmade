@@ -8,7 +8,11 @@ class CustomDrawerHeader extends StatefulWidget {
   const CustomDrawerHeader({
     super.key,
     required this.isCollapsable,
+    required this.name,
+    required this.image,
   });
+  final String name;
+  final String image;
 
   @override
   State<CustomDrawerHeader> createState() => _CustomDrawerHeaderState();
@@ -23,12 +27,14 @@ class _CustomDrawerHeaderState extends State<CustomDrawerHeader> {
       width: double.infinity,
       child: Row(
         children: [
-          const OwnerAvatar(),
+          OwnerAvatar(
+            image: widget.image,
+          ),
           if (widget.isCollapsable) ...[
-            const SizedBox(width: 10),
-            const Expanded(
+            SizedBox(width: 10),
+            Expanded(
               child: Text(
-                "Admin",
+                widget.name,
                 style: TextStyle(
                   color: textBlack,
                   fontWeight: FontWeight.w600,

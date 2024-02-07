@@ -1,8 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:handmade/cors/theme/colors.dart';
+import 'package:handmade/feather/pages/Admin/mangment/user/user_bloc.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/CustomDrawer/custom_drawer_header.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/CustomDrawer/custom_list_tile.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/CustomDrawer/owner_info.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/edit_profail/ebit_profail_page.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key});
@@ -33,7 +35,8 @@ class _CustomDrawerState extends State<CustomDrawer> {
           children: [
             CustomDrawerHeader(
               isCollapsable: _isCollapsed,
-              // model: AdminBloc.get(context).usermodel,
+              image: UserBloc.get(context).usermodel!.image!,
+              name: UserBloc.get(context).usermodel!.name!,
             ),
             const Divider(color: Colors.grey),
             const Center(
@@ -88,7 +91,13 @@ class _CustomDrawerState extends State<CustomDrawer> {
               icon: Icons.person,
               title: 'Edit Profail',
               infoCount: 0,
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const EditProfailAdmin(),
+                    ));
+              },
             ),
             OwnerInfo(
               isCollapsed: _isCollapsed,

@@ -59,6 +59,7 @@ class ForgetPasswodBody extends StatelessWidget {
                   ),
                   const Gap(60),
                   CustomTextFormFaild(
+                    keyboardType: TextInputType.emailAddress,
                     controll: email,
                     head: "Email",
                     hintText: "Enter Email",
@@ -68,11 +69,8 @@ class ForgetPasswodBody extends StatelessWidget {
                     onTap: () {
                       Navigator.pushNamed(context, HomeAdmin.nameKey);
                       if (formkeyforget.currentState!.validate()) {}
-                    
-                   
-                   LoginBloc.get(context).resetPassword(email.text,context);
-                   
-                       
+
+                      LoginBloc.get(context).resetPassword(email.text, context);
                     },
                     child: const CustomButtonAuth(
                       text: "Send",

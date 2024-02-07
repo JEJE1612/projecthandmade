@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:handmade/feather/pages/Auth/data/model/user_model.dart';
 import 'package:handmade/feather/pages/Auth/mangment/bloc_register/register_state.dart';
 
@@ -26,17 +27,41 @@ class CreatAccount extends Cubit<CratAccountState> {
   }
 
   Future<void> userRegister() async {
-    print("aaaaaaaaaaaaaaaaaa");
-    emit(CreatUserLoadingState());
+    EasyLoading.show();
     try {
       await FirebaseAuth.instance.createUserWithEmailAndPassword(
         email: email.text,
         password: password.text,
       );
+
+      // Successfully created user, proceed with additional actions (if needed)
       creatSaveData();
+
+      // Emit a state indicating successful user registration
       emit(ScafullCreatUserState());
-    } catch (e) {
-      emit(ErrorCrestLodingState(error: "Error check your data"));
+    } catch (error) {
+      String errorMessage = " Please check your data.";
+
+      // Check for specific errors and customize the error message accordingly
+      if (error is FirebaseAuthException) {
+        switch (error.code) {
+          case "email-already-in-use":
+            errorMessage =
+                "The email address is already in use by another account.";
+            break;
+          case "weak-password":
+            errorMessage =
+                "The password provided is too weak. Please use a stronger password.";
+            break;
+          // Add more cases as needed
+        }
+      }
+
+      // Show the user-friendly error message
+      EasyLoading.showError(errorMessage);
+
+      // Emit a state indicating error during user registration
+      emit(ErrorCrestLodingState(error: errorMessage));
     }
   }
 
@@ -48,7 +73,7 @@ class CreatAccount extends Cubit<CratAccountState> {
       phone: phone.text,
       uid: FirebaseAuth.instance.currentUser!.uid,
       image:
-          "https://www.behance.net/gallery/148207527/3D-Avatars/modules/837188661",
+          "https://cdn.pixabay.com/photo/2014/04/03/10/44/avatar-311292_1280.png",
     );
     emit(SaveDataFireStoreLoding());
     try {
@@ -57,6 +82,7 @@ class CreatAccount extends Cubit<CratAccountState> {
           .doc(FirebaseAuth.instance.currentUser!.uid)
           .set(model.toMap());
       emit(SaveDataFireStoreScafull());
+      EasyLoading.dismiss();
     } catch (e) {
       emit(SaveDataFireStoreerror(error: e.toString()));
     }
