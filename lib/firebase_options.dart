@@ -36,28 +36,30 @@ class DefaultFirebaseOptions {
   }
 
   static const FirebaseOptions android = FirebaseOptions(
-    apiKey: 'AIzaSyB3StQIjdMxZt-1WorB-GDzZ4doOjG1hbg',
+    
     appId: '1:938214522724:android:27492a519ecd779da60471',
     messagingSenderId: '938214522724',
     projectId: 'handmade-73f02',
-    storageBucket: 'handmade-73f02.appspot.com',
+    storageBucket: 'handmade-73f02.appspot.com', 
+    apiKey: 'AIzaSyCF2Hv234cc9bRY6Fh27380OUQOJ9wg6LM',
   );
 
   static const FirebaseOptions ios = FirebaseOptions(
-    apiKey: 'AIzaSyB3StQIjdMxZt-1WorB-GDzZ4doOjG1hbg',
-    appId: '1:938214522724:android:27492a519ecd779da60471',
+    apiKey: "AIzaSyCF2Hv234cc9bRY6Fh27380OUQOJ9wg6LM",
+    appId: '1:938214522724:ios:bf135a64ac15fdb0a60471',
     messagingSenderId: '938214522724',
     projectId: 'handmade-73f02',
     storageBucket: 'handmade-73f02.appspot.com',
     iosBundleId: 'com.example.handmade',
+    appGroupId:"app-1-938214522724-ios-bf135a64ac15fdb0a60471"
   );
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: 'AIzaSyB3StQIjdMxZt-1WorB-GDzZ4doOjG1hbg',
-    appId: '1:938214522724:android:27492a519ecd779da60471',
+    apiKey: "AIzaSyCF2Hv234cc9bRY6Fh27380OUQOJ9wg6LM",
+    appId: '1:938214522724:web:a38747b4337ed452a60471',
     messagingSenderId: '938214522724',
     projectId: 'handmade-73f02',
     storageBucket: 'handmade-73f02.appspot.com',
-      authDomain: "handmade-73f02.firebaseapp.com",
-        measurementId: "G-67GE7YQMF0"
+    authDomain: "handmade-73f02.firebaseapp.com",
+    measurementId: "G-67GE7YQMF0"
   );
 }
