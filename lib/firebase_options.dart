@@ -54,7 +54,7 @@ class DefaultFirebaseOptions {
     appGroupId:"app-1-938214522724-ios-bf135a64ac15fdb0a60471"
   );
   static const FirebaseOptions web = FirebaseOptions(
-    apiKey: "AIzaSyCF2Hv234cc9bRY6Fh27380OUQOJ9wg6LM",
+    apiKey: "AIzaSyCcvKEAKCsbo8tvCuDejzbL8z6deiTS6TY",
     appId: '1:938214522724:web:a38747b4337ed452a60471',
     messagingSenderId: '938214522724',
     projectId: 'handmade-73f02',
