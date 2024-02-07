@@ -12,7 +12,7 @@ class LoginBloc extends Cubit<LoginState> {
 
   var formkey = GlobalKey<FormState>();
   static LoginBloc get(context) => BlocProvider.of(context);
-
+  var formkeyforget = GlobalKey<FormState>();
   bool obscureText = false;
   IconData icon = Icons.visibility_outlined;
 

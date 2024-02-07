@@ -8,6 +8,7 @@ import 'package:handmade/cors/theme/padding.dart';
 import 'package:handmade/feather/pages/Admin/presention/views/home_admin.dart';
 import 'package:handmade/feather/pages/Auth/mangment/bloc_login/login_bloc.dart';
 import 'package:handmade/feather/pages/Auth/mangment/bloc_login/login_state.dart';
+import 'package:handmade/feather/pages/Auth/presentaion/views/forgetpassword.dart';
 import 'package:handmade/feather/pages/Auth/presentaion/views/register_pagee.dart';
 import 'package:handmade/feather/pages/Auth/presentaion/widgets/custom_text_formfaild.dart';
 
@@ -136,7 +137,14 @@ class LoginBody extends StatelessWidget {
                   ),
                   const Gap(3),
                   InkWell(
-                    onTap: () {},
+                    onTap: () {
+                  Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                              builder: (context) => ForgetPasswod(),
+                            ));
+                                               
+                    },
                     child: Container(
                       margin: const EdgeInsets.only(top: 10, bottom: 20),
                       alignment: Alignment.topRight,
