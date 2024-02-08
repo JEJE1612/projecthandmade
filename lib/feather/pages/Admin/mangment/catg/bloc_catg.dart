@@ -26,7 +26,6 @@ class CatgBloc extends Cubit<CatgState> {
 
       emit(ScafullGetImageCatrg());
     } else {
-      print('No image selected.');
       emit(ErrorGetImageCatrg());
     }
   }
@@ -90,7 +89,7 @@ class CatgBloc extends Cubit<CatgState> {
       emit(ScafullCreatCatgies());
     } catch (e) {
       emit(ErrorCreatCatgies());
-      print("Error in creating addPhoto: ${e.toString()}");
+      //print("Error in creating addPhoto: ${e.toString()}");
     }
   }
 

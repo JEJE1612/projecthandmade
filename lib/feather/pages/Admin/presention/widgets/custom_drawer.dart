@@ -1,10 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:handmade/cors/theme/colors.dart';
 import 'package:handmade/feather/pages/Admin/mangment/user/user_bloc.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/CustomDrawer/custom_drawer_header.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/CustomDrawer/custom_list_tile.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/CustomDrawer/owner_info.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/dealetUse/dealt_user.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/edit_profail/ebit_profail_page.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/views/add_catg.dart';
 
 class CustomDrawer extends StatefulWidget {
   const CustomDrawer({super.key});
@@ -38,7 +41,6 @@ class _CustomDrawerState extends State<CustomDrawer> {
               image: UserBloc.get(context).usermodel!.image!,
               name: UserBloc.get(context).usermodel!.name!,
             ),
-            const Divider(color: Colors.grey),
             const Center(
               child: Text(
                 " catg",
@@ -49,19 +51,25 @@ class _CustomDrawerState extends State<CustomDrawer> {
             const Divider(color: Colors.grey),
             CustomListTile(
               isCollapsed: _isCollapsed,
-              icon: Icons.add,
-              title: 'Add catg',
+              icon: Icons.category_outlined,
+              title: 'Add category',
               infoCount: 0,
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AddCatgries(),
+                    ));
+              },
             ),
             CustomListTile(
               isCollapsed: _isCollapsed,
-              icon: Icons.delete,
-              title: 'remove catg',
+              icon: Icons.delete_outline,
+              title: 'remove category',
               infoCount: 0,
               onTap: () {},
             ),
-            const Divider(color: Colors.grey),
+            const Gap(5),
             const Center(
               child: Text(
                 "User",
@@ -75,9 +83,15 @@ class _CustomDrawerState extends State<CustomDrawer> {
               icon: Icons.delete,
               title: 'remove user',
               infoCount: 0,
-              onTap: () {},
+              onTap: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const DealtAllUser(),
+                    ));
+              },
             ),
-            const Divider(color: Colors.grey),
+            const Gap(5),
             const Center(
               child: Text(
                 "profail",

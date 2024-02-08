@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
+import 'package:handmade/cors/theme/assets.dart';
 import 'package:handmade/cors/theme/colors.dart';
-import 'package:handmade/feather/pages/Admin/presention/widgets/CustomDrawer/owner_avatar.dart';
+import 'package:handmade/cors/theme/helper.dart';
 
 class CustomDrawerHeader extends StatefulWidget {
   final bool isCollapsable;
@@ -27,14 +29,13 @@ class _CustomDrawerHeaderState extends State<CustomDrawerHeader> {
       width: double.infinity,
       child: Row(
         children: [
-          OwnerAvatar(
-            image: widget.image,
-          ),
+          const Gap(10),
+          getSvgIcon(AssetsData.home),
           if (widget.isCollapsable) ...[
-            SizedBox(width: 10),
-            Expanded(
+            const Gap(10),
+            const Expanded(
               child: Text(
-                widget.name,
+                "Service",
                 style: TextStyle(
                   color: textBlack,
                   fontWeight: FontWeight.w600,

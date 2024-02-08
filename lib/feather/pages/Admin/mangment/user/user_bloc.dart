@@ -54,10 +54,9 @@ class UserBloc extends Cubit<UserState> {
     }
   }
 
-  void udateAdminData({
+  void udateUserData({
     required String name,
     required String phone,
-    required String bio,
     String? image,
   }) {
     EasyLoading.show();
@@ -77,6 +76,7 @@ class UserBloc extends Cubit<UserState> {
         .then((value) {
       getUserData();
       emit(ScafullUdateAdminData());
+      EasyLoading.dismiss();
     }).catchError((eror) {
       emit(ErrorUdateAdminData());
       debugPrint(eror.toString());
@@ -84,23 +84,20 @@ class UserBloc extends Cubit<UserState> {
   }
 
   void uploadprofialImage({
-    required String? name,
-    required String? phone,
-    required String? bio,
+    required String name,
+    required String phone,
   }) {
-    emit(LodingUploadImageProfailState());
+    EasyLoading.show();
     FirebaseStorage.instance
         .ref()
         .child("user/${Uri.file(image!.path).pathSegments.last}")
         .putFile(image!)
         .then((value) {
       value.ref.getDownloadURL().then((value) {
-        emit(ScafullUploadImageProfailState());
         debugPrint(value);
-        udateAdminData(
-          name: name!,
-          phone: phone!,
-          bio: bio!,
+        udateUserData(
+          name: name,
+          phone: phone,
           image: value,
         );
         debugPrint(value);

@@ -43,7 +43,7 @@ class CustomListTile extends StatelessWidget {
                   fontWeight: FontWeight.w600,
                   fontSize: 10,
                 ),
-                child: Icon(icon, color: primary),
+                child: Icon(icon, color: textBlack),
               ),
               if (isCollapsed) ...[
                 const Expanded(

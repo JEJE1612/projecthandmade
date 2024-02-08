@@ -52,7 +52,7 @@ class OwnerInfo extends StatelessWidget {
                                 "${model.name}",
                                 overflow: TextOverflow.clip,
                                 maxLines: 1,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: textBlack,
                                   fontWeight: FontWeight.bold,
                                   fontSize: 14,
@@ -67,7 +67,7 @@ class OwnerInfo extends StatelessWidget {
                                 "${model.email}",
                                 overflow: TextOverflow.clip,
                                 maxLines: 1,
-                                style: TextStyle(
+                                style: const TextStyle(
                                   color: textBlack,
                                   fontSize: 12,
                                 ),

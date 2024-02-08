@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:handmade/cors/theme/colors.dart';
+import 'package:handmade/feather/pages/Admin/mangment/user/user_bloc.dart';
+import 'package:handmade/feather/pages/Admin/mangment/user/user_state.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/custom_appbar.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/custom_drawer.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/hom_items_admin.dart';
@@ -22,58 +25,62 @@ class _HomeAdminState extends State<HomeAdmin> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return Scaffold(
-      key: _scaffoldkey,
-      backgroundColor: textWhite,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(80),
-        child: MainAppBar(
-          size: size,
-          text: "Hand Made",
-          onPressed: () {
-            _scaffoldkey.currentState!.openDrawer();
-          },
-        ),
-      ),
-      body: ListView(
-        children: [
-          const Gap(20),
-          HomeItemsAdmin(
-            text1: "Numder Categories:",
-            text2: "5",
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ShowCatgroies(),
-                  ));
-            },
+    return BlocBuilder<UserBloc, UserState>(
+      builder: (context, state) {
+        return Scaffold(
+          key: _scaffoldkey,
+          backgroundColor: textWhite,
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(80),
+            child: MainAppBar(
+              size: size,
+              text: "Hand Made",
+              onPressed: () {
+                _scaffoldkey.currentState!.openDrawer();
+              },
+            ),
           ),
-          HomeItemsAdmin(
-            text1: "Numder User:",
-            text2: "5",
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ShowUser(),
-                  ));
-            },
+          body: ListView(
+            children: [
+              const Gap(20),
+              HomeItemsAdmin(
+                text1: "Numder Categories:",
+                text2: "5",
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ShowCatgroies(),
+                      ));
+                },
+              ),
+              HomeItemsAdmin(
+                text1: "Numder User:",
+                text2: "5",
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ShowUser(),
+                      ));
+                },
+              ),
+              HomeItemsAdmin(
+                text1: "Numder owner:",
+                text2: "5",
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const ShowOwner(),
+                      ));
+                },
+              )
+            ],
           ),
-          HomeItemsAdmin(
-            text1: "Numder owner:",
-            text2: "5",
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ShowOwner(),
-                  ));
-            },
-          )
-        ],
-      ),
-      drawer: const CustomDrawer(),
+          drawer: const CustomDrawer(),
+        );
+      },
     );
   }
 }
