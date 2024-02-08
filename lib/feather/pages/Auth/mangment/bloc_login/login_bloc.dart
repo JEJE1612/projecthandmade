@@ -34,6 +34,9 @@ class LoginBloc extends Cubit<LoginState> {
         password: password.text,
       )
           .then((value) {
+        getUserType(
+          uid: value.user!.uid,
+        );
         emit(LoginSucssesState(
           uid: value.user!.uid,
         ));
@@ -72,9 +75,10 @@ class LoginBloc extends Cubit<LoginState> {
           .get()
           .then((userData) {
         var userRole = userData['type'];
-
-        if (userRole == 'consulting') {
+        if (userRole == 'Owner') {
           emit(LoginAsConsltent());
+        } else if (userRole == 'admin') {
+          emit(LoginAsadmin());
         } else {
           emit(LoginAsClint());
         }

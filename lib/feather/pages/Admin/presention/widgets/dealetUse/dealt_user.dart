@@ -2,177 +2,141 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:gap/gap.dart';
+import 'package:handmade/cors/theme/colors.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/dealetUse/mangment/dealt_all_user_cubit.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/dealetUse/mangment/dealt_all_user_state.dart.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/widgets/custom_bar.dart';
 
-import '../show_catg/widgets/custom_bar.dart';
+import '../../../../../../cors/theme/padding.dart';
 
-class DealtAllUser extends StatefulWidget {
+class DealtAllUser extends StatelessWidget {
   const DealtAllUser({super.key});
 
   @override
-  State<DealtAllUser> createState() => _DealtAllUserState();
+  Widget build(BuildContext context) {
+    return BlocProvider(
+      create: (context) => DealtAllUserCubit()..initialize(),
+      child: const DealtAllUserViewitems(),
+    );
+  }
 }
 
-class _DealtAllUserState extends State<DealtAllUser> {
-  @override
-  void initState() {
-    getClientstream();
-    searchword.addListener(_onSearchChange);
-    super.initState();
-  }
-
-  _onSearchChange() {
-    print('nnnnnnnnnnnnnnnn');
-    searchResultlist();
-  }
-
-  TextEditingController searchword = TextEditingController();
-  List allresult = [];
-  List resultlist = [];
-  List<String> emailblock = [''];
-  getClientstream() async {
-    var data = await FirebaseFirestore.instance
-        .collection('user')
-        .orderBy('name')
-        .get();
-    setState(() {
-      allresult = data.docs;
-    });
-    searchResultlist();
-  }
-
-  searchResultlist() {
-    var showResult = [];
-    if (searchword.text != '') {
-      for (var userSnapShot in allresult) {
-        var name = userSnapShot['name'].toString().toLowerCase();
-        if (name.contains(searchword.text.toLowerCase())) {
-          showResult.add(userSnapShot);
-        }
-      }
-    } else {
-      showResult = List.from(allresult);
-    }
-    setState(() {
-      resultlist = showResult;
-    });
-  }
-
-  @override
-  void dispose() {
-    searchword.removeListener(_onSearchChange);
-    super.dispose();
-  }
-
-  @override
-  void didChangeDependencies() {
-    getClientstream();
-
-    super.didChangeDependencies();
-  }
+class DealtAllUserViewitems extends StatelessWidget {
+  const DealtAllUserViewitems({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Column(
-          children: [
-            const CustomAppBar(
-              text: "remove user",
-            ),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
-              child: CupertinoSearchTextField(
-                controller: searchword,
+        child: Padding(
+          padding: const EdgeInsets.only(
+              top: topMainPadding,
+              left: leftMainPadding,
+              right: rightMainPadding),
+          child: Column(
+            children: [
+              const CustomAppBar(
+                text: "remove user",
               ),
-            ),
-            Expanded(
-                child: ListViewDealtConsultant(
-              resultlist: resultlist,
-            )),
-          ],
+              Container(
+                margin:
+                    const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
+                child: CupertinoSearchTextField(
+                  controller: context.read<DealtAllUserCubit>().searchword,
+                  onChanged: (query) {
+                    context.read<DealtAllUserCubit>().searchResultList();
+                  },
+                ),
+              ),
+              const Gap(10),
+              Expanded(
+                child: BlocBuilder<DealtAllUserCubit, DealtAllUserState>(
+                  builder: (context, state) {
+                    if (state is LoadingState) {
+                      EasyLoading.show();
+                    } else if (state is LoadedState) {
+                      EasyLoading.dismiss();
+                      return DealtItem(
+                        resultlist: state.resultlist,
+                      );
+                    }
+                    return Container();
+                  },
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
   }
 }
 
-class ListViewDealtConsultant extends StatelessWidget {
-  const ListViewDealtConsultant({
-    super.key,
-    required this.resultlist,
-  });
-
+class DealtItem extends StatelessWidget {
+  const DealtItem({super.key, required this.resultlist});
   final List resultlist;
-
   @override
   Widget build(BuildContext context) {
-    return ListView.separated(
-      separatorBuilder: (context, index) => SizedBox(
-        height: 2,
+    return GridView.builder(
+      padding:
+          const EdgeInsets.only(left: leftMainPadding, right: rightMainPadding),
+      shrinkWrap: true,
+      itemCount: resultlist.length,
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 2,
+        mainAxisSpacing: 20,
+        crossAxisSpacing: 10,
       ),
-      itemBuilder: (context, index) {
-        return DealtItemslist(
-          resultlist: resultlist,
-          index: index,
+      itemBuilder: (BuildContext context, int index) {
+        return Card(
+          child: Stack(
+            children: [
+              Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    CircleAvatar(
+                      backgroundImage: CachedNetworkImageProvider(
+                        resultlist[index]['image'],
+                      ),
+                      radius: 40,
+                    ),
+                    Text(
+                      resultlist[index]['name'],
+                      style: TextStyle(
+                        fontWeight: FontWeight.w400,
+                        fontSize: 18,
+                        color: textBlack,
+                      ),
+                    ),
+                  ]),
+              Positioned(
+                right: 0,
+                child: CircleAvatar(
+                  backgroundColor: Colors.grey,
+                  child: IconButton(
+                    onPressed: () {
+                      FirebaseFirestore.instance
+                          .collection("user")
+                          .doc(resultlist[index]['uid'])
+                          .delete()
+                          .then((_) {});
+                      EasyLoading.showSuccess(" Remove Success ");
+                    },
+                    icon: const Icon(
+                      Icons.delete_outline,
+                      color: Colors.white,
+                    ),
+                  ),
+                ),
+              ),
+            ],
+          ),
         );
       },
-      itemCount: resultlist.length,
-    );
-  }
-}
-
-class DealtItemslist extends StatelessWidget {
-  const DealtItemslist({
-    super.key,
-    required this.resultlist,
-    required this.index,
-  });
-
-  final List resultlist;
-  final int index;
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-      color: Colors.grey[300],
-      child: ListTile(
-        leading: Container(
-          height: 60,
-          width: 60,
-          decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(100),
-            image: DecorationImage(
-              image: CachedNetworkImageProvider(
-                resultlist[index]['image'],
-              ),
-            ),
-          ),
-        ),
-        title: Text(
-          resultlist[index]['name'],
-          style: TextStyle(fontSize: 16, color: Colors.black),
-        ),
-        trailing: CircleAvatar(
-          backgroundColor: Colors.grey,
-          child: IconButton(
-            onPressed: () {
-              FirebaseFirestore.instance
-                  .collection("user")
-                  .doc(resultlist[index]['uid'])
-                  .delete()
-                  .then((_) {
-                print('done');
-              });
-
-              Navigator.pop(context);
-            },
-            icon: const Icon(
-              Icons.delete_outline,
-              color: Colors.white,
-            ),
-          ),
-        ),
-      ),
     );
   }
 }

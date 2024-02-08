@@ -20,3 +20,5 @@ class Forgetpasswordstate extends LoginState {}
 class LoginAsClint extends LoginState {}
 
 class LoginAsConsltent extends LoginState {}
+
+class LoginAsadmin extends LoginState {}
