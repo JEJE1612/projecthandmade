@@ -9,3 +9,10 @@ const Color light = Color(0xFFE6E9ED);
 const Color textWhite = Color(0xFFFFFFFF);
 const Color textBlack = Color(0xFF2B3849);
 const Color textFieldBg = Color(0xFFE6E9ED);
+
+TextStyle getBoldTextStyle =  TextStyle(
+  fontSize: 15,
+  fontWeight: FontWeight.bold,
+  fontFamily: "Poppins-Bold",
+  color: textWhite,
+);

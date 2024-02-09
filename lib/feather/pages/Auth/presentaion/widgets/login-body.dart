@@ -4,9 +4,9 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:gap/gap.dart';
 import 'package:handmade/cors/theme/colors.dart';
 import 'package:handmade/cors/theme/padding.dart';
+import 'package:handmade/feather/main_bottom_nav_screen.dart';
 import 'package:handmade/feather/pages/Admin/presention/views/home_admin.dart';
 import 'package:handmade/feather/pages/Admin/presention/views/home_owner.dart';
-import 'package:handmade/feather/pages/Admin/presention/views/home_user.dart';
 import 'package:handmade/feather/pages/Auth/mangment/bloc_login/login_bloc.dart';
 import 'package:handmade/feather/pages/Auth/mangment/bloc_login/login_state.dart';
 import 'package:handmade/feather/pages/Auth/presentaion/views/forgetpassword.dart';
@@ -31,7 +31,7 @@ class LoginBody extends StatelessWidget {
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const HomeUser(),
+                  builder: (context) => const BottomNavBarScreen(),
                 ),
                 (route) => false);
           } else if (state is LoginAsConsltent) {
