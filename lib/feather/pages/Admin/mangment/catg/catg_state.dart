@@ -25,3 +25,7 @@ class ErrorCreatCatgies extends CatgState {}
 class ScafullGetListCatroies extends CatgState {}
 
 class LodingGetListCatroies extends CatgState {}
+
+class SuccessDeleteCatgies extends CatgState {}
+
+class ErrorDeleteCatgies extends CatgState {}

@@ -2,7 +2,9 @@ import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:handmade/feather/pages/Admin/data/model/catrg_model.dart';
 import 'package:handmade/feather/pages/Admin/mangment/catg/catg_state.dart';
 import 'package:image_picker/image_picker.dart';
@@ -32,13 +34,8 @@ class CatgBloc extends Cubit<CatgState> {
     }
   }
 
-  void uploadCatgrImage({
-    required String text,
-    required String date,
-    required String postImage,
-  }) {
-    emit(LodingCreatCatg());
-
+  void uploadCatgrImage() {
+    EasyLoading.show();
     FirebaseStorage.instance
         .ref()
         .child("user/${Uri.file(imagecatrg!.path).pathSegments.last}")
@@ -46,9 +43,7 @@ class CatgBloc extends Cubit<CatgState> {
         .then((value) {
       value.ref.getDownloadURL().then((value) {
         creatCatrg(
-          imagecat: value,
-          dateTime: date,
-          text: text,
+          postImge: value,
         );
         emit(ScafullUploadcreatCatgState());
       }).catchError((e) {
@@ -61,18 +56,15 @@ class CatgBloc extends Cubit<CatgState> {
 
   List<CatroiesModel> catg = [];
   List catgnumder = [];
+  TextEditingController text = TextEditingController();
 
   CollectionReference catgr = FirebaseFirestore.instance.collection('catg');
   void creatCatrg({
-    required String text,
     String? postImge,
-    required String dateTime,
-    required String imagecat,
   }) async {
     CatroiesModel model = CatroiesModel(
-      text: text,
+      text: text.text,
       catoiesImage: postImge ?? "",
-      dateTime: dateTime,
     );
 
     emit(LodingCreatCatgies());
@@ -82,38 +74,46 @@ class CatgBloc extends Cubit<CatgState> {
     try {
       DocumentReference docRef = await catgr.add(model.toMap());
 
-      model.uId = docRef.id;
-
-      await docRef.update({'docId': docRef.id});
-
-      getSomeWork();
-
+      await docRef.update({'uid': docRef.id});
+      getCats();
       emit(ScafullCreatCatgies());
     } catch (e) {
       emit(ErrorCreatCatgies());
-      //print("Error in creating addPhoto: ${e.toString()}");
     }
   }
 
-  void getSomeWork() async {
-    emit(LodingGetListCatroies());
-    try {
-      QuerySnapshot querySnapshot = await FirebaseFirestore.instance
-          .collection('catg')
-          .orderBy(
-            "dateTime",
-          )
-          .get();
+  List<CatroiesModel> catroiesList = [];
 
-      for (var element in querySnapshot.docs) {
-        catg.add(
-            CatroiesModel.fromJson(element.data() as Map<String, dynamic>));
-        catgnumder.add(element.id);
+  Future<void> getCats() async {
+    emit(LodingGetListCatroies());
+
+    try {
+      QuerySnapshot querySnapshot = await catgr.get();
+
+      for (QueryDocumentSnapshot doc in querySnapshot.docs) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        CatroiesModel catroiesModel = CatroiesModel.fromJson(data);
+        catroiesList.add(catroiesModel);
       }
+      text.clear();
+      removeimagecatrg();
+      EasyLoading.dismiss();
 
       emit(ScafullGetListCatroies());
     } catch (e) {
       print("Error in getAsk: $e");
+    }
+  }
+
+  Future<void> deleteCatroies(String docId) async {
+    EasyLoading.show();
+
+    try {
+      await catgr.doc(docId).delete();
+      getCats(); // Call a function to update the UI or perform additional tasks after deletion
+      emit(SuccessDeleteCatgies());
+    } catch (e) {
+      emit(ErrorDeleteCatgies());
     }
   }
 }

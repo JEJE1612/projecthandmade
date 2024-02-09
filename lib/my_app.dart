@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:handmade/feather/pages/Admin/mangment/catg/bloc_catg.dart';
 import 'package:handmade/feather/pages/Admin/mangment/user/user_bloc.dart';
 import 'package:handmade/feather/pages/Admin/presention/views/home_admin.dart';
 import 'package:handmade/feather/pages/Auth/presentaion/views/forgetpassword.dart';
@@ -18,7 +19,10 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(
           create: (context) => UserBloc()..getUserData(),
-        )
+        ),
+        BlocProvider(
+          create: (context) => CatgBloc()..getCats(),
+        ),
       ],
       child: MaterialApp(
         title: 'HandMade',

@@ -15,12 +15,16 @@ class AddCatgries extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // var textControll = TextEditingController();
     return BlocProvider(
       create: (context) => CatgBloc(),
       child: BlocConsumer<CatgBloc, CatgState>(
-        listener: (context, state) {},
+        listener: (context, state) {
+          if (state is ScafullGetListCatroies) {
+            Navigator.pop(context);
+          }
+        },
         builder: (context, state) {
+          var textcontroller = CatgBloc.get(context).text;
           return Scaffold(
             body: Padding(
               padding: const EdgeInsets.only(
@@ -46,29 +50,36 @@ class AddCatgries extends StatelessWidget {
                         ),
                         getSvgIcon(AssetsData.arrowright),
                         const Spacer(),
-                        SafeArea(
-                          child: Container(
-                            width: 100,
-                            height: 45,
-                            decoration: BoxDecoration(
-                                color: primary,
-                                borderRadius: BorderRadius.circular(30)),
-                            child: const Center(
-                              child: Text(
-                                "save",
-                                style: TextStyle(
-                                    fontSize: 16,
-                                    color: textWhite,
-                                    fontWeight: FontWeight.bold),
+                        if (CatgBloc.get(context).imagecatrg != null &&
+                            CatgBloc.get(context).text != null)
+                          SafeArea(
+                            child: InkWell(
+                              onTap: () {
+                                CatgBloc.get(context).uploadCatgrImage();
+                              },
+                              child: Container(
+                                width: 100,
+                                height: 45,
+                                decoration: BoxDecoration(
+                                    color: primary,
+                                    borderRadius: BorderRadius.circular(30)),
+                                child: const Center(
+                                  child: Text(
+                                    "save",
+                                    style: TextStyle(
+                                        fontSize: 16,
+                                        color: textWhite,
+                                        fontWeight: FontWeight.bold),
+                                  ),
+                                ),
                               ),
                             ),
-                          ),
-                        )
+                          )
                       ],
                     ),
                   ),
                   CustomTextFormFaild(
-                    controll: TextEditingController(),
+                    controll: textcontroller,
                     head: "Name ",
                     hintText: "Name category",
                     keyboardType: TextInputType.text,
