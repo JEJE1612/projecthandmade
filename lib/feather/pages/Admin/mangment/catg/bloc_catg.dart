@@ -9,6 +9,8 @@ import 'package:image_picker/image_picker.dart';
 
 class CatgBloc extends Cubit<CatgState> {
   CatgBloc() : super(InitalState());
+  static CatgBloc get(context) => BlocProvider.of(context);
+
   File? imagecatrg;
   ImagePicker picker = ImagePicker();
 

@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -18,7 +19,7 @@ class UserBloc extends Cubit<UserState> {
     emit(LodingGetUserData());
     FirebaseFirestore.instance
         .collection('user')
-        .doc("XIeszeDVJ4ND7oVXUrbEoP77hjs1")
+        .doc(FirebaseAuth.instance.currentUser!.uid)
         .get()
         .then((value) {
       if (value.exists) {

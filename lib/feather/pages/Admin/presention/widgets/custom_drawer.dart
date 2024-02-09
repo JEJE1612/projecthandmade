@@ -80,14 +80,14 @@ class _CustomDrawerState extends State<CustomDrawer> {
             const Divider(color: Colors.grey),
             CustomListTile(
               isCollapsed: _isCollapsed,
-              icon: Icons.delete,
+              icon: Icons.person_remove,
               title: 'remove user',
               infoCount: 0,
               onTap: () {
                 Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => DealtAllUser(),
+                      builder: (context) => const DealtAllUser(),
                     ));
               },
             ),
