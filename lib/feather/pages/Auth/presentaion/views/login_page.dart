@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:handmade/cors/theme/assets.dart';
 import 'package:handmade/cors/theme/colors.dart';
 import 'package:handmade/cors/theme/helper.dart';
 import 'package:handmade/cors/theme/padding.dart';
+import 'package:handmade/feather/main_bottom_nav_screen.dart';
 import 'package:handmade/feather/pages/Admin/presention/views/home_admin.dart';
 import 'package:handmade/feather/pages/Auth/mangment/bloc_login/login_bloc.dart';
 import 'package:handmade/feather/pages/Auth/mangment/bloc_login/login_state.dart';
@@ -138,12 +140,11 @@ class LoginBody extends StatelessWidget {
                   const Gap(3),
                   InkWell(
                     onTap: () {
-                  Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => ForgetPasswod(),
-                            ));
-                                               
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => ForgetPasswod(),
+                          ));
                     },
                     child: Container(
                       margin: const EdgeInsets.only(top: 10, bottom: 20),
@@ -159,7 +160,13 @@ class LoginBody extends StatelessWidget {
                   const Gap(40),
                   InkWell(
                     onTap: () {
-                      Navigator.pushNamed(context, HomeAdmin.nameKey);
+                       Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => BottomNavBarScreen(),
+                          ));
+ 
+                      // Navigator.pushNamed(context, HomeAdmin.nameKey);
                       if (formkey.currentState!.validate()) {}
                     },
                     child: const CustomButtonAuth(
