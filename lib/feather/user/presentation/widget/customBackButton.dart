@@ -1,17 +1,14 @@
-// ignore_for_file: non_constant_identifier_names
 
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 
-CustomBackButton() {
+CustomBackButton(BuildContext context) {
   return IconButton(
     onPressed: () {
-      Get.back();
+      Navigator.pop(context);
     },
     icon: const Icon(
-    Icons.arrow_back,
+      Icons.arrow_back,
       size: 15,
-      //color: Get.isDarkMode ? whiteColor : darkBlueColor,
     ),
   );
 }

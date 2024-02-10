@@ -54,8 +54,8 @@ class CartListTileCard extends StatelessWidget {
                               height: 4,
                             ),
                             RichText(
-                              text: TextSpan(
-                                style: const TextStyle(
+                              text: const TextSpan(
+                                style: TextStyle(
                                     color: Colors.black54, fontSize: 12),
                                 children: [
                                   TextSpan(text: 'Color '),

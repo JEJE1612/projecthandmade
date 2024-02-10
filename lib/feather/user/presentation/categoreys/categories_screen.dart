@@ -1,5 +1,7 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:handmade/feather/user/management/bloc.dart';
+import 'package:handmade/feather/user/management/my_state.dart';
 import 'package:handmade/feather/user/presentation/categoreys/categories_card.dart';
 import 'package:handmade/feather/user/presentation/widget/custom_app_bar.dart';
 
@@ -13,28 +15,31 @@ class CategoriesScreen extends StatefulWidget {
 class _CategoriesScreenState extends State<CategoriesScreen> {
   @override
   Widget build(BuildContext context) {
-    return  Scaffold(
-        appBar: customAppBar("Categories", false),
-        body: gridViewForCategories,
-      
-    );
+    return BlocConsumer<MyBloc, MyState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          var bloc = MyBloc.get(context);
+          return Scaffold(
+            appBar: customAppBar("Categories", false,context),
+            body: gridViewForCategories,
+          );
+        });
   }
 
   Padding get gridViewForCategories {
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: GridView.builder(
-        itemCount: 4,
+        itemCount: MyBloc.get(context).catroies.length,
         gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 4,
-          crossAxisSpacing: 16,
-          mainAxisSpacing: 16,
+          crossAxisCount: 3,
+          crossAxisSpacing: 12,
+          mainAxisSpacing: 12,
         ),
         itemBuilder: (context, int index) {
-          return const FittedBox(
-            child: CategoriesCard(
-            
-            ),
+          return  FittedBox(
+            child: CategoriesCard(name:MyBloc.get(context).catroies[index]['text'],
+             image: MyBloc.get(context).catroies[index]['catoiesImage'],),
           );
         },
       ),

@@ -45,11 +45,11 @@ class _HomeCarouselSliderState extends State<HomeCarouselSlider> {
                 child: Stack(
                   children: [
                     Image.network(widget.sliders[index] , scale: 1.0,fit: BoxFit.scaleDown,),
-                    Positioned(
+                    const Positioned(
                       bottom: 0,
                       child: Text(
                         "data.title" ,
-                        style: const TextStyle(color: Colors.white),
+                        style: TextStyle(color: Colors.white),
                       ),
                     ),
                   ],

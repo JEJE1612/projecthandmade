@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:handmade/feather/user/management/bloc.dart';
 import 'package:handmade/feather/user/management/my_state.dart';
-import 'package:handmade/feather/user/presentation/prodect/products_card.dart';
+import 'package:handmade/feather/user/presentation/favourte/productincategory/prodect/favorateproducts_card.dart';
+import 'package:handmade/feather/user/presentation/widget/custom_app_bar.dart';
 
-import 'widget/custom_app_bar.dart';
 
-class WishListScreen extends StatefulWidget {
-  const WishListScreen({super.key});
+class FavourateprodectScreen extends StatefulWidget {
+  const FavourateprodectScreen({super.key});
 
   @override
-  State<WishListScreen> createState() => _WishListScreenState();
+  State<FavourateprodectScreen> createState() => _FavourateprodectScreenState();
 }
 
-class _WishListScreenState extends State<WishListScreen> {
+class _FavourateprodectScreenState extends State<FavourateprodectScreen> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<MyBloc, MyState>(
@@ -21,7 +21,7 @@ class _WishListScreenState extends State<WishListScreen> {
         builder: (context, state) {
           var bloc = MyBloc.get(context);
           return Scaffold(
-              appBar: customAppBar("All Products", false,context),
+              appBar: customAppBar("All Prodects", false,context),
               body: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
                 child: GridView.builder(
@@ -34,7 +34,7 @@ class _WishListScreenState extends State<WishListScreen> {
                   ),
                   itemBuilder: (context, int index) {
                     return const FittedBox(
-                      child: ProductsCard(
+                      child: FavorateProductsCard(
                         isShowDeleteButton: true,
                       ),
                     );

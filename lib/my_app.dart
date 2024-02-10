@@ -8,6 +8,8 @@ import 'package:handmade/feather/pages/Auth/presentaion/views/login_page.dart';
 import 'package:handmade/feather/pages/Auth/presentaion/views/register_pagee.dart';
 import 'package:handmade/feather/pages/onbording_page/onbording.dart';
 import 'package:handmade/feather/pages/splach_screen/presentaion/views/splach.dart';
+import 'package:handmade/feather/user/management/bloc.dart';
+import 'package:nested/nested.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -15,7 +17,14 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
-      providers: [
+      providers: <SingleChildWidget>[
+
+        BlocProvider( 
+          create: (context)=> MyBloc()
+          ..getUserData()
+          ..getCaroies(),
+
+        ),
         BlocProvider(
           create: (context) => UserBloc()..getUserData(),
         )
