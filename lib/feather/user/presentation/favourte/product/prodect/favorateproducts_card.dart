@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:handmade/cors/theme/colors.dart';
-import 'package:handmade/feather/user/presentation/favourte/productincategory/prodect/favorate_products_details_screen%20.dart';
+
+import 'package:handmade/feather/user/presentation/favourte/product/prodect/favorate_products_details_screen .dart';
 
 
 class FavorateProductsCard extends StatelessWidget {

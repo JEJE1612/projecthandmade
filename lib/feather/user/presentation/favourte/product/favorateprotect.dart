@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:handmade/feather/user/management/bloc.dart';
 import 'package:handmade/feather/user/management/my_state.dart';
-import 'package:handmade/feather/user/presentation/favourte/productincategory/prodect/favorateproducts_card.dart';
+import 'package:handmade/feather/user/presentation/favourte/product/prodect/favorateproducts_card.dart';
 import 'package:handmade/feather/user/presentation/widget/custom_app_bar.dart';
 
 

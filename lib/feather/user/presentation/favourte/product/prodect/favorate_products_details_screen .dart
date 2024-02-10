@@ -7,6 +7,7 @@ import 'package:handmade/feather/user/presentation/widget/custom_app_bar.dart';
 import 'package:handmade/feather/user/presentation/widget/love_icon_button.dart';
 import 'package:handmade/feather/user/presentation/prodect/products_carousel_slider.dart';
 
+
 class FavorateProductsDetailsScreen extends StatefulWidget {
 
   const FavorateProductsDetailsScreen({super.key});
