@@ -1,17 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:handmade/cors/theme/assets.dart';
 import 'package:handmade/cors/theme/colors.dart';
-import 'package:handmade/feather/pages/Admin/mangment/catg/bloc_catg.dart';
-import 'package:handmade/feather/pages/Admin/mangment/catg/catg_state.dart';
-import 'package:handmade/feather/pages/Admin/mangment/user/user_bloc.dart';
-import 'package:handmade/feather/pages/Admin/mangment/user/user_state.dart';
-import 'package:handmade/feather/pages/Admin/presention/widgets/custom_appbar.dart';
-import 'package:handmade/feather/pages/Admin/presention/widgets/custom_drawer.dart';
-import 'package:handmade/feather/pages/Admin/presention/widgets/hom_items_admin.dart';
+import 'package:handmade/cors/theme/helper.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/dealetUse/dealt_user.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/edit_profail/profail.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/show_cat.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/show_user.dart';
-import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/widgets/show_owner.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/views/add_catg.dart';
 
 class HomeAdmin extends StatefulWidget {
   static const String nameKey = "HomeAdmin";
@@ -26,87 +22,154 @@ class _HomeAdminState extends State<HomeAdmin> {
       GlobalKey<ScaffoldState>();
   @override
   Widget build(BuildContext context) {
-    var size = MediaQuery.of(context).size;
     return Scaffold(
       key: _scaffoldkey,
       backgroundColor: textWhite,
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(80),
-        child: MainAppBar(
-          size: size,
-          text: "Hand Made",
-          onPressed: () {
-            _scaffoldkey.currentState!.openDrawer();
-          },
-        ),
-      ),
-      body: ListView(
-        children: [
-          const Gap(20),
-          BlocProvider(
-            create: (context) => CatgBloc(),
-            child: BlocBuilder<CatgBloc, CatgState>(
-              builder: (context, state) {
-                return HomeItemsAdmin(
-                  text1: "Numder Categories:",
-                  text2: "${CatgBloc.get(context).catroiesList.length}",
-                  onTap: () {
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const ShowCatgroies(),
-                        ));
-                  },
-                );
-              },
-            ),
-          ),
-          HomeItemsAdmin(
-            text1: "Numder User:",
-            text2: "5",
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ShowUser(),
-                  ));
-            },
-          ),
-          HomeItemsAdmin(
-            text1: "Numder owner:",
-            text2: "5",
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const ShowOwner(),
-                  ));
-            },
-          ),
-          const Column(
+      appBar: AppBar(
+        elevation: 0.8,
+        backgroundColor: textWhite,
+        title: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Row(
             children: [
-              Card(
-                elevation: 10,
-                color: Colors.amberAccent,
-                child: Image(
-                  image: AssetImage(""),
-                  fit: BoxFit.cover,
-                  height: 100,
-                ),
-              ),
-              Gap(10),
-              Text(
-                "Categoris",
+              const Text(
+                "Hand made",
                 style: TextStyle(
                     color: textBlack,
                     fontSize: 18,
                     fontWeight: FontWeight.bold),
               ),
+              const SizedBox(
+                width: 10,
+              ),
+              getSvgIcon(AssetsData.arrowright),
+            ],
+          ),
+        ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (context) => const ProfailpageAdmin(),
+                  ));
+            },
+            icon: getSvgIcon(AssetsData.profile),
+          )
+        ],
+      ),
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CutomCardAdmin(
+                image: "assets/images/box.png",
+                name: " ADD Categoris",
+                onTap: () {
+                  Navigator.pushNamed(context, AddCatgries.nameKey);
+                },
+              ),
+              CutomCardAdmin(
+                image: "assets/images/delay.png",
+                name: " show Categoris",
+                onTap: () {
+                  Navigator.pushNamed(context, ShowCatgroies.nameKey);
+                },
+              ),
+            ],
+          ),
+          const Gap(20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CutomCardAdmin(
+                image: "assets/images/remove_3179884.png",
+                name: " Remove Categoris",
+                onTap: () {
+                  Navigator.pushNamed(context, AddCatgries.nameKey);
+                },
+              ),
+              CutomCardAdmin(
+                image: "assets/images/man_4140037.png",
+                name: " show user",
+                onTap: () {
+                  Navigator.pushNamed(context, ShowCatgroies.nameKey);
+                },
+              ),
+            ],
+          ),
+          const Gap(20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              CutomCardAdmin(
+                image: "assets/images/task-list_3090231.png",
+                name: "Show Owner",
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => ShowAllOwner(),
+                      ));
+                },
+              ),
+              CutomCardAdmin(
+                image: "assets/images/contact_8637607.png",
+                name: "Remove user",
+                onTap: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const DealtAllUser(),
+                      ));
+                },
+              ),
             ],
           ),
         ],
       ),
-      drawer: const CustomDrawer(),
+    );
+  }
+}
+
+class CutomCardAdmin extends StatelessWidget {
+  const CutomCardAdmin({
+    super.key,
+    this.onTap,
+    required this.image,
+    required this.name,
+  });
+  final Function()? onTap;
+  final String image;
+  final String name;
+
+  @override
+  Widget build(BuildContext context) {
+    return InkWell(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Card(
+            color: textBlack,
+            elevation: 20,
+            child: Image(
+              image: AssetImage(image),
+              fit: BoxFit.cover,
+              height: 100,
+            ),
+          ),
+          Gap(10),
+          Text(
+            name,
+            style: TextStyle(
+                color: textBlack, fontSize: 18, fontWeight: FontWeight.bold),
+          ),
+        ],
+      ),
     );
   }
 }

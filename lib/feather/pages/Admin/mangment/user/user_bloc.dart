@@ -14,6 +14,15 @@ class UserBloc extends Cubit<UserState> {
   UserBloc() : super(InitalState());
   static UserBloc get(context) => BlocProvider.of(context);
   UserModel? usermodel;
+  Future<void> signOut() async {
+    try {
+      await FirebaseAuth.instance.signOut();
+      print("User signed out successfully");
+      emit(ScafullsignOut());
+    } catch (e) {
+      print("Error signing out: $e");
+    }
+  }
 
   void getUserData() {
     emit(LodingGetUserData());

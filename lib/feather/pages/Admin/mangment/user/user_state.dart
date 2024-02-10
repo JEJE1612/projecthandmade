@@ -33,3 +33,5 @@ class LodingUploadImageProfailState extends UserState {}
 class ScafullUploadImageProfailState extends UserState {}
 
 class ErrorUploadImageProfailState extends UserState {}
+
+class ScafullsignOut extends UserState {}

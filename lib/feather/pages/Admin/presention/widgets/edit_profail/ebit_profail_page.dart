@@ -12,6 +12,7 @@ import 'package:handmade/feather/pages/Auth/presentaion/views/forgetpassword.dar
 import 'package:handmade/feather/pages/Auth/presentaion/widgets/custom_text_formfaild.dart';
 
 class EditProfailAdmin extends StatefulWidget {
+  static const String nameKey = 'EditProfailAdmin';
   const EditProfailAdmin({super.key});
 
   @override
@@ -33,6 +34,9 @@ class _EditProfailState extends State<EditProfailAdmin> {
       },
       builder: (context, state) {
         var model = UserBloc.get(context).usermodel;
+        if (state is LodingGetUserData) {
+          return CircularProgressIndicator();
+        }
         return Scaffold(
           body: SingleChildScrollView(
             child: SafeArea(
@@ -49,7 +53,7 @@ class _EditProfailState extends State<EditProfailAdmin> {
                         CircleAvatar(
                           radius: 100,
                           backgroundImage: UserBloc.get(context).image == null
-                              ? CachedNetworkImageProvider(model!.image!)
+                              ? CachedNetworkImageProvider(model?.image! ?? "")
                               : FileImage(UserBloc.get(context).image!)
                                   as ImageProvider,
                         ),

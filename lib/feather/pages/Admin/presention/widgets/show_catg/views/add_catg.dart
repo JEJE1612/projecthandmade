@@ -11,6 +11,7 @@ import 'package:handmade/feather/pages/Admin/mangment/catg/catg_state.dart';
 import 'package:handmade/feather/pages/Auth/presentaion/widgets/custom_text_formfaild.dart';
 
 class AddCatgries extends StatelessWidget {
+  static const String nameKey = 'AddCatgries';
   const AddCatgries({super.key});
 
   @override

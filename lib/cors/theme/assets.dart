@@ -9,4 +9,9 @@ class AssetsData {
   static const String arrowright = '${(icon)}/arrow_right_icon.svg';
   static const String home = '${(icon)}/home_icon.svg';
   static const String profile = '${(icon)}/profile_icon.svg';
+  static const String phoneicon = '${(icon)}/phone_icon.svg';
+  static const String hearticon = '${(icon)}/heart_icon.svg';
+  static const String helpicon = '${(icon)}/help_icon.svg';
+  static const String logouticon = '${(icon)}/logout_icon.svg';
+  static const String italian = '${(icon)}/italian.svg';
 }
