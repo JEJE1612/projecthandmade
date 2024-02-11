@@ -29,15 +29,15 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
                 showSelectedLabels: true,
                 type: BottomNavigationBarType.shifting,
                 elevation: 4,
-                onTap: (value)  {
-        if (value == 1) { 
-          MyBloc.get(context).onChanged(value);
-        } else if (value == 2) {
-          MyBloc.get(context).onChanged(value);
-        } else {
-          MyBloc.get(context).onChanged(value);
-        }
-      },
+                onTap: (value) {
+                  if (value == 1) {
+                    MyBloc.get(context).onChanged(value);
+                  } else if (value == 2) {
+                    MyBloc.get(context).onChanged(value);
+                  } else {
+                    MyBloc.get(context).onChanged(value);
+                  }
+                },
                 items: const [
                   BottomNavigationBarItem(
                       icon: Icon(CupertinoIcons.home),

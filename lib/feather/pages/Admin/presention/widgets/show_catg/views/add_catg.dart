@@ -86,6 +86,31 @@ class AddCatgries extends StatelessWidget {
                     keyboardType: TextInputType.text,
                   ),
                   const Gap(20),
+                  InkWell(
+                    onTap: () {
+                      CatgBloc.get(context).getimagecatrg();
+                    },
+                    child: Container(
+                      height: 50,
+                      width: double.infinity,
+                      decoration: BoxDecoration(
+                          color: textFieldBg,
+                          borderRadius: BorderRadius.circular(5)),
+                      child: const Padding(
+                        padding: EdgeInsets.only(left: 15, right: 15),
+                        child: Center(
+                          child: Text(
+                            "AddPhoto",
+                            style: const TextStyle(
+                                fontSize: 16,
+                                color: grey,
+                                fontWeight: FontWeight.w500),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                  const Gap(20),
                   if (CatgBloc.get(context).imagecatrg != null)
                     Expanded(
                       child: Stack(
@@ -118,37 +143,17 @@ class AddCatgries extends StatelessWidget {
                     Expanded(
                       child: Container(
                         padding: const EdgeInsets.all(10),
-                        margin: const EdgeInsets.only(bottom: 50),
                         decoration: BoxDecoration(
+                            image: const DecorationImage(
+                              image: AssetImage(
+                                "assets/images/box.png",
+                              ),
+                            ),
                             color: primary,
                             borderRadius: BorderRadius.circular(20)),
-                        child: const Center(
-                          child: Text(
-                            "Pleas choose photo!!",
-                            style: TextStyle(
-                              fontSize: 20,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ),
                       ),
                     ),
                   const Divider(height: 20, thickness: 0.5, color: Colors.grey),
-                  CircleAvatar(
-                    backgroundColor: primary,
-                    radius: 30,
-                    child: Center(
-                      child: IconButton(
-                          onPressed: () {
-                            CatgBloc.get(context).getimagecatrg();
-                          },
-                          icon: const Icon(
-                            Icons.camera_alt_outlined,
-                            size: 34,
-                            color: Colors.white,
-                          )),
-                    ),
-                  ),
                 ],
               ),
             ),

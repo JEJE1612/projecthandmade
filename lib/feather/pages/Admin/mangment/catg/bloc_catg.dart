@@ -110,8 +110,9 @@ class CatgBloc extends Cubit<CatgState> {
 
     try {
       await catgr.doc(docId).delete();
-      getCats(); // Call a function to update the UI or perform additional tasks after deletion
+      getCats();
       emit(SuccessDeleteCatgies());
+      EasyLoading.dismiss();
     } catch (e) {
       emit(ErrorDeleteCatgies());
     }

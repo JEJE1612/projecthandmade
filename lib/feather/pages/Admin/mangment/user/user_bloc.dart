@@ -119,4 +119,37 @@ class UserBloc extends Cubit<UserState> {
       emit(ErrorUploadImageProfailState());
     });
   }
+
+  final TextEditingController searchword = TextEditingController();
+
+  List allOwner = [];
+  List resultlist = [];
+
+  void initialize() async {
+    EasyLoading.show();
+    var data = await FirebaseFirestore.instance
+        .collection('user')
+        .orderBy('name')
+        .where('type', isEqualTo: 'user')
+        .get();
+    allOwner = data.docs;
+    searchResultList();
+    emit(LoadedUserState(resultlist));
+  }
+
+  void searchResultList() {
+    var showResult = [];
+    if (searchword.text != '') {
+      for (var userSnapshot in allOwner) {
+        var name = userSnapshot['name'].toString().toLowerCase();
+        if (name.contains(searchword.text.toLowerCase())) {
+          showResult.add(userSnapshot);
+        }
+      }
+    } else {
+      showResult = List.from(allOwner);
+    }
+    resultlist = showResult;
+    emit(LoadedUserState(resultlist));
+  }
 }

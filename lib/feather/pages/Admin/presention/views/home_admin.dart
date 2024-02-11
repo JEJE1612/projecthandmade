@@ -5,8 +5,10 @@ import 'package:handmade/cors/theme/colors.dart';
 import 'package:handmade/cors/theme/helper.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/dealetUse/dealt_user.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/edit_profail/profail.dart';
-import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/show_cat.dart';
-import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/show_user.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/show-user.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/views/remove_catg.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/views/show_cat.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/show_owner.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/views/add_catg.dart';
 
 class HomeAdmin extends StatefulWidget {
@@ -90,14 +92,14 @@ class _HomeAdminState extends State<HomeAdmin> {
                 image: "assets/images/remove_3179884.png",
                 name: " Remove Categoris",
                 onTap: () {
-                  Navigator.pushNamed(context, AddCatgries.nameKey);
+                  Navigator.pushNamed(context, RemoveCatgroies.nameKey);
                 },
               ),
               CutomCardAdmin(
                 image: "assets/images/man_4140037.png",
                 name: " show user",
                 onTap: () {
-                  Navigator.pushNamed(context, ShowCatgroies.nameKey);
+                  Navigator.pushNamed(context, ShowAllUser.nameKey);
                 },
               ),
             ],
@@ -113,7 +115,7 @@ class _HomeAdminState extends State<HomeAdmin> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (context) => ShowAllOwner(),
+                        builder: (context) => const ShowAllOwner(),
                       ));
                 },
               ),

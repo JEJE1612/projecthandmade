@@ -36,7 +36,7 @@ class ShowCatgroies extends StatelessWidget {
             appBar: const PreferredSize(
               preferredSize: Size.fromHeight(80),
               child: CustomAppBar(
-                text: "show",
+                text: "show Catgroies",
               ),
             ),
             body: GridView.builder(
@@ -71,26 +71,50 @@ class CatroiesItems extends StatelessWidget {
   final CatroiesModel model;
   @override
   Widget build(BuildContext context) {
-    return Card(
-      child: Column(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            CircleAvatar(
-              backgroundImage: CachedNetworkImageProvider(
-                model.catoiesImage ?? "",
-                errorListener: (p0) => Text("Not found"),
-              ),
-              radius: 45,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      crossAxisAlignment: CrossAxisAlignment.center,
+      children: [
+        Card(
+          elevation: 10,
+          shape: RoundedRectangleBorder(
+            borderRadius:
+                BorderRadius.circular(15.0), // Adjust the value as needed
+          ),
+          child: Container(
+            decoration: BoxDecoration(
+              color: Colors.grey,
+              borderRadius: BorderRadius.circular(
+                  15.0), // Match the value with the one used in shape
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black.withOpacity(0.2),
+                  spreadRadius: 2,
+                  blurRadius: 5,
+                  offset: const Offset(0, 3),
+                ),
+              ],
             ),
-            Text(
-              model.text ?? "",
-              style: TextStyle(
-                fontSize: 18,
-                color: textBlack,
+            child: ClipRRect(
+              borderRadius: BorderRadius.circular(
+                  15.0), // Match the value with the one used in BoxDecoration
+              child: CachedNetworkImage(
+                imageUrl: model.catoiesImage ?? "",
+                fit: BoxFit.cover,
+                height: 90,
+                width: 100,
               ),
             ),
-          ]),
+          ),
+        ),
+        Text(
+          model.text ?? "",
+          style: const TextStyle(
+            fontSize: 18,
+            color: textBlack,
+          ),
+        ),
+      ],
     );
   }
 }

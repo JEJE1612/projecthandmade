@@ -37,7 +37,7 @@ class DealtAllUserViewitems extends StatelessWidget {
           child: Column(
             children: [
               const CustomAppBar(
-                text: "Show user",
+                text: "Show Owner",
               ),
               Container(
                 margin:
@@ -54,7 +54,6 @@ class DealtAllUserViewitems extends StatelessWidget {
                 child: BlocBuilder<ShowAllOwnerBloc, ShowAllownerState>(
                   builder: (context, state) {
                     if (state is LoadingState) {
-                      EasyLoading.show();
                     } else if (state is LoadedState) {
                       EasyLoading.dismiss();
                       return DealtItem(
@@ -90,29 +89,25 @@ class DealtItem extends StatelessWidget {
       ),
       itemBuilder: (BuildContext context, int index) {
         return Card(
-          child: Stack(
-            children: [
-              Column(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  crossAxisAlignment: CrossAxisAlignment.center,
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: CachedNetworkImageProvider(
-                        resultlist[index]['image'],
-                      ),
-                      radius: 40,
-                    ),
-                    Text(
-                      resultlist[index]['name'],
-                      style: TextStyle(
-                        fontWeight: FontWeight.w400,
-                        fontSize: 18,
-                        color: textBlack,
-                      ),
-                    ),
-                  ]),
-            ],
-          ),
+          child: Column(
+              mainAxisAlignment: MainAxisAlignment.spaceAround,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                CircleAvatar(
+                  backgroundImage: CachedNetworkImageProvider(
+                    resultlist[index]['image'],
+                  ),
+                  radius: 40,
+                ),
+                Text(
+                  resultlist[index]['name'],
+                  style: const TextStyle(
+                    fontWeight: FontWeight.w400,
+                    fontSize: 18,
+                    color: textBlack,
+                  ),
+                ),
+              ]),
         );
       },
     );

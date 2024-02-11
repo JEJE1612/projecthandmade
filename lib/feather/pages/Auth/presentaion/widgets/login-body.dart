@@ -39,7 +39,7 @@ class LoginBody extends StatelessWidget {
             Navigator.pushAndRemoveUntil(
                 context,
                 MaterialPageRoute(
-                  builder: (context) => const Homeowner(),
+                  builder: (context) => const HomeOwner(),
                 ),
                 (route) => false);
           } else if (state is LoginAsadmin) {

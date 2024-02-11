@@ -7,3 +7,5 @@ class LoadedState extends ShowAllownerState {
 
   LoadedState(this.resultlist);
 }
+
+class ChangeBottonSheet extends ShowAllownerState {}

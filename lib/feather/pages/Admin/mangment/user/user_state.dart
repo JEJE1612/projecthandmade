@@ -35,3 +35,9 @@ class ScafullUploadImageProfailState extends UserState {}
 class ErrorUploadImageProfailState extends UserState {}
 
 class ScafullsignOut extends UserState {}
+
+class LoadedUserState extends UserState {
+  final List resultlist;
+
+  LoadedUserState(this.resultlist);
+}

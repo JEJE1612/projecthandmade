@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:handmade/feather/user/presentation/prodect/products_card.dart';
 
 import 'widget/custom_app_bar.dart';

@@ -5,7 +5,9 @@ import 'package:handmade/feather/pages/Admin/mangment/catg/bloc_catg.dart';
 import 'package:handmade/feather/pages/Admin/mangment/user/user_bloc.dart';
 import 'package:handmade/feather/pages/Admin/presention/views/home_admin.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/edit_profail/ebit_profail_page.dart';
-import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/show_cat.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/show-user.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/views/remove_catg.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/views/show_cat.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/views/add_catg.dart';
 import 'package:handmade/feather/pages/Auth/presentaion/views/forgetpassword.dart';
 import 'package:handmade/feather/pages/Auth/presentaion/views/login_page.dart';
@@ -43,6 +45,8 @@ class MyApp extends StatelessWidget {
           AddCatgries.nameKey: (_) => const AddCatgries(),
           ShowCatgroies.nameKey: (_) => const ShowCatgroies(),
           EditProfailAdmin.nameKey: (_) => const EditProfailAdmin(),
+          RemoveCatgroies.nameKey: (_) => const RemoveCatgroies(),
+          ShowAllUser.nameKey: (_) => const ShowAllUser(),
         },
       ),
     );
