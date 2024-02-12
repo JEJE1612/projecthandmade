@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:gap/gap.dart';
+import 'package:handmade/cors/theme/custom_loding.dart';
 import 'package:handmade/cors/theme/padding.dart';
 import 'package:handmade/feather/pages/Admin/mangment/user/user_bloc.dart';
 import 'package:handmade/feather/pages/Admin/mangment/user/user_state.dart';
@@ -29,13 +30,12 @@ class _EditProfailState extends State<EditProfailAdmin> {
       listener: (context, state) {
         if (state is ScafullUdateAdminData) {
           EasyLoading.showSuccess("Success edit profail");
-          Navigator.pop(context);
         }
       },
       builder: (context, state) {
         var model = UserBloc.get(context).usermodel;
         if (state is LodingGetUserData) {
-          return CircularProgressIndicator();
+          return const CustomLoding();
         }
         return Scaffold(
           body: SingleChildScrollView(

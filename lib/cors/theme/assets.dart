@@ -15,4 +15,5 @@ class AssetsData {
   static const String logouticon = '${(icon)}/logout_icon.svg';
   static const String italian = '${(icon)}/italian.svg';
   static const String ordericon = '${(icon)}/order_icon.svg';
+  static const String searchicon = '${(icon)}/search_icon.svg';
 }

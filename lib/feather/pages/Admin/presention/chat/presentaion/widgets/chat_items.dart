@@ -1,8 +1,9 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:handmade/cors/theme/colors.dart';
+import 'package:handmade/cors/theme/padding.dart';
 import 'package:handmade/feather/pages/Admin/presention/chat/presentaion/widgets/chat_deatils.dart';
 import 'package:handmade/feather/pages/Auth/data/model/user_model.dart';
-
 
 class ChatItems extends StatelessWidget {
   const ChatItems({super.key, required this.model});
@@ -19,29 +20,34 @@ class ChatItems extends StatelessWidget {
                   builder: (context) => chatDeatiles(model),
                 ));
           },
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Row(
-              children: [
-                CircleAvatar(
-                  backgroundImage: CachedNetworkImageProvider(
-                    model.image ?? "",
-                //    errorListener: (p0) => Image.asset(AssetsData.user),
+          child: Card(
+            color: textWhite,
+            child: Padding(
+              padding: const EdgeInsets.only(
+                  top: 10,
+                  bottom: 10,
+                  left: leftMainPadding,
+                  right: rightMainPadding),
+              child: Row(
+                children: [
+                  CircleAvatar(
+                    backgroundImage: CachedNetworkImageProvider(
+                      model.image ?? "",
+                      //    errorListener: (p0) => Image.asset(AssetsData.user),
+                    ),
+                    radius: 25,
                   ),
-                  radius: 25,
-                ),
-                const SizedBox(
-                  width: 15,
-                ),
-                Text(
-                  model.name ?? "",
-                  style: TextStyle(
-                    fontSize: 18,
-
-                    
+                  const SizedBox(
+                    width: 15,
                   ),
-                ),
-              ],
+                  Text(
+                    model.name ?? "",
+                    style: const TextStyle(
+                      fontSize: 18,
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

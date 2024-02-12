@@ -10,7 +10,7 @@ import 'package:handmade/feather/pages/Admin/presention/widgets/dealetUse/mangme
 import 'package:handmade/feather/pages/Admin/presention/widgets/dealetUse/mangment/dealt_all_user_state.dart.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/widgets/custom_bar.dart';
 
-import '../../../../../../cors/theme/padding.dart';
+import '../../../../../../../cors/theme/padding.dart';
 
 class DealtAllUser extends StatelessWidget {
   const DealtAllUser({super.key});
@@ -106,7 +106,7 @@ class DealtItem extends StatelessWidget {
                     ),
                     Text(
                       resultlist[index]['name'],
-                      style: TextStyle(
+                      style: const TextStyle(
                         fontWeight: FontWeight.w400,
                         fontSize: 18,
                         color: textBlack,

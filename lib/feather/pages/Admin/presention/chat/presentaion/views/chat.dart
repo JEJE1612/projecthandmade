@@ -1,14 +1,12 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:gap/gap.dart';
-import 'package:handmade/cors/theme/padding.dart';
+
+import 'package:handmade/cors/theme/colors.dart';
+
 import 'package:handmade/feather/pages/Admin/presention/chat/mangment/chat_bloc.dart';
 import 'package:handmade/feather/pages/Admin/presention/chat/mangment/chat_state.dart';
 import 'package:handmade/feather/pages/Admin/presention/chat/presentaion/widgets/chat_items.dart';
-
-import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/widgets/custom_bar.dart';
 
 class ChatPage extends StatelessWidget {
   static const String nameKey = "ChatPage";
@@ -22,35 +20,42 @@ class ChatPage extends StatelessWidget {
       child: BlocConsumer<ChatBloc, ChatState>(
         listener: (context, state) {},
         builder: (context, state) {
+          var size = MediaQuery.of(context).size;
           return Scaffold(
             body: SafeArea(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  children: [
-                    const CustomAppBar(
-                      text: "Chat",
-                    ),
-                    const Gap(10),
-                    Expanded(
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          left: leftMainPadding,
-                          right: rightMainPadding,
-                        ),
-                        child: ListView.separated(
-                          physics: const BouncingScrollPhysics(),
-                          itemBuilder: (context, index) => ChatItems(
-                            model: ChatBloc.get(context).user[index],
-                          ),
-                          separatorBuilder: (context, index) => const Divider(
-                              height: 20, thickness: 0.5, color: Colors.grey),
-                          itemCount: ChatBloc.get(context).user.length,
-                        ),
+              child: Column(
+                children: [
+                  Container(
+                    color: textWhite,
+                    width: double.infinity,
+                    height: size.height * 0.08,
+                    child: const Center(
+                      child: Text(
+                        "Chat",
+                        style: TextStyle(
+                            fontSize: 18,
+                            color: textBlack,
+                            fontWeight: FontWeight.w600),
                       ),
                     ),
-                  ],
-                ),
+                  ),
+                  Expanded(
+                    child: Container(
+                      color: light,
+                      child: ListView.separated(
+                        padding: EdgeInsets.zero,
+                        physics: const BouncingScrollPhysics(),
+                        itemBuilder: (context, index) => ChatItems(
+                          model: ChatBloc.get(context).user[index],
+                        ),
+                        separatorBuilder: (context, index) => const SizedBox(
+                          height: 5,
+                        ),
+                        itemCount: ChatBloc.get(context).user.length,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           );

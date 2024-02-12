@@ -101,7 +101,7 @@ class AddCatgries extends StatelessWidget {
                         child: Center(
                           child: Text(
                             "AddPhoto",
-                            style: const TextStyle(
+                            style: TextStyle(
                                 fontSize: 16,
                                 color: grey,
                                 fontWeight: FontWeight.w500),
@@ -121,9 +121,10 @@ class AddCatgries extends StatelessWidget {
                             decoration: BoxDecoration(
                               borderRadius: BorderRadius.circular(6),
                               image: DecorationImage(
-                                  image: FileImage(
-                                      CatgBloc.get(context).imagecatrg!),
-                                  fit: BoxFit.cover),
+                                image: FileImage(
+                                    CatgBloc.get(context).imagecatrg!),
+                                fit: BoxFit.cover,
+                              ),
                             ),
                           ),
                           IconButton(

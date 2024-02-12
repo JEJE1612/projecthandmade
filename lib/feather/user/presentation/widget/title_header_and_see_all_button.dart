@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:get/route_manager.dart';
 import 'package:handmade/feather/user/presentation/wish_list_screen.dart';
 
 class TitleHeaderAndSeeAllButton extends StatelessWidget {
@@ -22,12 +21,12 @@ class TitleHeaderAndSeeAllButton extends StatelessWidget {
           style: Theme.of(context).textTheme.titleLarge,
         ),
         TextButton(
-          onPressed: () {  Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const 
-            WishListScreen() ,
-                  ));
+          onPressed: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const WishListScreen(),
+                ));
           },
           child: const Text("See All"),
         ),

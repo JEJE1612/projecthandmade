@@ -2,6 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:handmade/cors/theme/colors.dart';
+import 'package:handmade/cors/theme/custom_loding.dart';
 import 'package:handmade/cors/theme/padding.dart';
 import 'package:handmade/feather/pages/Admin/data/model/catrg_model.dart';
 import 'package:handmade/feather/pages/Admin/mangment/catg/bloc_catg.dart';
@@ -23,14 +24,7 @@ class ShowCatgroies extends StatelessWidget {
         builder: (context, state) {
           var model = CatgBloc.get(context).catroiesList;
           if (CatgBloc.get(context).catroiesList.isEmpty) {
-            return const Center(
-              child: Text(
-                "Pleas add Catgroies",
-                style: TextStyle(
-                  color: Colors.black,
-                ),
-              ),
-            );
+            return const CustomLoding();
           }
           return Scaffold(
             appBar: const PreferredSize(

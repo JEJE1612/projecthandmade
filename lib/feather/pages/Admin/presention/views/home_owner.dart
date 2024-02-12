@@ -30,49 +30,32 @@ class HomeOwnerBody extends StatelessWidget {
         listener: (context, state) {},
         builder: (context, state) {
           return Scaffold(
-              body: ShowAllOwnerBloc.get(context)
-                  .viewsConsultant[ShowAllOwnerBloc.get(context).currentindex],
-              bottomNavigationBar: const NavigationButton());
+            body: ShowAllOwnerBloc.get(context)
+                .viewsConsultant[ShowAllOwnerBloc.get(context).currentindex],
+            bottomNavigationBar: BottomNavigationBar(
+              selectedItemColor: primary,
+              currentIndex: ShowAllOwnerBloc.get(context).currentindex,
+              onTap: (value) async {
+                ShowAllOwnerBloc.get(context).changeBootomSheet(value);
+              },
+              items: [
+                BottomNavigationBarItem(
+                  icon: getSvgIcon(AssetsData.home),
+                  label: "Home",
+                ),
+                BottomNavigationBarItem(
+                  icon: getSvgIcon(AssetsData.ordericon),
+                  label: "Order",
+                ),
+                const BottomNavigationBarItem(
+                    icon: Icon(Icons.chat_bubble_outline), label: "Chat"),
+                BottomNavigationBarItem(
+                    icon: getSvgIcon(AssetsData.profile), label: "Profile"),
+              ],
+            ),
+          );
         },
       ),
-    );
-  }
-}
-
-class NavigationButton extends StatelessWidget {
-  const NavigationButton({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return BottomNavigationBar(
-      selectedItemColor: primary,
-      unselectedItemColor: Colors.grey,
-      currentIndex: ShowAllOwnerBloc.get(context).currentindex,
-      onTap: (value) async {
-        if (value == 1) {
-          //  await MyBloc.get(context).getAllUser();
-          ShowAllOwnerBloc.get(context).changeBootomSheet(value);
-        } else if (value == 2) {
-          //  await MyBloc.get(context).getUserData();
-          ShowAllOwnerBloc.get(context).changeBootomSheet(value);
-        } else {
-          ShowAllOwnerBloc.get(context).changeBootomSheet(value);
-        }
-      },
-      items: [
-        BottomNavigationBarItem(
-          icon: getSvgIcon(AssetsData.home),
-          label: "Home",
-        ),
-        BottomNavigationBarItem(
-          icon: getSvgIcon(AssetsData.ordericon),
-          label: "Order",
-        ),
-        const BottomNavigationBarItem(
-            icon: Icon(Icons.chat_bubble_outline), label: "Chat"),
-        BottomNavigationBarItem(
-            icon: getSvgIcon(AssetsData.profile), label: "Profile"),
-      ],
     );
   }
 }

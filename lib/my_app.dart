@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:handmade/cors/theme/colors.dart';
 import 'package:handmade/feather/pages/Admin/mangment/catg/bloc_catg.dart';
+import 'package:handmade/feather/pages/Admin/mangment/owner/owner_bloc.dart';
 import 'package:handmade/feather/pages/Admin/mangment/user/user_bloc.dart';
 import 'package:handmade/feather/pages/Admin/presention/views/home_admin.dart';
-import 'package:handmade/feather/pages/Admin/presention/widgets/edit_profail/ebit_profail_page.dart';
-import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/show-user.dart';
+import 'package:handmade/feather/pages/Admin/presention/profail/edit_profail/ebit_profail_page.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/show_user.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/views/remove_catg.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/views/show_cat.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/views/add_catg.dart';
@@ -28,6 +30,9 @@ class MyApp extends StatelessWidget {
         BlocProvider(
           create: (context) => CatgBloc()..getCats(),
         ),
+        BlocProvider(
+          create: (context) => ShowAllOwnerBloc(),
+        ),
       ],
       child: MaterialApp(
         title: 'HandMade',
@@ -35,6 +40,16 @@ class MyApp extends StatelessWidget {
         home: const SplashView(),
         initialRoute: SplashView.nameKey,
         builder: EasyLoading.init(),
+        theme: ThemeData(
+            bottomNavigationBarTheme: const BottomNavigationBarThemeData(
+          type: BottomNavigationBarType.fixed,
+          selectedIconTheme: IconThemeData(
+            color: primary,
+          ),
+          elevation: 0,
+          selectedItemColor: primary,
+          unselectedItemColor: grey,
+        )),
         routes: {
           SplashView.nameKey: (_) => const SplashView(),
           Onborording.nameKey: (_) => const Onborording(),

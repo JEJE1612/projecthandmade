@@ -101,7 +101,8 @@ class CatgBloc extends Cubit<CatgState> {
 
       emit(ScafullGetListCatroies());
     } catch (e) {
-      print("Error in getAsk: $e");
+      debugPrint("Error in getAsk: $e");
+      
     }
   }
 

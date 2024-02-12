@@ -3,9 +3,9 @@ import 'package:gap/gap.dart';
 import 'package:handmade/cors/theme/assets.dart';
 import 'package:handmade/cors/theme/colors.dart';
 import 'package:handmade/cors/theme/helper.dart';
-import 'package:handmade/feather/pages/Admin/presention/widgets/dealetUse/dealt_user.dart';
-import 'package:handmade/feather/pages/Admin/presention/widgets/edit_profail/profail.dart';
-import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/show-user.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/dealetUse/views/dealt_user.dart';
+import 'package:handmade/feather/pages/Admin/presention/profail/profail.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/show_user.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/views/remove_catg.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/views/show_cat.dart';
 import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/show_owner.dart';
@@ -164,10 +164,10 @@ class CutomCardAdmin extends StatelessWidget {
               height: 100,
             ),
           ),
-          Gap(10),
+          const Gap(10),
           Text(
             name,
-            style: TextStyle(
+            style: const TextStyle(
                 color: textBlack, fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ],

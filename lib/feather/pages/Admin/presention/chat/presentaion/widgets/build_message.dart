@@ -22,23 +22,9 @@ class Buildmesssage extends StatelessWidget {
             ),
             child: Text(
               "${massge.text}",
-              style: TextStyle(color: Colors.black54, fontSize: 16),
+              style: const TextStyle(color: Colors.black54, fontSize: 16),
             ),
           ),
-          // Container(
-          //   padding: const EdgeInsets.all(10),
-          //   decoration: BoxDecoration(
-          //     borderRadius: const BorderRadiusDirectional.only(
-          //       bottomEnd: Radius.circular(10),
-          //       topEnd: Radius.circular(10),
-          //       bottomStart: Radius.circular(10),
-          //     ),
-          //   ),
-          //   child: Text(
-          //     "${massge?.dateTime}",
-          //     style: TextStyle(color: Colors.grey, fontSize: 16),
-          //   ),
-          // ),
         ],
       ),
     );

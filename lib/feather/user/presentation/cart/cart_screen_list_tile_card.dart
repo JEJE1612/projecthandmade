@@ -21,7 +21,7 @@ class CartListTileCard extends StatelessWidget {
           Container(
             width: 100,
             height: 100,
-            decoration: BoxDecoration(
+            decoration: const BoxDecoration(
               color: Colors.white,
               image: DecorationImage(
                 image: NetworkImage(
@@ -45,17 +45,17 @@ class CartListTileCard extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
+                            const Text(
                               'title',
-                              style: const TextStyle(
-                                  fontSize: 18, color: Colors.black),
+                              style:
+                                  TextStyle(fontSize: 18, color: Colors.black),
                             ),
                             const SizedBox(
                               height: 4,
                             ),
                             RichText(
-                              text: TextSpan(
-                                style: const TextStyle(
+                              text: const TextSpan(
+                                style: TextStyle(
                                     color: Colors.black54, fontSize: 12),
                                 children: [
                                   TextSpan(text: 'Color '),

@@ -66,7 +66,7 @@ class ChatBloc extends Cubit<ChatState> {
         .add(model.toMap())
         .then((value) {
       emit(ScafullSendMessageState());
-      print(uid);
+    
     }).catchError((e) {
       emit(ErrorSendMessageState());
     });
@@ -86,9 +86,9 @@ class ChatBloc extends Cubit<ChatState> {
         .snapshots()
         .listen((event) {
       messages.clear();
-      event.docs.forEach((element) {
+      for (var element in event.docs) {
         messages.add(ChatModel.fromJson(element.data()));
-      });
+      }
       emit(GetMessageScafull());
     });
   }
@@ -114,7 +114,7 @@ class ChatBloc extends Cubit<ChatState> {
           chatImage: chatImage,
           reseverId: reseverId);
     } else {
-      print('No image selected.');
+     
       emit(ErrorChatimageState());
     }
   }

@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:gap/gap.dart';
+import 'package:handmade/cors/theme/colors.dart';
+import 'package:handmade/cors/theme/padding.dart';
 import 'package:handmade/feather/pages/Admin/presention/chat/mangment/chat_bloc.dart';
 import 'package:handmade/feather/pages/Admin/presention/chat/mangment/chat_state.dart';
 import 'package:handmade/feather/pages/Admin/presention/chat/presentaion/widgets/build_message.dart';
@@ -23,84 +26,106 @@ chatDeatiles(UserModel? user) {
       },
       builder: (context, state) {
         return Scaffold(
-          appBar: AppBar(
-            titleSpacing: 0.0,
-            title: Row(
-              children: [
-                CircleAvatar(
-                  backgroundImage: NetworkImage(
-                    "${user?.image}",
-                  ),
-                  radius: 20,
-                ),
-                const SizedBox(
-                  width: 15,
-                ),
-                Text(
-                  "${user?.name}",
-                  style: const TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.w400,
-                  ),
-                ),
-              ],
-            ),
-            actions: [
-              IconButton(
-                onPressed: () {
-                  ChatBloc.get(context).getChatImage(
-                    chatImage: '',
-                    reseverId: user!.uid!,
-                    dateTime: DateTime.now().toString(),
-                    text: "",
-                  );
-                },
-                icon: const Icon(Icons.camera_alt),
-              ),
-            ],
-          ),
-          body: Padding(
-            padding: const EdgeInsets.all(8.0),
+          body: SafeArea(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
+                const Gap(20),
+                Container(
+                  padding: const EdgeInsets.only(
+                      bottom: 5,
+                      left: leftMainPadding,
+                      right: rightMainPadding),
+                  alignment: Alignment.center,
+                  color: textWhite,
+                  height: 45,
+                  width: double.infinity,
+                  child: Center(
+                    child: Row(
+                      children: [
+                        CircleAvatar(
+                          backgroundImage: NetworkImage(
+                            "${user?.image}",
+                          ),
+                          radius: 30,
+                        ),
+                        const SizedBox(
+                          width: 15,
+                        ),
+                        Text(
+                          "${user?.name}",
+                          style: const TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        const Spacer(),
+                        IconButton(
+                          onPressed: () {
+                            ChatBloc.get(context).getChatImage(
+                              chatImage: '',
+                              reseverId: user!.uid!,
+                              dateTime: DateTime.now().toString(),
+                              text: "",
+                            );
+                          },
+                          icon: const Icon(
+                            Icons.camera_alt_outlined,
+                            color: primary,
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
                 Expanded(
-                  child: ListView.separated(
-                      itemBuilder: (context, index) {
-                        if (user?.uid ==
-                            ChatBloc.get(context).messages[index].senderId) {
-                          return Buildmesssage(
+                  child: Container(
+                    color: light,
+                    child: ListView.separated(
+                        itemBuilder: (context, index) {
+                          if (user?.uid ==
+                              ChatBloc.get(context).messages[index].senderId) {
+                            return Buildmesssage(
+                              massge: ChatBloc.get(context).messages[index],
+                            );
+                          }
+                          return BuildMyMessage(
                             massge: ChatBloc.get(context).messages[index],
                           );
-                        }
-                        return BuildMyMessage(
-                          massge: ChatBloc.get(context).messages[index],
-                        );
-                      },
-                      separatorBuilder: (context, index) =>
-                          SizedBox(height: 15),
-                      itemCount: ChatBloc.get(context).messages.length),
-                ),
-                TextFormField(
-                  controller: massageController,
-                  decoration: InputDecoration(
-                      suffixIcon: IconButton(
-                        onPressed: () {
-                          ChatBloc.get(context).sendMessagechat(
-                            text: massageController.text,
-                            dateTime: DateTime.now().toString(),
-                            reseverId: user!.uid!,
-                          );
-                          massageController.clear();
                         },
-                        icon: const Icon(
-                          Icons.send,
+                        separatorBuilder: (context, index) =>
+                            const SizedBox(height: 15),
+                        itemCount: ChatBloc.get(context).messages.length),
+                  ),
+                ),
+                Container(
+                  color: light,
+                  padding: const EdgeInsets.only(
+                      bottom: 5,
+                      left: leftMainPadding,
+                      right: rightMainPadding),
+                  child: TextFormField(
+                    controller: massageController,
+                    decoration: InputDecoration(
+                        suffixIcon: IconButton(
+                          onPressed: () {
+                            ChatBloc.get(context).sendMessagechat(
+                              text: massageController.text,
+                              dateTime: DateTime.now().toString(),
+                              reseverId: user!.uid!,
+                            );
+                            massageController.clear();
+                          },
+                          icon: const Icon(
+                            Icons.send,
+                          ),
                         ),
-                      ),
-                      hintText: "message",
-                      focusedBorder: customStyleBorderchat(),
-                      disabledBorder: customStyleBorderchat(),
-                      border: customStyleBorderchat(),
-                      enabledBorder: customStyleBorderchat()),
+                        hintText: "message",
+                        focusedBorder: customStyleBorderchat(),
+                        disabledBorder: customStyleBorderchat(),
+                        border: customStyleBorderchat(),
+                        enabledBorder: customStyleBorderchat()),
+                  ),
                 ),
               ],
             ),
@@ -114,7 +139,7 @@ chatDeatiles(UserModel? user) {
 OutlineInputBorder customStyleBorderchat() {
   return OutlineInputBorder(
       borderRadius: BorderRadius.circular(20),
-      borderSide: BorderSide(color: Colors.black));
+      borderSide: const BorderSide(color: Colors.black));
 }
 
 

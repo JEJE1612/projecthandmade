@@ -17,10 +17,10 @@ class UserBloc extends Cubit<UserState> {
   Future<void> signOut() async {
     try {
       await FirebaseAuth.instance.signOut();
-      print("User signed out successfully");
+      debugPrint("User signed out successfully");
       emit(ScafullsignOut());
     } catch (e) {
-      print("Error signing out: $e");
+      debugPrint("Error signing out: $e");
     }
   }
 
