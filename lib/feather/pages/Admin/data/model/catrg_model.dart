@@ -7,9 +7,11 @@ class CatroiesModel {
   CatroiesModel.fromJson(Map<String, dynamic> json) {
     text = json['text'];
     catoiesImage = json['catoiesImage'];
+    uid = json['uid'];
   }
   Map<String, dynamic> toMap() {
     return {
+      'uid': uid,
       'text': text,
       'catoiesImage': catoiesImage,
     };

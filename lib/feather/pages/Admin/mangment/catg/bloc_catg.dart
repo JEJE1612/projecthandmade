@@ -102,11 +102,11 @@ class CatgBloc extends Cubit<CatgState> {
       emit(ScafullGetListCatroies());
     } catch (e) {
       debugPrint("Error in getAsk: $e");
-      
     }
   }
 
   Future<void> deleteCatroies(String docId) async {
+    catroiesList.clear();
     EasyLoading.show();
 
     try {

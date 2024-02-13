@@ -112,7 +112,7 @@ class CatroiesItems extends StatelessWidget {
                   backgroundColor: Colors.grey,
                   child: IconButton(
                     onPressed: () {
-                      CatgBloc.get(context).deleteCatroies(model.uid!);
+                      CatgBloc.get(context).deleteCatroies(model.uid ?? "");
                     },
                     icon: const Icon(
                       Icons.delete_outline,

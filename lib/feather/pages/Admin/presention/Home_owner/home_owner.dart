@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 
 import 'package:handmade/cors/theme/colors.dart';
+import 'package:handmade/feather/pages/Admin/mangment/prodect/prodect_bloc.dart';
+import 'package:handmade/feather/pages/Admin/mangment/prodect/prodect_state.dart';
 
 import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/app_bar_owner.dart';
 import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/app_prodect.dart';
@@ -11,32 +14,41 @@ class HomeOwnerpage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.push(
-              context,
-              MaterialPageRoute(
-                builder: (context) => const AppProdect(),
-              ));
-        },
-        child: const Text("ADD"),
-      ),
-      body: SafeArea(
-        child: Column(
-          children: [
-            const AppBarOwner(),
-            Expanded(
-              child: Container(
-                color: light,
-                child: ListView.builder(
-                  itemCount: 2,
-                  itemBuilder: (context, index) => const CustomCardOwnerCreat(),
-                ),
+    return BlocProvider(
+      create: (context) => ProdectBloc()..getProdect(),
+      child: BlocBuilder<ProdectBloc, ProdectState>(
+        builder: (context, state) {
+          return Scaffold(
+            floatingActionButton: FloatingActionButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) => const AppProdect(),
+                    ));
+              },
+              child: const Text("ADD"),
+            ),
+            body: SafeArea(
+              child: Column(
+                children: [
+                  const AppBarOwner(),
+                  Expanded(
+                    child: Container(
+                      color: light,
+                      child: ListView.builder(
+                        itemCount: ProdectBloc.get(context).prodects.length,
+                        itemBuilder: (context, index) => CustomCardOwnerCreat(
+                          model: ProdectBloc.get(context).prodects[index],
+                        ),
+                      ),
+                    ),
+                  )
+                ],
               ),
-            )
-          ],
-        ),
+            ),
+          );
+        },
       ),
     );
   }

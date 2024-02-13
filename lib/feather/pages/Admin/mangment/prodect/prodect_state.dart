@@ -27,3 +27,14 @@ class LodingGetcatroiesState extends ProdectState {}
 class ScafullGetcatroiesstate extends ProdectState {}
 
 class ErrorGetcatroiesstate extends ProdectState {}
+
+class LodingGetListprodects extends ProdectState {}
+
+class ScafullGetListCatroies extends ProdectState {}
+
+class SuccessDeleteCatgies extends ProdectState {}
+
+class ErrorDeleteCatgies extends ProdectState {
+  final String eror;
+  ErrorDeleteCatgies(this.eror);
+}

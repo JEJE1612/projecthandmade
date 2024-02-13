@@ -5,7 +5,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:handmade/feather/pages/Admin/data/model/prodect_model.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -27,11 +26,12 @@ class ProdectBloc extends Cubit<ProdectState> {
       FirebaseFirestore.instance.collection('prodect');
   void creatProdect({
     String? prodectImage,
+    required String catgname,
   }) async {
     ProdectModel model = ProdectModel(
         prodectuid: '',
         prodectname: title.text,
-        catgname: "",
+        catgname: catgname,
         prodectImage: prodectImage,
         text: descipton.text,
         price: price.text,
@@ -39,16 +39,33 @@ class ProdectBloc extends Cubit<ProdectState> {
         date: time.toString(),
         uid: uid);
 
-    // catg.clear();
-    // catgnumder.clear();
-
     try {
       DocumentReference docRef = await prodect.add(model.toMap());
 
       await docRef.update({'prodectuid': docRef.id});
-      //  getCats();
     } catch (e) {
       emit(ErrorCreatProdect());
+    }
+  }
+
+  List<ProdectModel> prodects = [];
+
+  Future<void> getProdect() async {
+    emit(LodingGetListprodects());
+
+    try {
+      QuerySnapshot querySnapshot = await prodect.get();
+
+      for (QueryDocumentSnapshot doc in querySnapshot.docs) {
+        Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
+        ProdectModel catroiesModel = ProdectModel.fromJson(data);
+        prodects.add(catroiesModel);
+        print("${prodects.length}hjkggggggggggggg");
+      }
+
+      emit(ScafullGetListCatroies());
+    } catch (e) {
+      debugPrint("Error in getAsk: $e");
     }
   }
 
@@ -72,8 +89,20 @@ class ProdectBloc extends Cubit<ProdectState> {
     }
   }
 
-  void uploadimageProdect() {
+  // void chooseMyCategory(String mychoose ,{required String  uid}) {
+  //   FirebaseFirestore.instance
+  //       .collection('prodect')
+  //       .doc(uid)
+  //       .set({'category': mychoose}, SetOptions(merge: true)).then((value) {
+  //     //Do your stuff.
+  //   });
+  // }
+
+  void uploadimageProdect({
+    required String catgname,
+  }) {
     emit(LodingCreatProdect());
+    prodects.clear();
     FirebaseStorage.instance
         .ref()
         .child("user/${Uri.file(imageProdect!.path).pathSegments.last}")
@@ -82,7 +111,9 @@ class ProdectBloc extends Cubit<ProdectState> {
       value.ref.getDownloadURL().then((value) {
         creatProdect(
           prodectImage: value,
+          catgname: '',
         );
+        getProdect();
         emit(ScafullUploadprodectImage());
       }).catchError((e) {
         emit(ErrorUploadcreatprodectImage());
