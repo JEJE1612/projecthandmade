@@ -38,3 +38,10 @@ class ErrorDeleteCatgies extends ProdectState {
   final String eror;
   ErrorDeleteCatgies(this.eror);
 }
+
+class SuccessDeleteProect extends ProdectState {}
+
+class ErrorDeleteProdect extends ProdectState {
+  final String eror;
+  ErrorDeleteProdect(this.eror);
+}

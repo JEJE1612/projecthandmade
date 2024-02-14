@@ -2,7 +2,9 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:handmade/cors/theme/colors.dart';
+import 'package:handmade/cors/theme/style_text.dart';
 import 'package:handmade/feather/pages/Admin/data/model/prodect_model.dart';
+import 'package:handmade/feather/pages/Admin/presention/Home_owner/views/prodect_deatils.dart';
 
 class CustomCardOwnerCreat extends StatelessWidget {
   const CustomCardOwnerCreat({
@@ -12,8 +14,16 @@ class CustomCardOwnerCreat extends StatelessWidget {
   final ProdectModel model;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.all(20),
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+              builder: (context) => ProdectDeatils(
+                prodect: model,
+              ),
+            ));
+      },
       child: Card(
         clipBehavior: Clip.none,
         color: textWhite,
@@ -21,7 +31,7 @@ class CustomCardOwnerCreat extends StatelessWidget {
           children: [
             Container(
               width: double.infinity,
-              height: MediaQuery.of(context).size.height * 0.25,
+              height: MediaQuery.of(context).size.height * 0.15,
               decoration: BoxDecoration(
                 image: DecorationImage(
                     fit: BoxFit.cover,
@@ -33,85 +43,54 @@ class CustomCardOwnerCreat extends StatelessWidget {
                     topRight: Radius.circular(12)),
               ),
             ),
-            const Gap(10),
             Padding(
-              padding: const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.only(left: 5, right: 5, top: 2),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const Text(
-                    "Name:",
-                    style: TextStyle(
-                      color: primary,
-                      fontSize: 18,
-                    ),
-                  ),
-                  const Gap(3),
                   Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text(
-                        "${model.prodectname}",
-                        style: const TextStyle(
-                            color: textBlack,
-                            fontSize: 18,
-                            fontWeight: FontWeight.w600),
+                      Expanded(
+                        child: Text(
+                          "${model.prodectname}",
+                          maxLines: 1,
+                          overflow: TextOverflow.ellipsis,
+                          style: Styles.textStyle16,
+                        ),
                       ),
+                      Gap(2),
                     ],
                   ),
-                  Gap(2),
-                  Text(
-                    "Dicridaction",
-                    style: TextStyle(
-                      color: primary,
-                      fontSize: 18,
-                    ),
-                  ),
-                  Gap(3),
-                  Text(
-                    "${model.text}",
-                    maxLines: 4,
-                    style: TextStyle(
-                      color: textBlack,
-                      fontSize: 14,
-                    ),
-                  ),
-                  Gap(2),
                   Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Column(
+                      Row(
                         children: [
-                          Text(
-                            "price",
-                            style: TextStyle(
-                              color: primary,
-                              fontSize: 18,
-                            ),
+                          const Icon(
+                            Icons.category,
+                            color: grey,
                           ),
-                          Text(
-                            "${model.price}",
-                            style: TextStyle(
-                                color: textBlack,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600),
+                          const Gap(5),
+                          Row(
+                            children: [
+                              Text("${model.pace}", style: Styles.textStyle18),
+                              Gap(5),
+                              Text("piece", style: Styles.textStyle16),
+                            ],
                           ),
                         ],
                       ),
-                      Column(
+                      Row(
                         children: [
                           Text(
-                            "paces",
-                            style: TextStyle(
-                              color: primary,
-                              fontSize: 18,
-                            ),
+                            "${model.price}",
+                            style: Styles.textStyle18.copyWith(color: primary),
                           ),
-                          Text(
-                            "${model.pace}",
-                            style: TextStyle(
-                                color: textBlack,
-                                fontSize: 18,
-                                fontWeight: FontWeight.w600),
+                          Gap(5),
+                          const Icon(
+                            Icons.attach_money,
+                            color: secondary,
                           ),
                         ],
                       ),

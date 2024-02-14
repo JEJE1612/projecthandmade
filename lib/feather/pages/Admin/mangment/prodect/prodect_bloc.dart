@@ -5,6 +5,8 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
+import 'package:handmade/cors/model/comment_model.dart';
 import 'package:handmade/feather/pages/Admin/data/model/prodect_model.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -26,7 +28,7 @@ class ProdectBloc extends Cubit<ProdectState> {
       FirebaseFirestore.instance.collection('prodect');
   void creatProdect({
     String? prodectImage,
-    required String catgname,
+    String? catgname,
   }) async {
     ProdectModel model = ProdectModel(
         prodectuid: '',
@@ -43,6 +45,7 @@ class ProdectBloc extends Cubit<ProdectState> {
       DocumentReference docRef = await prodect.add(model.toMap());
 
       await docRef.update({'prodectuid': docRef.id});
+      await docRef.update({'catgname': catgname});
     } catch (e) {
       emit(ErrorCreatProdect());
     }
@@ -89,14 +92,14 @@ class ProdectBloc extends Cubit<ProdectState> {
     }
   }
 
-  // void chooseMyCategory(String mychoose ,{required String  uid}) {
-  //   FirebaseFirestore.instance
-  //       .collection('prodect')
-  //       .doc(uid)
-  //       .set({'category': mychoose}, SetOptions(merge: true)).then((value) {
-  //     //Do your stuff.
-  //   });
-  // }
+  void chooseMyCategory(String mychoose, {required String prodectUid}) {
+    FirebaseFirestore.instance
+        .collection('prodect')
+        .doc(prodectUid)
+        .set({'catgname': mychoose}, SetOptions(merge: true)).then((value) {
+      //Do your stuff.
+    });
+  }
 
   void uploadimageProdect({
     required String catgname,
@@ -111,7 +114,7 @@ class ProdectBloc extends Cubit<ProdectState> {
       value.ref.getDownloadURL().then((value) {
         creatProdect(
           prodectImage: value,
-          catgname: '',
+          catgname: catgname,
         );
         getProdect();
         emit(ScafullUploadprodectImage());
@@ -121,6 +124,21 @@ class ProdectBloc extends Cubit<ProdectState> {
     }).catchError((e) {
       emit(ErrorUploadprodectImage());
     });
+  }
+
+  Future<void> deleteProdect(String docId) async {
+    prodects.clear();
+    EasyLoading.show();
+
+    try {
+      await prodect.doc(docId).delete();
+
+      emit(SuccessDeleteProect());
+      getProdect();
+      EasyLoading.dismiss();
+    } catch (e) {
+      emit(ErrorDeleteProdect(e.toString()));
+    }
   }
 
   List catroies = [];

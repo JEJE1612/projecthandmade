@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import 'package:handmade/cors/theme/colors.dart';
+
 import 'package:handmade/feather/pages/Admin/mangment/prodect/prodect_bloc.dart';
 import 'package:handmade/feather/pages/Admin/mangment/prodect/prodect_state.dart';
 
@@ -16,7 +16,12 @@ class HomeOwnerpage extends StatelessWidget {
   Widget build(BuildContext context) {
     return BlocProvider(
       create: (context) => ProdectBloc()..getProdect(),
-      child: BlocBuilder<ProdectBloc, ProdectState>(
+      child: BlocConsumer<ProdectBloc, ProdectState>(
+        listener: (context, state) {
+          if (state is SuccessDeleteProect) {
+            ProdectBloc.get(context).getProdect();
+          }
+        },
         builder: (context, state) {
           return Scaffold(
             floatingActionButton: FloatingActionButton(
@@ -36,14 +41,21 @@ class HomeOwnerpage extends StatelessWidget {
                   Expanded(
                     child: Container(
                       color: light,
-                      child: ListView.builder(
-                        itemCount: ProdectBloc.get(context).prodects.length,
-                        itemBuilder: (context, index) => CustomCardOwnerCreat(
-                          model: ProdectBloc.get(context).prodects[index],
-                        ),
-                      ),
+                      padding: const EdgeInsets.only(left: 10, right: 10),
+                      child: GridView.builder(
+                          itemCount: ProdectBloc.get(context).prodects.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            mainAxisSpacing: 10,
+                            crossAxisSpacing: 2,
+                            childAspectRatio: 1 / 1.0,
+                          ),
+                          itemBuilder: (context, index) => CustomCardOwnerCreat(
+                                model: ProdectBloc.get(context).prodects[index],
+                              )),
                     ),
-                  )
+                  ),
                 ],
               ),
             ),

@@ -188,6 +188,7 @@ class _AppProdectState extends State<AppProdect> {
                             ProdectBloc.get(context).uploadimageProdect(
                               catgname: selectedType['text'],
                             );
+                           
                           },
                           child: const CustomButtonAuth(
                             text: " Creat Prodect ",
