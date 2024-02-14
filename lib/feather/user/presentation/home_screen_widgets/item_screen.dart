@@ -21,7 +21,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: customAppBar(widget.title, true),
+      appBar: customAppBar(widget.title, true,context),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
         child: GridView.builder(
@@ -34,7 +34,7 @@ class _ItemsScreenState extends State<ItemsScreen> {
           ),
           itemBuilder: (context, int index) {
             return
-               WishListScreen();
+               const WishListScreen();
                 
               
             

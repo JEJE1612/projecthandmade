@@ -7,15 +7,15 @@ import 'package:handmade/feather/user/presentation/widget/custom_app_bar.dart';
 import 'package:handmade/feather/user/presentation/widget/love_icon_button.dart';
 import 'package:handmade/feather/user/presentation/prodect/products_carousel_slider.dart';
 
-class ProductsDetailsScreen extends StatefulWidget {
+class ProductsDetailsScreeninGategory extends StatefulWidget {
 
-  const ProductsDetailsScreen({super.key});
+  const ProductsDetailsScreeninGategory({super.key});
 
   @override
-  State<ProductsDetailsScreen> createState() => _ProductsDetailsScreenState();
+  State<ProductsDetailsScreeninGategory> createState() => _ProductsDetailsScreeninGategoryState();
 }
 
-class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
+class _ProductsDetailsScreeninGategoryState extends State<ProductsDetailsScreeninGategory> {
   @override
 
   @override
@@ -74,11 +74,11 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
         Wrap(
           crossAxisAlignment: WrapCrossAlignment.center,
           children: [
-            // const Icon(
-            //   Icons.star,
-            //   size: 18,
-            //   color: Colors.amber,
-            // ),
+            const Icon(
+              Icons.star,
+              size: 18,
+              color: Colors.amber,
+            ),
             // const Text(
             //   '4',
             //   style: TextStyle(
@@ -104,10 +104,8 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
             //     ),
             //   ),
             // ),
-             InkWell(
+            InkWell(
               onTap: () {
-             /*   Get.find<CreateWishListController>()
-                    .createWishList(productsDetails.productId!);*/
               },
               child: const FavoriteLoveIconButton(),
             ),
@@ -161,42 +159,7 @@ class _ProductsDetailsScreenState extends State<ProductsDetailsScreen> {
     );
   }
 
-  // SizedBox productsDetailsColorSelector(List<String> colors) {
-  //   return SizedBox(
-  //     height: 30,
-  //     child: ListView.separated(
-  //       scrollDirection: Axis.horizontal,
-  //       itemCount: colors.length,
-  //       itemBuilder: (context, int index) {
-  //         return InkWell(
-  //           borderRadius: BorderRadius.circular(20),
-  //           onTap: () {
-  //             _selectedColorIndex = index;
-  //             if (mounted) {
-  //               setState(() {});
-  //             }
-  //           },
-  //           child: CircleAvatar(
-  //             radius: 18,
-  //             backgroundColor: HexColor.fromHex(colors[index]),
-  //             child: _selectedColorIndex == index
-  //                 ? const Icon(
-  //                     Icons.done,
-  //                     color: Colors.white,
-  //                   )
-  //                 : null,
-  //           ),
-  //         );
-  //       },
-  //       separatorBuilder: (context, int index) {
-  //         return const SizedBox(
-  //           width: 8,
-  //         );
-  //       },
-  //     ),
-  //   );
-  // }
-
+  
   Container cartBottomContainer(
       ) {
     return Container(

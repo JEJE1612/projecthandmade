@@ -1,40 +1,47 @@
-
 import 'package:flutter/material.dart';
 import 'package:handmade/cors/theme/colors.dart';
+import 'package:handmade/feather/user/presentation/categoreys/productincategory/protectcatg.dart';
 
 class CategoriesCard extends StatelessWidget {
-  
-  const CategoriesCard({super.key});
-
+  const CategoriesCard({super.key, required this.name, required this.image});
+  final String name;
+  final String image;
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 8.0),
-      child: Column(
-        children: [
-          Container(
-            height: 60,
-            width: 60,
-            margin: const EdgeInsets.symmetric(horizontal: 8),
-            padding: const EdgeInsets.all(16),
-            decoration: BoxDecoration(
-              color: primary.withOpacity(0.1),
-              borderRadius: BorderRadius.circular(12),
+    return InkWell(
+      onTap: () {
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>const prodectcatgScreen()));
+      },
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 8.0),
+        child: Column(
+          children: [
+            Container(
+                height: 100,
+                width: 100,
+                margin: const EdgeInsets.symmetric(horizontal: 8),
+                padding: const EdgeInsets.all(16),
+                decoration: BoxDecoration(
+                  color: primary.withOpacity(0.1),
+                  borderRadius: BorderRadius.circular(12),
+                ),
+                child: Image.network(
+                  image,
+                  height: 50,
+                )),
+            const SizedBox(
+              height: 4,
             ),
-            child: Image.network( "https://images.unsplash.com/photo-1634926878768-2a5b3c42f139?w=500&auto=format&fit=crop&q=60&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTV8fGF2YXRhcnxlbnwwfHwwfHx8MA%3D%3D" , height: 50,)
-          ),
-          const SizedBox(
-            height: 4,
-          ),
-          Text(
-             "shopping",
-            style: const TextStyle(
-                overflow: TextOverflow.ellipsis,
-                fontSize: 15,
-                color: primary,
-                letterSpacing: 0.4),
-          ),
-        ],
+            Text(
+              name,
+              style: const TextStyle(
+                  overflow: TextOverflow.ellipsis,
+                  fontSize: 15,
+                  color: primary,
+                  letterSpacing: 0.4),
+            ),
+          ],
+        ),
       ),
     );
   }

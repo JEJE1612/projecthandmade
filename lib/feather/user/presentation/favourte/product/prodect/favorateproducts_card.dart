@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:handmade/cors/theme/colors.dart';
-import 'package:handmade/feather/user/presentation/prodect/products_details_screen%20copy.dart';
 
-class ProductsCard extends StatelessWidget {
-  const ProductsCard({
+import 'package:handmade/feather/user/presentation/favourte/product/prodect/favorate_products_details_screen .dart';
+
+
+class FavorateProductsCard extends StatelessWidget {
+  const FavorateProductsCard({
     super.key,
     //required this.product,
      required this.isShowDeleteButton,
@@ -17,7 +19,7 @@ class ProductsCard extends StatelessWidget {
     return InkWell(
 
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>const ProductsDetailsScreen()));
+        Navigator.push(context, MaterialPageRoute(builder: (context)=>const FavorateProductsDetailsScreen()));
       //  Get.to(() => ProductsDetailsScreen(productsId: product.id!));
       },
       child: Card(

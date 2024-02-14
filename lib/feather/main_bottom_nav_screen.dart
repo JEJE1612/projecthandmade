@@ -50,6 +50,9 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
                       icon: Icon(CupertinoIcons.shopping_cart), label: "Cart"),
                   BottomNavigationBarItem(
                       icon: Icon(CupertinoIcons.gift), label: "prodects"),
+                        BottomNavigationBarItem(
+                      icon: Icon(CupertinoIcons.chat_bubble), label: "chat"),
+                
                 ],
               ));
         });
