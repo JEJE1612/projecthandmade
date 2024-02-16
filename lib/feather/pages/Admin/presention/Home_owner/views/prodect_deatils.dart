@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:handmade/cors/theme/colors.dart';
 import 'package:handmade/cors/theme/style_text.dart';
 import 'package:handmade/feather/pages/Admin/data/model/prodect_model.dart';
@@ -8,6 +9,7 @@ import 'package:handmade/feather/pages/Admin/mangment/prodect/prodect_bloc.dart'
 import 'package:handmade/feather/pages/Admin/mangment/user/user_bloc.dart';
 import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/back_ground_prodect.dart';
 import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/information_prdect.dart';
+import 'package:handmade/feather/user/presentation/cart/cart_screen.dart';
 
 import '../../../mangment/prodect/prodect_state.dart';
 
@@ -66,7 +68,20 @@ class ProdectDeatils extends StatelessWidget {
                         CustomButtonOwner(
                           title: "Buy_it",
                           color: secondary,
-                          onPressed: () {},
+                          onPressed: () {
+                            ProdectBloc.get(context).creatorder(
+                            prodect?.prodectuid,
+                            prodect?.prodectname,
+                            prodect?.prodectImage,
+                        
+                            0,
+                            prodect?.price , 
+                            prodect?.text,
+                            );
+
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const CartScreen()));
+                            
+                          },
                         ),
                       CustomButtonOwner(
                         title: "Remove_it",

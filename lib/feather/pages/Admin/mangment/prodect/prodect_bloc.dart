@@ -6,7 +6,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:handmade/cors/model/comment_model.dart';
+
+import 'package:handmade/feather/pages/Admin/data/model/orders.dart';
 import 'package:handmade/feather/pages/Admin/data/model/prodect_model.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -36,7 +37,7 @@ class ProdectBloc extends Cubit<ProdectState> {
         catgname: catgname,
         prodectImage: prodectImage,
         text: descipton.text,
-        price: price.text,
+        price: price.text ,
         pace: paces.text,
         date: time.toString(),
         uid: uid);
@@ -157,5 +158,39 @@ class ProdectBloc extends Cubit<ProdectState> {
     }).catchError((e) {
       emit(ErrorGetcatroiesstate());
     });
+  }
+
+  Orders? orders;
+  List<Orders> listorders = [];
+  CollectionReference order = FirebaseFirestore.instance.collection('orders');
+  void creatorder(
+    String? productid,
+    String? nameproduct,
+    String? image,
+      
+    int? dicountprice,
+    String? price,
+      String? title,
+  ) async {
+    Orders model = Orders(
+        productid: productid,
+        
+        price: price,
+        image: image,
+        discountPrice: dicountprice,
+        nameproduct: nameproduct,
+        ownerId: "", 
+        userId: uid,
+       title: title, 
+       discount: '');
+
+    try {
+      emit(LodingCreatorderp());
+      DocumentReference docRef = await order.add(model.toMap());
+
+      await docRef.update({'orderuid': docRef.id});
+      
+      emit(ScafullCreatorders());
+    } catch (e) {}
   }
 }

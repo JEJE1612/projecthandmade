@@ -5,6 +5,7 @@ class Product {
   String? price;
   int? discount;
   String? discountPrice;
+  
   String? image;
   int? stock;
   double? star;
