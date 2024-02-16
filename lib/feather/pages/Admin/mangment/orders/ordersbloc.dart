@@ -4,14 +4,13 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:handmade/feather/pages/Admin/data/model/orders.dart';
 import 'package:handmade/feather/pages/Admin/mangment/orders/ordersstate.dart';
-import 'package:firebase_database/firebase_database.dart';
 
 class OrderBloc extends Cubit<OrdersState> {
   OrderBloc() : super(LoadingState());
   static OrderBloc get(context) => BlocProvider.of(context);
-  int total = 0;
+  num total = 0;
   String  texttotal ="";
-  void findtotal(int price) {
+  void findtotal(num price) {
     total += price;
     texttotal = total.toString();
     emit(Scafullfindtotal());
@@ -38,12 +37,13 @@ class OrderBloc extends Cubit<OrdersState> {
         nameproduct: nameproduct,
         ownerId: "",
         userId: uid,
-        title: '');
+        title: '', 
+        orderid: '');
 
     try {
       DocumentReference docRef = await order.add(model.toMap());
 
-      await docRef.update({'prodectuid': docRef.id});
+      await docRef.update({'orderuid': docRef.id});
     } catch (e) {
       emit(ErrorCreatorder());
     }
@@ -65,7 +65,7 @@ class OrderBloc extends Cubit<OrdersState> {
     }).catchError((e) {});
   }
 Future<void> deleteOrders(String docId) async {
-    ordershow.clear();
+    
     EasyLoading.show();
 
     try {

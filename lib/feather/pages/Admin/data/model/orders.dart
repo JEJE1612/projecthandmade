@@ -9,7 +9,7 @@ class Orders {
   String? ownerId;
   String? nameproduct;
   String? userId;
-
+  String? orderid;
   Orders({
     required this.productid,
     required this.price,
@@ -20,6 +20,7 @@ class Orders {
     required this.ownerId,
     required this.nameproduct,
     required this.userId,
+    required this.orderid,
   });
 
   Orders.fromJson(Map<String, dynamic> json) {
@@ -30,7 +31,7 @@ class Orders {
     image = json['image'];
     ownerId = json["ownerId"];
     userId = json["userId"];
-    userId = json["title"];
+    orderid = json["orderuid"];
 
   }
 
@@ -43,7 +44,9 @@ class Orders {
       "image": image,
       "ownerid": ownerId,
       "userId":userId,
-      "title":title
+      "title":title,
+      "orderuid":orderid
+      
     };
   }
 }

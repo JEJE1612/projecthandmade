@@ -25,112 +25,103 @@ class CartListTileCard extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<OrderBloc, OrdersState>(listener: (context, state) {
-      if (state is ScafullGetordersstate) {
-        int price = int.parse(OrderBloc.get(context).ordershow[index]['price']);
-        OrderBloc.get(context).findtotal(price);
-      }
-    }, builder: (context, state) {
-      String orderuid = OrderBloc.get(context).ordershow[index]['orderuid'];
-      // String productid= OrderBloc.get(context).ordershow[index]['productid'];
-
-      return Card(
-        elevation: 2,
-        margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-        child: Row(
-          children: [
-            Container(
-              width: 100,
-              height: 100,
-              decoration: BoxDecoration(
-                color: Colors.white,
-                image: DecorationImage(
-                  image: NetworkImage(image),
+    return BlocConsumer<OrderBloc, OrdersState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          String orderuid = OrderBloc.get(context).ordershow[index]['orderuid'];
+          String productid =
+              OrderBloc.get(context).ordershow[index]['productid'];
+          OrderBloc.get(context).findtotal(num.parse(price));
+          return Card(
+            elevation: 2,
+            margin: const EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
+            child: Row(
+              children: [
+                Container(
+                  width: 100,
+                  height: 100,
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    image: DecorationImage(
+                      image: NetworkImage(image),
+                    ),
+                  ),
                 ),
-              ),
-            ),
-            const SizedBox(
-              width: 8,
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                const SizedBox(
+                  width: 8,
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.start,
                       children: [
-                        Expanded(
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                name,
-                                style: TextStyle(
-                                    fontSize: 18, color: Colors.black),
+                        Row(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    name,
+                                    style: TextStyle(
+                                        fontSize: 18, color: Colors.black),
+                                  ),
+                                  const SizedBox(
+                                    height: 4,
+                                  ),
+                                ],
                               ),
-                              const SizedBox(
-                                height: 4,
-                              ),
-                            ],
-                          ),
+                            ),
+                            IconButton(
+                                onPressed: () async {
+                                  OrderBloc.get(context).deleteOrders(orderuid);
+                                },
+                                icon: const Icon(Icons.delete_outline))
+                          ],
                         ),
-                        IconButton(
-                            onPressed: () async {
-                              OrderBloc.get(context).deleteOrders(orderuid);
-                              //    bool delete = await deleteController.deleteCartId(cartData.productId!);
-                              /*  if(delete){
-                                  Get.snackbar("success", "products deleted successfully");
-                                }else{
-                                  Get.snackbar("failed", "products delete failed");
-                                }*/
-                            },
-                            icon: const Icon(Icons.delete_outline))
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Text(
+                              price,
+                              style: const TextStyle(
+                                  color: primary,
+                                  fontSize: 18,
+                                  fontWeight: FontWeight.w700),
+                            ),
+                            SizedBox(
+                              width: 85,
+                              child: FittedBox(
+                                child: CustomStepper(
+                                  lowerLimit: 1,
+                                  upperLimit: 20,
+                                  stepValue: 1,
+                                  value: 1,
+                                  onChanged: (int value) {
+                                    OrderBloc.get(context).choosehowmanypace(
+                                        value.toString(),
+                                        orderuid,
+                                        image,
+                                        price,
+                                        productid,
+                                        name);
+                                  },
+                                ),
+                              ),
+                            )
+                          ],
+                        )
                       ],
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          price,
-                          style: const TextStyle(
-                              color: primary,
-                              fontSize: 18,
-                              fontWeight: FontWeight.w700),
-                        ),
-                        // SizedBox(
-                        //   width: 85,
-                        // //   child: FittedBox(
-                        //     child: CustomStepper(
-                        //       lowerLimit: 1,
-                        //       upperLimit: 20,
-                        //       stepValue: 1,
-                        //       value: 1,
-                        //       onChanged: (int value) {
-
-                        //         // OrderBloc.get(context).choosehowmanypace(
-                        //         //     value.toString(),
-                        //         //   orderuid,
-                        //         //     image,
-                        //         //     price,
-                        //         //     productid,
-                        //         //     name
-                        //         //     );
-                        //       },
-                        //     ),
-                        //   ),
-                        // )
-                      ],
-                    )
-                  ],
-                ),
-              ),
-            )
-          ],
-        ),
-      );
-    });
+                  ),
+                )
+              ],
+            ),
+          );
+        });
   }
 }

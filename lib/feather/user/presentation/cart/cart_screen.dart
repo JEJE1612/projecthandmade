@@ -37,10 +37,9 @@ class _CartScreenState extends State<CartScreen> {
                   children: [
                     Expanded(
                       child: ListView.builder(
-                        shrinkWrap: false,
+                        shrinkWrap: true,
                         itemCount: OrderBloc.get(context).ordershow.length,
                         itemBuilder: (context, int index) {
-                         
                           return Padding(
                             padding: EdgeInsets.symmetric(horizontal: 8.0),
                             child: CartListTileCard(
@@ -86,7 +85,7 @@ class _CartScreenState extends State<CartScreen> {
                                 ),
                                 Text(
                                  OrderBloc.get(context).texttotal,
-                                  style: TextStyle(
+                                  style: const TextStyle(
                                       fontSize: 18,
                                       color: primary,
                                       fontWeight: FontWeight.bold),

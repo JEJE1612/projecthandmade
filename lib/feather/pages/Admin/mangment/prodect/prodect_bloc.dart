@@ -182,7 +182,8 @@ class ProdectBloc extends Cubit<ProdectState> {
         ownerId: "", 
         userId: uid,
        title: title, 
-       discount: '');
+       discount: '', 
+       orderid: '');
 
     try {
       emit(LodingCreatorderp());

@@ -24,8 +24,8 @@ class _CheckoutPageState extends State<CheckoutPage> {
             Navigator.of(context).push(MaterialPageRoute(
               builder: (BuildContext context) => PaypalCheckout(
                 sandboxMode: true,
-                clientId: "",
-                secretKey: "",
+                clientId: "AWP3yKiLyC16kemny9nDK-t7svJdnp-tvuEkpLg7ESlFGp-uIE2PpdOSLZHabQI2IUse930uZt35LnZv",
+                secretKey: "EDAdReX7XkXK0910yiCU7X3aFUr12OSrf-mirnmQJvwsW9uEwNOH_DpDU5Ag3V1l2wjA52R6gWkyOORv",
                 returnURL: "success.snippetcoder.com",
                 cancelURL: "cancel.snippetcoder.com",
                 transactions: const [
