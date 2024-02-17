@@ -50,20 +50,20 @@ class Product {
 
   Map<String, dynamic> toMap() {
     return {
-        "id":id,
-    "title":title,
-    "shortDes":shortDes,
-    'price':price,
-    "discount":discount,
-    "discountPrice":discountPrice,
-    "image":image,
-    "stock":stock,
-    "star":star,
-    "remark":remark,
-    "categoryId":categoryId,
-    "brandId":brandId,
-    "createdAt":createdAt,
-    "updatedAt":updatedAt,
-      };
+      "id": id,
+      "title": title,
+      "shortDes": shortDes,
+      'price': price,
+      "discount": discount,
+      "discountPrice": discountPrice,
+      "image": image,
+      "stock": stock,
+      "star": star,
+      "remark": remark,
+      "categoryId": categoryId,
+      "brandId": brandId,
+      "createdAt": createdAt,
+      "updatedAt": updatedAt,
+    };
   }
 }

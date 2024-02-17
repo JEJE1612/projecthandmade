@@ -25,8 +25,9 @@ class _AppProdectState extends State<AppProdect> {
   @override
   Widget build(BuildContext context) {
     return BlocConsumer<ProdectBloc, ProdectState>(
-      listener: (context, state) {
+      listener: (context, state) async {
         if (state is ScafullUploadprodectImage) {
+          ProdectBloc.get(context).prodects.clear();
           Navigator.pop(context);
           EasyLoading.dismiss();
         }
@@ -188,7 +189,6 @@ class _AppProdectState extends State<AppProdect> {
                             ProdectBloc.get(context).uploadimageProdect(
                               catgname: selectedType['text'],
                             );
-                           
                           },
                           child: const CustomButtonAuth(
                             text: " Creat Prodect ",

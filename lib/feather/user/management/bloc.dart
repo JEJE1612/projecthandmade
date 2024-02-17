@@ -3,13 +3,13 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:handmade/feather/pages/Admin/data/model/catrg_model.dart';
+import 'package:handmade/feather/pages/Admin/presention/chat/presentaion/views/chat.dart';
+import 'package:handmade/feather/pages/Admin/presention/profail/profail.dart';
 import 'package:handmade/feather/pages/Auth/data/model/user_model.dart';
 import 'package:handmade/feather/user/management/my_state.dart';
-import 'package:handmade/feather/user/presentation/cart/cart_screen.dart';
-import 'package:handmade/feather/user/presentation/categoreys/categories_screen.dart';
-import 'package:handmade/feather/user/presentation/chat/chat.dart';
-import 'package:handmade/feather/user/presentation/homeuser.dart';
-import 'package:handmade/feather/user/presentation/wish_list_screen.dart';
+import 'package:handmade/feather/user/presentation/favourte/product/favorateprotect.dart';
+
+import 'package:handmade/feather/user/views/homeuser.dart';
 
 class MyBloc extends Cubit<MyState> {
   MyBloc() : super(InitalMyState());
@@ -19,10 +19,9 @@ class MyBloc extends Cubit<MyState> {
 
   final List<Widget> screens = [
     const HomeScreenUser(),
-    const CategoriesScreen(),
-    const CartScreen(),
-    const WishListScreen(),
-   const Chatscreen()
+    const ChatPage(),
+    const FavourateprodectScreen(),
+    const ProfailpageAdmin(),
   ];
 
   void onChanged(int index) {
@@ -53,15 +52,13 @@ class MyBloc extends Cubit<MyState> {
       } else {
         emit(HomeuserErrorStata());
       }
-    }).catchError((e) {
-      
-    });
+    }).catchError((e) {});
   }
-  
+
   List catroies = [];
   List<String> catroiesnum = [];
 
- void getCaroies() async {
+  void getCaroies() async {
     catroies.clear();
     catroiesnum.clear();
     emit(LodingGetcatroiesState());
@@ -73,10 +70,10 @@ class MyBloc extends Cubit<MyState> {
       }
     }).catchError((e) {});
   }
-  
+
   List catroiesuser = [];
 
- void getCaroiestouser() async {
+  void getCaroiestouser() async {
     emit(LodingGetcatroiesState());
     FirebaseFirestore.instance.collection('catg').get().then((value) {
       for (var element in value.docs) {

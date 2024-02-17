@@ -59,7 +59,7 @@ class CustomCardOwnerCreat extends StatelessWidget {
                           style: Styles.textStyle16,
                         ),
                       ),
-                      Gap(2),
+                      const Gap(2),
                     ],
                   ),
                   Row(
@@ -75,7 +75,7 @@ class CustomCardOwnerCreat extends StatelessWidget {
                           Row(
                             children: [
                               Text("${model.pace}", style: Styles.textStyle18),
-                              Gap(5),
+                              const Gap(5),
                               Text("piece", style: Styles.textStyle16),
                             ],
                           ),
@@ -87,7 +87,7 @@ class CustomCardOwnerCreat extends StatelessWidget {
                             "${model.price}",
                             style: Styles.textStyle18.copyWith(color: primary),
                           ),
-                          Gap(5),
+                          const Gap(5),
                           const Icon(
                             Icons.attach_money,
                             color: secondary,

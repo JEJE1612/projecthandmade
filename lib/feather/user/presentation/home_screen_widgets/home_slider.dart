@@ -3,15 +3,13 @@ import 'package:flutter/material.dart';
 import 'package:handmade/cors/theme/colors.dart';
 
 class HomeSlider extends StatefulWidget {
-  final List sliders=[ 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8fDA%3D&w=1000&q=80',
+  final List sliders = [
+    'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8fDA%3D&w=1000&q=80',
+    'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8fDA%3D&w=1000&q=80',
+    'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8fDA%3D&w=1000&q=80'
+  ];
 
-'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8fDA%3D&w=1000&q=80',
-
- 
-'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8fDA%3D&w=1000&q=80'
-];
-
-   HomeSlider({super.key});
+  HomeSlider({super.key});
 
   @override
   State<HomeSlider> createState() => _HomeSliderState();
@@ -38,15 +36,14 @@ class _HomeSliderState extends State<HomeSlider> {
               builder: (BuildContext context) {
                 return Container(
                   width: MediaQuery.of(context).size.width,
-                  margin: const EdgeInsets.symmetric(horizontal: 5.0),
+                  // margin: const EdgeInsets.symmetric(horizontal: 5.0),
                   decoration: BoxDecoration(
-                      color: primary,
-                      borderRadius: BorderRadius.circular(8)),
+                      color: primary, borderRadius: BorderRadius.circular(12)),
                   alignment: Alignment.center,
                   child: Row(
                     children: [
                       Image.network(
-                          sliderData,
+                        sliderData,
                         scale: 1.2,
                       ),
                       const SizedBox(
@@ -56,7 +53,7 @@ class _HomeSliderState extends State<HomeSlider> {
                         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                         children: [
                           Text(
-                             'shopping',
+                            'shopping',
                             style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
@@ -74,8 +71,7 @@ class _HomeSliderState extends State<HomeSlider> {
                               onPressed: () {},
                               child: const Text(
                                 "Buy Now",
-                                style: TextStyle(
-                                    color: primary, fontSize: 14),
+                                style: TextStyle(color: primary, fontSize: 14),
                               ),
                             ),
                           ),
@@ -98,13 +94,12 @@ class _HomeSliderState extends State<HomeSlider> {
             for (int i = 0; i < widget.sliders.length; i++) {
               list.add(
                 Container(
-                  width: 10,
-                  height: 10,
+                  width: 7,
+                  height: 7,
                   margin: const EdgeInsets.symmetric(horizontal: 4),
                   decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(10),
-                      color:
-                          value == i ? primary: Colors.black54),
+                      borderRadius: BorderRadius.circular(15),
+                      color: value == i ? primary : Colors.black54),
                 ),
               );
             }

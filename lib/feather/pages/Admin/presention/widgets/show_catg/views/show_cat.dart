@@ -30,7 +30,7 @@ class ShowCatgroies extends StatelessWidget {
             appBar: const PreferredSize(
               preferredSize: Size.fromHeight(80),
               child: CustomAppBar(
-                text: "show Catgroies",
+                text: "Categories",
               ),
             ),
             body: GridView.builder(

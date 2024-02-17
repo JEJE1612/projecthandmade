@@ -29,7 +29,7 @@ class InformationProdect extends StatelessWidget {
             children: [
               Text(
                 "Name:",
-                style: Styles.textStyle18.copyWith(color: grey),
+                style: Styles.textStyle18.copyWith(color: primary),
               ),
               Gap(10),
               Text(

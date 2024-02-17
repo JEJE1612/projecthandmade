@@ -45,3 +45,12 @@ class ErrorDeleteProdect extends ProdectState {
   final String eror;
   ErrorDeleteProdect(this.eror);
 }
+
+class LodingUpdateProdect extends ProdectState {}
+
+class SuccessUpdateProdect extends ProdectState {}
+
+class ErrorUpdateProdect extends ProdectState {
+  final String eror;
+  ErrorUpdateProdect(this.eror);
+}

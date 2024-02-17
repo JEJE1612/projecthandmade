@@ -36,6 +36,10 @@ class HomeOwnerBody extends StatelessWidget {
               selectedItemColor: primary,
               currentIndex: ShowAllOwnerBloc.get(context).currentindex,
               onTap: (value) async {
+                if (value == 0) {
+                  //  ProdectBloc.get(context).getProdect();
+                  ShowAllOwnerBloc.get(context).changeBootomSheet(value);
+                }
                 ShowAllOwnerBloc.get(context).changeBootomSheet(value);
               },
               items: [

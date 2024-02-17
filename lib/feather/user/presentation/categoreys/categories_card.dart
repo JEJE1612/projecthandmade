@@ -1,5 +1,7 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:handmade/cors/theme/colors.dart';
+import 'package:gap/gap.dart';
+import 'package:handmade/cors/theme/style_text.dart';
 import 'package:handmade/feather/user/presentation/categoreys/productincategory/protectcatg.dart';
 
 class CategoriesCard extends StatelessWidget {
@@ -8,41 +10,32 @@ class CategoriesCard extends StatelessWidget {
   final String image;
   @override
   Widget build(BuildContext context) {
-    return InkWell(
-      onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>const prodectcatgScreen()));
-      },
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 8.0),
-        child: Column(
-          children: [
-            Container(
-                height: 100,
-                width: 100,
-                margin: const EdgeInsets.symmetric(horizontal: 8),
-                padding: const EdgeInsets.all(16),
-                decoration: BoxDecoration(
-                  color: primary.withOpacity(0.1),
-                  borderRadius: BorderRadius.circular(12),
-                ),
-                child: Image.network(
-                  image,
-                  height: 50,
-                )),
-            const SizedBox(
-              height: 4,
-            ),
-            Text(
-              name,
-              style: const TextStyle(
-                  overflow: TextOverflow.ellipsis,
-                  fontSize: 15,
-                  color: primary,
-                  letterSpacing: 0.4),
-            ),
-          ],
-        ),
+    return Padding(
+      padding: const EdgeInsets.only(
+        left: 20
       ),
+      child: InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                    builder: (context) => const prodectcatgScreen()));
+          },
+          child: Column(
+            children: [
+              CircleAvatar(
+                backgroundImage: CachedNetworkImageProvider(
+                  image,
+                ),
+                radius: 45,
+              ),
+              const Gap(10),
+              Text(
+                name,
+                style: Styles.textStyle18,
+              )
+            ],
+          )),
     );
   }
 }

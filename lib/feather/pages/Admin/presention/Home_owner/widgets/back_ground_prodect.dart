@@ -51,7 +51,7 @@ class BackGroundBrodect extends StatelessWidget {
                   child: const CircleAvatar(
                     backgroundColor: primary,
                     child: Icon(
-                      Icons.shopping_basket,
+                      Icons.shopping_cart_outlined,
                       color: Colors.white,
                     ),
                   ),

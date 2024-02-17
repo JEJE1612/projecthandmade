@@ -8,6 +8,7 @@ import 'package:handmade/feather/pages/Admin/mangment/prodect/prodect_bloc.dart'
 import 'package:handmade/feather/pages/Admin/mangment/user/user_bloc.dart';
 import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/back_ground_prodect.dart';
 import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/information_prdect.dart';
+import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/udate_prodect.dart';
 
 import '../../../mangment/prodect/prodect_state.dart';
 
@@ -28,6 +29,7 @@ class ProdectDeatils extends StatelessWidget {
         child: SafeArea(
           child: SingleChildScrollView(
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 BackGroundBrodect(
                   image: prodect?.prodectImage ?? "",
@@ -36,18 +38,33 @@ class ProdectDeatils extends StatelessWidget {
                   model: prodect,
                 ),
                 const Gap(10),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.8,
-                  child: Column(
+                Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
                       Text(
-                        "comment",
+                        "comment:",
                         style: Styles.textStyle20,
                       ),
-                      const Gap(5),
-                      const Gap(10),
+                      InkWell(
+                        onTap: () {},
+                        child: Text(
+                          "All_Comment",
+                          style: Styles.textStyle16.copyWith(color: primary),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+                const Gap(10),
+                SizedBox(
+                  height: MediaQuery.of(context).size.height * 0.17,
+                  child: Column(
+                    children: [
                       Expanded(
                         child: ListView.separated(
+                          padding: EdgeInsets.zero,
                           separatorBuilder: (context, index) => const SizedBox(
                             height: 5,
                           ),
@@ -56,42 +73,53 @@ class ProdectDeatils extends StatelessWidget {
                               const CardItemsComment(),
                         ),
                       ),
-                      const Gap(20),
-                      CustomButtonOwner(
-                        title: "Comment",
-                        color: primary,
-                        onPressed: () {},
-                      ),
-                      if (UserBloc.get(context).usermodel?.type != 'Owner')
-                        CustomButtonOwner(
-                          title: "Buy_it",
-                          color: secondary,
-                          onPressed: () {},
-                        ),
-                      CustomButtonOwner(
-                        title: "Remove_it",
-                        color: danger,
-                        onPressed: () {
-                          ProdectBloc.get(context)
-                              .deleteProdect(prodect!.prodectuid!);
-                        },
-                      ),
-                      CustomButtonOwner(
-                        title: "update_it",
-                        color: textBlack,
-                        onPressed: () {},
-                      ),
-                      const Divider(
-                        indent: 60,
-                        color: primary,
-                        endIndent: 60,
-                        height: 2,
-                        thickness: 2,
-                      ),
-                      const Gap(10),
                     ],
                   ),
                 ),
+                const Gap(30),
+                CustomButtonOwner(
+                  title: "Comment",
+                  color: primary,
+                  onPressed: () {},
+                ),
+                if (UserBloc.get(context).usermodel?.type != 'Owner')
+                  CustomButtonOwner(
+                    title: "Buy_it",
+                    color: secondary,
+                    onPressed: () {},
+                  ),
+                if (UserBloc.get(context).usermodel?.type == 'user')
+                  CustomButtonOwner(
+                    title: "Remove_it",
+                    color: danger,
+                    onPressed: () {
+                      ProdectBloc.get(context)
+                          .deleteProdect(prodect!.prodectuid!);
+                    },
+                  ),
+                if (UserBloc.get(context).usermodel?.type == 'user')
+                  CustomButtonOwner(
+                    title: "update_it",
+                    color: textBlack,
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => UdateProdectPage(
+                              model: prodect!,
+                            ),
+                          ));
+                    },
+                  ),
+                const Gap(10),
+                const Divider(
+                  indent: 80,
+                  color: primary,
+                  endIndent: 80,
+                  height: 2,
+                  thickness: 2,
+                ),
+                const Gap(10),
               ],
             ),
           ),
@@ -120,7 +148,7 @@ class CardItemsComment extends StatelessWidget {
                   children: [
                     const CircleAvatar(
                         backgroundColor: Colors.amber, radius: 25),
-                    Gap(10),
+                    const Gap(10),
                     Column(
                       children: [
                         Text(

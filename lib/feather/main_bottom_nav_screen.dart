@@ -1,7 +1,9 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:handmade/cors/theme/assets.dart';
 import 'package:handmade/cors/theme/colors.dart';
+import 'package:handmade/cors/theme/helper.dart';
 import 'package:handmade/feather/user/management/bloc.dart';
 import 'package:handmade/feather/user/management/my_state.dart';
 
@@ -26,8 +28,6 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
                 currentIndex: MyBloc.get(context).currentSelectedIndex,
                 unselectedItemColor: Colors.grey,
                 selectedItemColor: primary,
-                showSelectedLabels: true,
-                type: BottomNavigationBarType.shifting,
                 elevation: 4,
                 onTap: (value) {
                   if (value == 1) {
@@ -38,21 +38,19 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
                     MyBloc.get(context).onChanged(value);
                   }
                 },
-                items: const [
+                items: [
                   BottomNavigationBarItem(
-                      icon: Icon(CupertinoIcons.home),
-                      label: "Home",
-                      tooltip: "Home"),
+                    icon: getSvgIcon(AssetsData.home),
+                    label: "Home",
+                  ),
+                  const BottomNavigationBarItem(
+                      icon: Icon(Icons.chat_bubble_outline), label: "Chat"),
+                  const BottomNavigationBarItem(
+                    icon: Icon(Icons.favorite_border),
+                    label: "favorite",
+                  ),
                   BottomNavigationBarItem(
-                      icon: Icon(CupertinoIcons.square_grid_2x2),
-                      label: "Category"),
-                  BottomNavigationBarItem(
-                      icon: Icon(CupertinoIcons.shopping_cart), label: "Cart"),
-                  BottomNavigationBarItem(
-                      icon: Icon(CupertinoIcons.gift), label: "prodects"),
-                        BottomNavigationBarItem(
-                      icon: Icon(CupertinoIcons.chat_bubble), label: "chat"),
-                
+                      icon: getSvgIcon(AssetsData.profile), label: "Profile"),
                 ],
               ));
         });

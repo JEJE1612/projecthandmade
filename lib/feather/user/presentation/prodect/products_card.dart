@@ -1,109 +1,107 @@
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:handmade/cors/theme/colors.dart';
-import 'package:handmade/feather/user/presentation/prodect/products_details_screen%20copy.dart';
+import 'package:handmade/cors/theme/style_text.dart';
+import 'package:handmade/feather/pages/Admin/data/model/prodect_model.dart';
+import 'package:handmade/feather/pages/Admin/presention/Home_owner/views/prodect_deatils.dart';
 
 class ProductsCard extends StatelessWidget {
   const ProductsCard({
     super.key,
-    //required this.product,
-     required this.isShowDeleteButton,
+    required this.isShowDeleteButton,
+    required this.prodect,
   });
 
-  //final Product product;
   final bool isShowDeleteButton;
+  final ProdectModel prodect;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>const ProductsDetailsScreen()));
-      //  Get.to(() => ProductsDetailsScreen(productsId: product.id!));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => ProdectDeatils(
+                      prodect: prodect,
+                    )));
       },
       child: Card(
-        elevation: 5,
-        shadowColor:primary.withOpacity(0.1),
+        elevation: 20,
+        shadowColor: primary.withOpacity(0.1),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
-        child: SizedBox(
-          width: 150,
+        child: Container(
+          color: Colors.white,
+          width: MediaQuery.of(context).size.width * 0.45,
           child: Column(
             children: [
               Container(
-                height: 100,
+                height: MediaQuery.of(context).size.width * 0.19,
                 decoration: BoxDecoration(
                   borderRadius: const BorderRadius.only(
                       topLeft: Radius.circular(8),
                       topRight: Radius.circular(8)),
                   color: primary.withOpacity(0.2),
-                  image: const DecorationImage(
-                    image:NetworkImage( 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8fDA%3D&w=1000&q=80'),
+                  image: DecorationImage(
+                    fit: BoxFit.cover,
+                    image:
+                        CachedNetworkImageProvider(prodect.prodectImage ?? ""),
                   ),
                 ),
               ),
               Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.only(left: 4, top: 2),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                     "New year sell Shoe",
-                      maxLines: 1,
-                      style: TextStyle(
-                          overflow: TextOverflow.ellipsis,
-                          fontSize: 12,
-                          fontWeight: FontWeight.w700,
-                          color: Colors.blueGrey),
-                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          " 2000",
-                          style: TextStyle(
-                              color: primary,
-                              fontSize: 14,
-                              fontWeight: FontWeight.bold),
-                        ),
-                        // Wrap(
-                        //   crossAxisAlignment: WrapCrossAlignment.center,
-                        //   children: [
-                        //     const Icon(
-                        //       Icons.star,
-                        //       size: 15,
-                        //       color: Colors.amber,
-                        //     ),
-                        //     Text(
-                        //       "4.0",
-                        //       style: TextStyle(
-                        //         overflow: TextOverflow.ellipsis,
-                        //         fontSize: 13,
-                        //         color: Colors.grey.shade600,
-                        //       ),
-                        //     ),
-                        //   ],
-                        // ),
-                         InkWell(
-                          child: Card(
-                            shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(6)),
-                            color: primary,
-                            child:  Padding(
-                              padding: const EdgeInsets.all(2.0),
-                              child: Icon(
-                                isShowDeleteButton == false ? Icons.favorite_border : Icons.delete,
-                                size: 12,
-                                color: Colors.white70,
-                              ),
+                        Row(
+                          children: [
+                            Text(
+                              "${prodect.price}",
+                              style: Styles.textStyle16.copyWith(color: grey),
                             ),
-                          ),
-                          onTap: (){
-                            
-                                                      },
-                        )
+                            const Icon(
+                              Icons.attach_money,
+                              color: secondary,
+                            ),
+                          ],
+                        ),
+                        const Gap(3),
+                        IconButton(
+                            onPressed: () {},
+                            icon: const Icon(
+                              Icons.favorite,
+                              color: Colors.grey,
+                            ))
                       ],
-                    )
+                    ),
+                    Row(
+                      children: [
+                        const Text(
+                          "Name:",
+                          maxLines: 1,
+                          style: TextStyle(
+                            color: primary,
+                            fontSize: 12,
+                          ),
+                        ),
+                        const Gap(2),
+                        Text(
+                          prodect.prodectname ?? "",
+                          maxLines: 1,
+                          style: const TextStyle(
+                            color: textBlack,
+                            fontSize: 12,
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
               )

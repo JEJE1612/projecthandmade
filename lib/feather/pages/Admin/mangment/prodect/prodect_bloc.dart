@@ -6,7 +6,6 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
-import 'package:handmade/cors/model/comment_model.dart';
 import 'package:handmade/feather/pages/Admin/data/model/prodect_model.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -55,6 +54,7 @@ class ProdectBloc extends Cubit<ProdectState> {
 
   Future<void> getProdect() async {
     emit(LodingGetListprodects());
+    prodects.clear();
 
     try {
       QuerySnapshot querySnapshot = await prodect.get();
@@ -63,7 +63,6 @@ class ProdectBloc extends Cubit<ProdectState> {
         Map<String, dynamic> data = doc.data() as Map<String, dynamic>;
         ProdectModel catroiesModel = ProdectModel.fromJson(data);
         prodects.add(catroiesModel);
-        print("${prodects.length}hjkggggggggggggg");
       }
 
       emit(ScafullGetListCatroies());
@@ -111,12 +110,12 @@ class ProdectBloc extends Cubit<ProdectState> {
         .child("user/${Uri.file(imageProdect!.path).pathSegments.last}")
         .putFile(imageProdect!)
         .then((value) {
-      value.ref.getDownloadURL().then((value) {
+      value.ref.getDownloadURL().then((value) async {
         creatProdect(
           prodectImage: value,
           catgname: catgname,
         );
-        getProdect();
+        await getProdect();
         emit(ScafullUploadprodectImage());
       }).catchError((e) {
         emit(ErrorUploadcreatprodectImage());
@@ -132,9 +131,9 @@ class ProdectBloc extends Cubit<ProdectState> {
 
     try {
       await prodect.doc(docId).delete();
-
+      await getProdect();
       emit(SuccessDeleteProect());
-      getProdect();
+
       EasyLoading.dismiss();
     } catch (e) {
       emit(ErrorDeleteProdect(e.toString()));
