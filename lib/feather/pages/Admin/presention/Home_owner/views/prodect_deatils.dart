@@ -1,11 +1,16 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:handmade/cors/model/comment_model.dart';
 import 'package:handmade/cors/theme/colors.dart';
 import 'package:handmade/cors/theme/style_text.dart';
 import 'package:handmade/feather/pages/Admin/data/model/prodect_model.dart';
+import 'package:handmade/feather/pages/Admin/mangment/comment/comment_bloc.dart';
 import 'package:handmade/feather/pages/Admin/mangment/prodect/prodect_bloc.dart';
 import 'package:handmade/feather/pages/Admin/mangment/user/user_bloc.dart';
+import 'package:handmade/feather/pages/Admin/presention/Home_owner/views/comment_view.dart';
 import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/back_ground_prodect.dart';
 import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/information_prdect.dart';
 import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/udate_prodect.dart';
@@ -58,29 +63,36 @@ class ProdectDeatils extends StatelessWidget {
                   ),
                 ),
                 const Gap(10),
-                SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.17,
-                  child: Column(
-                    children: [
-                      Expanded(
-                        child: ListView.separated(
-                          padding: EdgeInsets.zero,
-                          separatorBuilder: (context, index) => const SizedBox(
-                            height: 5,
-                          ),
-                          itemCount: 10,
-                          itemBuilder: (context, index) =>
-                              const CardItemsComment(),
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
+                // SizedBox(
+                //   height: MediaQuery.of(context).size.height * 0.17,
+                //   child: Column(
+                //     children: [
+                //       Expanded(
+                //         child: ListView.separated(
+                //           padding: EdgeInsets.zero,
+                //           separatorBuilder: (context, index) => const SizedBox(
+                //             height: 5,
+                //           ),
+                //           itemCount: 10,
+                //           itemBuilder: (context, index) => CardItemsComment(),
+                //         ),
+                //       ),
+                //     ],
+                //   ),
+                // ),
                 const Gap(30),
                 CustomButtonOwner(
                   title: "Comment",
                   color: primary,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => CommentView(
+                            model: prodect!,
+                          ),
+                        ));
+                  },
                 ),
                 if (UserBloc.get(context).usermodel?.type != 'Owner')
                   CustomButtonOwner(
@@ -88,7 +100,7 @@ class ProdectDeatils extends StatelessWidget {
                     color: secondary,
                     onPressed: () {},
                   ),
-                if (UserBloc.get(context).usermodel?.type == 'user')
+                if (UserBloc.get(context).usermodel?.type == 'Owner')
                   CustomButtonOwner(
                     title: "Remove_it",
                     color: danger,
@@ -97,7 +109,7 @@ class ProdectDeatils extends StatelessWidget {
                           .deleteProdect(prodect!.prodectuid!);
                     },
                   ),
-                if (UserBloc.get(context).usermodel?.type == 'user')
+                if (UserBloc.get(context).usermodel?.type == 'Owner')
                   CustomButtonOwner(
                     title: "update_it",
                     color: textBlack,
@@ -132,8 +144,11 @@ class ProdectDeatils extends StatelessWidget {
 class CardItemsComment extends StatelessWidget {
   const CardItemsComment({
     super.key,
+    required this.comment,
+    required this.prodectuid,
   });
-
+  final CommentModel comment;
+  final String prodectuid;
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -146,26 +161,29 @@ class CardItemsComment extends StatelessWidget {
               children: [
                 Row(
                   children: [
-                    const CircleAvatar(
-                        backgroundColor: Colors.amber, radius: 25),
+                    CircleAvatar(
+                        backgroundImage: CachedNetworkImageProvider(
+                          comment.imageuser ?? "",
+                        ),
+                        radius: 25),
                     const Gap(10),
                     Column(
                       children: [
                         Text(
-                          "Ahmed Mohmed",
+                          comment.nameuser ?? "",
                           style: Styles.textStyle16,
                         ),
                       ],
                     ),
                   ],
                 ),
-                Gap(10),
+                const Gap(10),
                 Padding(
                   padding: const EdgeInsets.only(left: 23),
                   child: SizedBox(
                     width: MediaQuery.of(context).size.width * 0.9,
-                    child: const Text(
-                      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content",
+                    child: Text(
+                      comment.message ?? "",
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
                     ),
@@ -175,6 +193,32 @@ class CardItemsComment extends StatelessWidget {
             ),
           ),
         ),
+        if (comment.userid == FirebaseAuth.instance.currentUser?.uid)
+          Positioned(
+            right: 10,
+            child: PopupMenuButton<String>(
+              itemBuilder: (context) => [
+                const PopupMenuItem(
+                  value: 'remove',
+                  child: Row(
+                    children: [
+                      Icon(Icons.delete),
+                      SizedBox(width: 5),
+                      Text('Remove'),
+                    ],
+                  ),
+                ),
+              ],
+              onSelected: (value) {
+                // Handle selection here
+                if (value == 'remove') {
+                  CommentBloc.get(context).removeComment(
+                      prodectuid: prodectuid,
+                      commentUid: comment.commentid ?? "");
+                }
+              },
+            ),
+          ),
       ],
     );
   }
