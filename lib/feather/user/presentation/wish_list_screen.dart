@@ -23,23 +23,29 @@ class _WishListScreenState extends State<WishListScreen> {
               appBar: customAppBar("All Products", false, context),
               body: Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 8),
-                // child: GridView.builder(
-                //   itemCount: 1,
-                //   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                //     crossAxisCount: 3,
-                //     crossAxisSpacing: 8,
-                //     mainAxisSpacing: 8,
-                //     childAspectRatio: 0.7,
-                //   ),
-                //   itemBuilder: (context, int index) {
-                //     return const FittedBox(
-                //       child: ProductsCard(
-                //         isShowDeleteButton: true,
-                //         prodect: ,
-                //       ),
-                //     );
-                //   },
-                // ),
+                child: GridView.builder(
+                  itemCount: bloc.product.length,
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 3,
+                    crossAxisSpacing: 8,
+                    mainAxisSpacing: 8,
+                    childAspectRatio: 0.7,
+                  ),
+                  itemBuilder: (context, int index) {
+                    return FittedBox(
+                      child: ProductsCard(
+                        isShowDeleteButton: true,
+                        image: bloc.product[index]['prodectImage'],
+                        price: bloc.product[index]['text'],
+                        name: bloc.product[index]['price'],
+                        id: bloc.product[index]['uid'],
+                        catgname: '',
+                        descreption: '',
+                        paces: '',
+                      ),
+                    );
+                  },
+                ),
               ));
         });
   }

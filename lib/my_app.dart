@@ -28,10 +28,12 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: <SingleChildWidget>[
-        BlocProvider(
-          create: (context) => MyBloc()
-            ..getUserData()
-            ..getCaroies(),
+
+        BlocProvider( 
+          create: (context)=> MyBloc()
+          ..getUserData()
+          ..getCaroies(),
+
         ),
         BlocProvider(
           create: (context) => UserBloc()..getUserData(),

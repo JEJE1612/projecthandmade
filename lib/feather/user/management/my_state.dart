@@ -16,6 +16,9 @@ class LodingGetcatroiesState extends MyState {}
 
 class ScafullGetcatroiesstate extends MyState {}
 
+class SuccessDeletefavProect extends MyState {}
+
+class SucessfulCreatProdect extends MyState {}
 class ErrorGetUserDatau extends MyState {
  // final String error;
  // ErrorGetUserData(this.error);
