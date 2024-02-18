@@ -37,7 +37,7 @@ class ProdectBloc extends Cubit<ProdectState> {
         catgname: catgname,
         prodectImage: prodectImage,
         text: descipton.text,
-        price: price.text ,
+        price: price.text,
         pace: paces.text,
         date: time.toString(),
         uid: uid);
@@ -160,23 +160,6 @@ class ProdectBloc extends Cubit<ProdectState> {
     });
   }
 
-<<<<<<< HEAD
-  // List<CommentModel> messages = [];
-  // void getComment({required String prodectuid}) {
-  //   FirebaseFirestore.instance
-  //       .collection('prodect')
-  //       .doc(prodectuid)
-  //       .collection("comment")
-  //       .snapshots()
-  //       .listen((event) {
-  //     messages.clear();
-  //     for (var element in event.docs) {
-  //       messages.add(CommentModel.fromJson(element.data()));
-  //     }
-  //     emit(GetMessageScafull());
-  //   });
-  // }
-=======
   Orders? orders;
   List<Orders> listorders = [];
   CollectionReference order = FirebaseFirestore.instance.collection('orders');
@@ -184,32 +167,29 @@ class ProdectBloc extends Cubit<ProdectState> {
     String? productid,
     String? nameproduct,
     String? image,
-      
     int? dicountprice,
     String? price,
-      String? title,
+    String? title,
   ) async {
     Orders model = Orders(
         productid: productid,
-        
         price: price,
         image: image,
         discountPrice: dicountprice,
         nameproduct: nameproduct,
-        ownerId: "", 
+        ownerId: "",
         userId: uid,
-       title: title, 
-       discount: '', 
-       orderid: '');
+        title: title,
+        discount: '',
+        orderid: '');
 
     try {
       emit(LodingCreatorderp());
       DocumentReference docRef = await order.add(model.toMap());
 
       await docRef.update({'orderuid': docRef.id});
-      
+
       emit(ScafullCreatorders());
     } catch (e) {}
   }
->>>>>>> d9ce828210b74e7ba35b208e198177945a19c524
 }
