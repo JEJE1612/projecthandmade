@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
+import 'package:get/get.dart';
 import 'package:handmade/cors/theme/colors.dart';
 import 'package:handmade/cors/theme/style_text.dart';
 import 'package:handmade/feather/pages/Admin/data/model/prodect_model.dart';
@@ -13,7 +14,11 @@ import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/back_
 import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/card_items_comment.dart';
 import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/custom_button_owner.dart';
 import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/information_prdect.dart';
+<<<<<<< HEAD
 import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/udate_prodect.dart';
+=======
+import 'package:handmade/feather/user/presentation/cart/cart_screen.dart';
+>>>>>>> d9ce828210b74e7ba35b208e198177945a19c524
 
 import '../../../mangment/prodect/prodect_state.dart';
 
@@ -50,6 +55,7 @@ class ProdectDeatils extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 20),
                   child: Row(
                     children: [
+<<<<<<< HEAD
                       const Spacer(),
                       InkWell(
                         onTap: () {
@@ -60,6 +66,55 @@ class ProdectDeatils extends StatelessWidget {
                                   model: prodect!,
                                 ),
                               ));
+=======
+                      Text(
+                        "comment",
+                        style: Styles.textStyle20,
+                      ),
+                      const Gap(5),
+                      const Gap(10),
+                      Expanded(
+                        child: ListView.separated(
+                          separatorBuilder: (context, index) => const SizedBox(
+                            height: 5,
+                          ),
+                          itemCount: 10,
+                          itemBuilder: (context, index) =>
+                              const CardItemsComment(),
+                        ),
+                      ),
+                      const Gap(20),
+                      CustomButtonOwner(
+                        title: "Comment",
+                        color: primary,
+                        onPressed: () {},
+                      ),
+                      if (UserBloc.get(context).usermodel?.type != 'Owner')
+                        CustomButtonOwner(
+                          title: "Buy_it",
+                          color: secondary,
+                          onPressed: () {
+                            ProdectBloc.get(context).creatorder(
+                            prodect?.prodectuid,
+                            prodect?.prodectname,
+                            prodect?.prodectImage,
+                        
+                            0,
+                            prodect?.price , 
+                            prodect?.text,
+                            );
+
+                            Navigator.push(context, MaterialPageRoute(builder: (context)=>const CartScreen()));
+                            
+                          },
+                        ),
+                      CustomButtonOwner(
+                        title: "Remove_it",
+                        color: danger,
+                        onPressed: () {
+                          ProdectBloc.get(context)
+                              .deleteProdect(prodect!.prodectuid!);
+>>>>>>> d9ce828210b74e7ba35b208e198177945a19c524
                         },
                         child: Text(
                           "Show_All_Comment",
