@@ -15,13 +15,9 @@ class HomeOwnerpage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => ProdectBloc()..getProdect(),
+      create: (context) => ProdectBloc()..getProdectCustomOwner(),
       child: BlocConsumer<ProdectBloc, ProdectState>(
-        listener: (context, state) {
-          if (state is SuccessDeleteProect) {
-            ProdectBloc.get(context).getProdect();
-          }
-        },
+        listener: (context, state) {},
         builder: (context, state) {
           return Scaffold(
             floatingActionButton: FloatingActionButton(
@@ -43,7 +39,9 @@ class HomeOwnerpage extends StatelessWidget {
                       color: light,
                       padding: const EdgeInsets.only(left: 10, right: 10),
                       child: GridView.builder(
-                          itemCount: ProdectBloc.get(context).prodects.length,
+                          itemCount: ProdectBloc.get(context)
+                              .prodectsCustomOwner
+                              .length,
                           gridDelegate:
                               const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 2,
@@ -52,7 +50,8 @@ class HomeOwnerpage extends StatelessWidget {
                             childAspectRatio: 1 / 1.0,
                           ),
                           itemBuilder: (context, index) => CustomCardOwnerCreat(
-                                model: ProdectBloc.get(context).prodects[index],
+                                model: ProdectBloc.get(context)
+                                    .prodectsCustomOwner[index],
                               )),
                     ),
                   ),

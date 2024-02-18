@@ -7,20 +7,19 @@ import 'package:handmade/feather/pages/Admin/data/favprodect.dart';
 import 'package:handmade/feather/pages/Admin/data/model/catrg_model.dart';
 import 'package:handmade/feather/pages/Admin/presention/chat/presentaion/views/chat.dart';
 import 'package:handmade/feather/pages/Admin/presention/profail/profail.dart';
+import 'package:handmade/feather/pages/Admin/presention/views/home_custum_user.dart';
 import 'package:handmade/feather/pages/Auth/data/model/user_model.dart';
 import 'package:handmade/feather/user/management/my_state.dart';
 import 'package:handmade/feather/user/presentation/favourte/product/favorateprotect.dart';
-
-import 'package:handmade/feather/user/views/homeuser.dart';
 
 class MyBloc extends Cubit<MyState> {
   MyBloc() : super(InitalMyState());
   static MyBloc get(context) => BlocProvider.of(context);
   int currentSelectedIndex = 0;
   UserModel? usermodel;
-
+  var uid = FirebaseAuth.instance.currentUser?.uid;
   final List<Widget> screens = [
-    const HomeScreenUser(),
+    const HomeCustomUser(),
     const ChatPage(),
     const FavourateprodectScreen(),
     const ProfailpageAdmin(),
@@ -55,18 +54,15 @@ class MyBloc extends Cubit<MyState> {
         emit(HomeuserErrorStata());
       }
     }).catchError((e) {});
-    }).catchError((e) {});
   }
-
 
   List catroies = [];
   List<String> catroiesnum = [];
 
   void getCaroies() async {
-  void getCaroies() async {
     catroies.clear();
     catroiesnum.clear();
-    emit(LodingGetcatroiesState());
+
     await FirebaseFirestore.instance.collection('catg').get().then((value) {
       for (var element in value.docs) {
         catroies.add(element);
@@ -75,7 +71,6 @@ class MyBloc extends Cubit<MyState> {
       }
     }).catchError((e) {});
   }
-
 
   List catroiesuser = [];
 
@@ -122,7 +117,8 @@ class MyBloc extends Cubit<MyState> {
         price: price,
         pace: paces,
         date: time.toString(),
-        uid: favuid, useruid: uid);
+        uid: favuid,
+        useruid: uid);
 
     try {
       DocumentReference docRef = await favprodect.add(model.toMap());
@@ -135,13 +131,11 @@ class MyBloc extends Cubit<MyState> {
 
   List getfavprodect = [];
 
-  void getfavourateProducttouser(
-    
-  ) async {
+  void getfavourateProducttouser() async {
     emit(LodingGetcatroiesState());
     FirebaseFirestore.instance
         .collection('favproduct')
-        .where("userid",isEqualTo: uid)
+        .where("userid", isEqualTo: uid)
         .get()
         .then((value) {
       for (var element in value.docs) {
@@ -150,7 +144,8 @@ class MyBloc extends Cubit<MyState> {
       }
     }).catchError((e) {});
   }
-   Future<void> deleteProdect(String docId) async {
+
+  Future<void> deleteProdect(String docId) async {
     getfavprodect.clear();
     EasyLoading.show();
 
@@ -160,8 +155,6 @@ class MyBloc extends Cubit<MyState> {
       emit(SuccessDeletefavProect());
       getfavourateProducttouser();
       EasyLoading.dismiss();
-    } catch (e) {
-        }
+    } catch (e) {}
   }
-
 }

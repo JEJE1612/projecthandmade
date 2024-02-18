@@ -7,7 +7,6 @@ import 'package:handmade/feather/pages/Admin/data/model/prodect_model.dart';
 import 'package:handmade/feather/pages/Admin/mangment/prodect/udate_prodect/udate_prodect.dart';
 import 'package:handmade/feather/pages/Admin/mangment/prodect/udate_prodect/udate_prodect_sate.dart';
 import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/custom_button_owner.dart';
-import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/text_form_faild_discr.dart';
 import 'package:handmade/feather/pages/Admin/presention/Order/order_page.dart';
 import 'package:handmade/feather/pages/Auth/presentaion/widgets/custom_text_formfaild.dart';
 
@@ -43,8 +42,46 @@ class UdateProdectPage extends StatelessWidget {
                           keyboardType: TextInputType.text,
                         ),
                         const Gap(10),
-                        TxetFormDiscription(
-                          discr: UdateProdectBloc.get(context).descipton,
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            const Text(
+                              "Description",
+                              style: TextStyle(
+                                  fontSize: 16,
+                                  color: grey,
+                                  fontWeight: FontWeight.w500),
+                            ),
+                            const Gap(10),
+                            Container(
+                              width: double.infinity,
+                              decoration: BoxDecoration(
+                                  color: textFieldBg,
+                                  borderRadius: BorderRadius.circular(5)),
+                              child: Padding(
+                                padding:
+                                    const EdgeInsets.only(left: 15, right: 15),
+                                child: TextFormField(
+                                  maxLines: 3,
+                                  autovalidateMode:
+                                      AutovalidateMode.onUserInteraction,
+                                  validator: (value) {
+                                    if (value!.isEmpty) {
+                                      return "This field cant Empty";
+                                    }
+                                    return '';
+                                  },
+                                  controller:
+                                      UdateProdectBloc.get(context).descipton,
+                                  cursorColor: textBlack,
+                                  decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText:
+                                          model.text ?? "Enter Descriotion"),
+                                ),
+                              ),
+                            ),
+                          ],
                         ),
                         const Gap(10),
                         CustomTextFormFaild(

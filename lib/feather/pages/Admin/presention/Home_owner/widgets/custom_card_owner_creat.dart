@@ -65,33 +65,12 @@ class CustomCardOwnerCreat extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
+                      Spacer(),
                       Row(
                         children: [
-                          const Icon(
-                            Icons.category,
-                            color: grey,
-                          ),
+                          Text("${model.pace}", style: Styles.textStyle16),
                           const Gap(5),
-                          Row(
-                            children: [
-                              Text("${model.pace}", style: Styles.textStyle18),
-                              const Gap(5),
-                              Text("piece", style: Styles.textStyle16),
-                            ],
-                          ),
-                        ],
-                      ),
-                      Row(
-                        children: [
-                          Text(
-                            "${model.price}",
-                            style: Styles.textStyle18.copyWith(color: primary),
-                          ),
-                          const Gap(5),
-                          const Icon(
-                            Icons.attach_money,
-                            color: secondary,
-                          ),
+                          Text("piece", style: Styles.textStyle16),
                         ],
                       ),
                     ],

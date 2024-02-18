@@ -6,9 +6,9 @@ import 'package:handmade/cors/theme/colors.dart';
 import 'package:handmade/cors/theme/padding.dart';
 import 'package:handmade/feather/pages/Admin/mangment/prodect/prodect_bloc.dart';
 import 'package:handmade/feather/pages/Admin/mangment/prodect/prodect_state.dart';
+import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/custom_button_owner.dart';
 import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/text_form_faild_discr.dart';
 import 'package:handmade/feather/pages/Admin/presention/Order/order_page.dart';
-import 'package:handmade/feather/pages/Auth/presentaion/views/forgetpassword.dart';
 import 'package:handmade/feather/pages/Auth/presentaion/widgets/custom_text_formfaild.dart';
 
 class AppProdect extends StatefulWidget {
@@ -27,6 +27,11 @@ class _AppProdectState extends State<AppProdect> {
     return BlocConsumer<ProdectBloc, ProdectState>(
       listener: (context, state) async {
         if (state is ScafullUploadprodectImage) {
+          ProdectBloc.get(context).title.clear();
+          ProdectBloc.get(context).descipton.clear();
+          ProdectBloc.get(context).paces.clear();
+          ProdectBloc.get(context).price.clear();
+
           ProdectBloc.get(context).prodects.clear();
           Navigator.pop(context);
           EasyLoading.dismiss();
@@ -83,32 +88,37 @@ class _AppProdectState extends State<AppProdect> {
                           ),
                         ),
                       if (ProdectBloc.get(context).imageProdect != null)
-                        Stack(
-                          children: [
-                            Container(
-                              height: 120,
-                              width: double.infinity,
-                              decoration: BoxDecoration(
-                                  image: DecorationImage(
-                                    fit: BoxFit.cover,
-                                    image: FileImage(bloc.imageProdect!),
-                                  ),
-                                  borderRadius: BorderRadius.circular(12)),
-                            ),
-                            Positioned(
-                              right: 0,
-                              child: IconButton(
-                                onPressed: () {
-                                  bloc.removeimagecatrg();
-                                },
-                                icon: const CircleAvatar(
-                                  child: Icon(
-                                    Icons.close_rounded,
+                        InkWell(
+                          onTap: () {
+                            bloc.getimagecatrg();
+                          },
+                          child: Stack(
+                            children: [
+                              Container(
+                                height: 120,
+                                width: double.infinity,
+                                decoration: BoxDecoration(
+                                    image: DecorationImage(
+                                      fit: BoxFit.cover,
+                                      image: FileImage(bloc.imageProdect!),
+                                    ),
+                                    borderRadius: BorderRadius.circular(12)),
+                              ),
+                              Positioned(
+                                right: 0,
+                                child: IconButton(
+                                  onPressed: () {
+                                    bloc.removeimagecatrg();
+                                  },
+                                  icon: const CircleAvatar(
+                                    child: Icon(
+                                      Icons.close_rounded,
+                                    ),
                                   ),
                                 ),
-                              ),
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         ),
                       const Gap(15),
                       CustomTextFormFaild(
@@ -156,14 +166,14 @@ class _AppProdectState extends State<AppProdect> {
                                 child: Container(
                                   height: 40,
                                   width: double.infinity,
-                                  color: textFieldBg,
+                                  color: primary,
                                   padding: const EdgeInsets.all(10),
                                   child: Center(
                                     child: Text(
                                       '${value['text']}',
                                       style: const TextStyle(
                                           fontSize: 16,
-                                          color: grey,
+                                          color: Colors.white,
                                           fontWeight: FontWeight.w500),
                                     ),
                                   ),
@@ -182,18 +192,15 @@ class _AppProdectState extends State<AppProdect> {
                               style: TextStyle(color: textBlack)),
                         ),
                       ),
-                      const Gap(30),
-                      Center(
-                        child: InkWell(
-                          onTap: () {
-                            ProdectBloc.get(context).uploadimageProdect(
-                              catgname: selectedType['text'],
-                            );
-                          },
-                          child: const CustomButtonAuth(
-                            text: " Creat Prodect ",
-                          ),
-                        ),
+                      const Gap(10),
+                      CustomButtonOwner(
+                        title: "Creat_Prodect",
+                        color: primary,
+                        onPressed: () {
+                          ProdectBloc.get(context).uploadimageProdect(
+                            catgname: selectedType['text'],
+                          );
+                        },
                       ),
                     ],
                   ),

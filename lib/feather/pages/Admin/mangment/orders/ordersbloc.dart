@@ -9,7 +9,7 @@ class OrderBloc extends Cubit<OrdersState> {
   OrderBloc() : super(LoadingState());
   static OrderBloc get(context) => BlocProvider.of(context);
   num total = 0;
-  String  texttotal ="";
+  String texttotal = "";
   void findtotal(num price) {
     total += price;
     texttotal = total.toString();
@@ -37,7 +37,7 @@ class OrderBloc extends Cubit<OrdersState> {
         nameproduct: nameproduct,
         ownerId: "",
         userId: uid,
-        title: '', 
+        title: '',
         orderid: '');
 
     try {
@@ -64,8 +64,8 @@ class OrderBloc extends Cubit<OrdersState> {
       }
     }).catchError((e) {});
   }
-Future<void> deleteOrders(String docId) async {
-    
+
+  Future<void> deleteOrders(String docId) async {
     EasyLoading.show();
 
     try {
@@ -73,9 +73,9 @@ Future<void> deleteOrders(String docId) async {
       getorders();
       emit(SuccessDeleteorder());
       EasyLoading.dismiss();
-    } catch (e) {
-    }
+    } catch (e) {}
   }
+
   void choosehowmanypace(String pace, String oruid, String image, String price,
       String puid, String name) async {
     FirebaseFirestore.instance.collection('orders').doc(oruid).set({

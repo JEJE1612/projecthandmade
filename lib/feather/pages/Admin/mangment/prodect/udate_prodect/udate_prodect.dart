@@ -37,7 +37,7 @@ class UdateProdectBloc extends Cubit<UdateProdetState> {
     );
 
     try {
-      await prodect.doc(prodectUid).set(updatedModel.toMap());
+      await prodect.doc(prodectUid).update(updatedModel.toMap());
       emit(SuccessUpdateProdect());
     } catch (e) {
       emit(ErrorUpdateProdect(e.toString()));

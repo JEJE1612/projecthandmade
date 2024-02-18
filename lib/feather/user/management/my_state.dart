@@ -19,13 +19,7 @@ class ScafullGetcatroiesstate extends MyState {}
 class SuccessDeletefavProect extends MyState {}
 
 class SucessfulCreatProdect extends MyState {}
-class ErrorGetUserDatau extends MyState {
- // final String error;
- // ErrorGetUserData(this.error);
-}
 
-class HomeuserErrorStata extends MyState {
-  //final String error;
-  //HomeErrorStata(this.error);
-}
+class ErrorGetUserDatau extends MyState {}
 
+class HomeuserErrorStata extends MyState {}

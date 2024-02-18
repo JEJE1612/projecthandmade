@@ -27,6 +27,7 @@ class ProdectBloc extends Cubit<ProdectState> {
   List<ProdectModel> listProdect = [];
   CollectionReference prodect =
       FirebaseFirestore.instance.collection('prodect');
+
   void creatProdect({
     String? prodectImage,
     String? catgname,
@@ -73,6 +74,22 @@ class ProdectBloc extends Cubit<ProdectState> {
     }
   }
 
+  List<ProdectModel> prodectsCustomOwner = [];
+  void getProdectCustomOwner() {
+    FirebaseFirestore.instance
+        .collection('prodect')
+        .orderBy("date")
+        .where('uid', isEqualTo: uid)
+        .snapshots()
+        .listen((event) {
+      prodectsCustomOwner.clear();
+      for (var element in event.docs) {
+        prodectsCustomOwner.add(ProdectModel.fromJson(element.data()));
+      }
+      emit(GetProdectModelScafull());
+    });
+  }
+
   File? imageProdect;
   ImagePicker picker = ImagePicker();
   void removeimagecatrg() {
@@ -97,9 +114,7 @@ class ProdectBloc extends Cubit<ProdectState> {
     FirebaseFirestore.instance
         .collection('prodect')
         .doc(prodectUid)
-        .set({'catgname': mychoose}, SetOptions(merge: true)).then((value) {
-      //Do your stuff.
-    });
+        .set({'catgname': mychoose}, SetOptions(merge: true)).then((value) {});
   }
 
   void uploadimageProdect({
@@ -128,12 +143,11 @@ class ProdectBloc extends Cubit<ProdectState> {
   }
 
   Future<void> deleteProdect(String docId) async {
-    prodects.clear();
     EasyLoading.show();
 
     try {
       await prodect.doc(docId).delete();
-      await getProdect();
+      getProdectCustomOwner();
       emit(SuccessDeleteProect());
 
       EasyLoading.dismiss();

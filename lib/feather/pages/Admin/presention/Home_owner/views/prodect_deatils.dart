@@ -14,7 +14,7 @@ import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/card_
 import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/custom_button_owner.dart';
 import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/information_prdect.dart';
 import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/udate_prodect.dart';
-import 'package:handmade/feather/user/presentation/cart/cart_screen.dart';
+import 'package:handmade/feather/pages/Admin/presention/views/home_owner.dart';
 
 import '../../../mangment/prodect/prodect_state.dart';
 
@@ -32,7 +32,12 @@ class ProdectDeatils extends StatelessWidget {
       body: BlocListener<ProdectBloc, ProdectState>(
         listener: (context, state) {
           if (state is SuccessDeleteProect) {
-            Navigator.pop(context);
+            Navigator.pushAndRemoveUntil(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => HomeOwner(),
+                ),
+                (route) => false);
           }
         },
         child: SafeArea(
@@ -46,82 +51,20 @@ class ProdectDeatils extends StatelessWidget {
                 InformationProdect(
                   model: prodect,
                 ),
-                const Gap(10),
                 Padding(
-                  padding: const EdgeInsets.only(right: 20),
+                  padding: const EdgeInsets.only(right: 20, bottom: 10),
                   child: Row(
                     children: [
+                      Spacer(),
                       Text(
-                        "comment",
-                        style: Styles.textStyle20,
-                      ),
-                      const Gap(5),
-                      const Gap(10),
-                      SizedBox(
-                        height: MediaQuery.of(context).size.height * 0.16,
-                        child: BlocBuilder<CommentBloc, CommentState>(
-                          builder: (context, state) {
-                            if (state is GetMessageScafull) {
-                              return ListView.separated(
-                                separatorBuilder: (context, index) =>
-                                    const SizedBox(
-                                  height: 10,
-                                ),
-                                itemCount: commentBloc.messages.length,
-                                itemBuilder: (context, index) =>
-                                    CardItemsComment(
-                                  prodectuid: prodect?.prodectuid ?? "",
-                                  comment: commentBloc.messages[index],
-                                ),
-                              );
-                            } else {
-                              return Center(
-                                child: Text("data"),
-                              );
-                            }
-                          },
-                        ),
-                      ),
-                      const Gap(20),
-                      CustomButtonOwner(
-                        title: "Comment",
-                        color: primary,
-                        onPressed: () {},
-                      ),
-                      if (UserBloc.get(context).usermodel?.type != 'Owner')
-                        CustomButtonOwner(
-                          title: "Buy_it",
-                          color: secondary,
-                          onPressed: () {
-                            ProdectBloc.get(context).creatorder(
-                              prodect?.prodectuid,
-                              prodect?.prodectname,
-                              prodect?.prodectImage,
-                              0,
-                              prodect?.price,
-                              prodect?.text,
-                            );
-
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const CartScreen()));
-                          },
-                        ),
-                      CustomButtonOwner(
-                        title: "Remove_it",
-                        color: danger,
-                        onPressed: () {
-                          ProdectBloc.get(context)
-                              .deleteProdect(prodect!.prodectuid!);
-                        },
+                        "Show_All_comment",
+                        style: Styles.textStyle16.copyWith(color: primary),
                       ),
                     ],
                   ),
                 ),
-                const Gap(30),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.16,
+                  height: MediaQuery.of(context).size.height * 0.14,
                   child: BlocBuilder<CommentBloc, CommentState>(
                     builder: (context, state) {
                       if (state is GetMessageScafull) {
@@ -136,14 +79,15 @@ class ProdectDeatils extends StatelessWidget {
                           ),
                         );
                       } else {
-                        return Center(
-                          child: Text("data"),
+                        return Container(
+                          width: double.infinity,
+                          height: 120,
+                          color: Colors.amber,
                         );
                       }
                     },
                   ),
                 ),
-                const Gap(30),
                 CustomButtonOwner(
                   title: "Comment",
                   color: primary,
@@ -168,8 +112,28 @@ class ProdectDeatils extends StatelessWidget {
                     title: "Remove_it",
                     color: danger,
                     onPressed: () {
-                      ProdectBloc.get(context)
-                          .deleteProdect(prodect!.prodectuid!);
+                      showDialog(
+                        context: context,
+                        builder: (context) {
+                          return AlertDialog(
+                            title: const Text(
+                              "Remove_prodect",
+                            ),
+                            content: const SingleChildScrollView(
+                                child: Text(
+                              "Woud you want Remove_Prodect ",
+                            )),
+                            actions: [
+                              TextButton(
+                                  onPressed: () {
+                                    ProdectBloc.get(context)
+                                        .deleteProdect(prodect!.prodectuid!);
+                                  },
+                                  child: const Text("Remove"))
+                            ],
+                          );
+                        },
+                      );
                     },
                   ),
                 if (UserBloc.get(context).usermodel?.type == 'Owner')

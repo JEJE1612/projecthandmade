@@ -3,9 +3,11 @@ abstract class ProdectState {}
 class LoadingState extends ProdectState {}
 
 class LodingCreatProdect extends ProdectState {}
+
 class LodingCreatorderp extends ProdectState {}
 
 class ScafullCreatProdect extends ProdectState {}
+
 class ScafullCreatorders extends ProdectState {}
 
 class ErrorCreatProdect extends ProdectState {}
@@ -56,3 +58,5 @@ class ErrorUpdateProdect extends ProdectState {
   final String eror;
   ErrorUpdateProdect(this.eror);
 }
+
+class GetProdectModelScafull extends ProdectState {}
