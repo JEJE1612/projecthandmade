@@ -31,7 +31,9 @@ class MyApp extends StatelessWidget {
         BlocProvider( 
           create: (context)=> MyBloc()
           ..getUserData()
-          ..getCaroies(),
+          ..getCaroies()
+          ..getProducttouser()
+          ,
 
         ),
         BlocProvider(

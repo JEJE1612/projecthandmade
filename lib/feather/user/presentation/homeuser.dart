@@ -81,10 +81,17 @@ class _HomeScreenUserState extends State<HomeScreenUser> {
       height: 182,
       child: ListView.builder(
         scrollDirection: Axis.horizontal,
-        itemCount: 5,
+        itemCount: MyBloc.get(context).product.length ,
         itemBuilder: (context, index) {
-          return const ProductsCard(
+          return ProductsCard(
             isShowDeleteButton: false,
+            image: MyBloc.get(context).product[index]['prodectImage'], 
+            price: MyBloc.get(context).product[index]['price'], 
+            name: MyBloc.get(context).product[index]['text'],
+            id: MyBloc.get(context).product[index]['uid'], 
+            catgname:MyBloc.get(context).product[index]['catgname'] , 
+            descreption: MyBloc.get(context).product[index]['prodectname'], 
+            paces: MyBloc.get(context).product[index]['pace'],
           );
         },
       ),

@@ -1,14 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:handmade/cors/theme/colors.dart';
+import 'package:handmade/feather/user/management/bloc.dart';
 
 import 'package:handmade/feather/user/presentation/favourte/product/prodect/favorate_products_details_screen .dart';
 
-
 class FavorateProductsCard extends StatelessWidget {
+  final String image;
+  final String name;
+  final String price;
+   final String id;
   const FavorateProductsCard({
     super.key,
     //required this.product,
-     required this.isShowDeleteButton,
+    required this.isShowDeleteButton,
+    required this.image,
+    required this.name,
+    required this.price, required this.id,
   });
 
   //final Product product;
@@ -17,14 +24,16 @@ class FavorateProductsCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-
       onTap: () {
-        Navigator.push(context, MaterialPageRoute(builder: (context)=>const FavorateProductsDetailsScreen()));
-      //  Get.to(() => ProductsDetailsScreen(productsId: product.id!));
+        Navigator.push(
+            context,
+            MaterialPageRoute(
+                builder: (context) => const FavorateProductsDetailsScreen()));
+        //  Get.to(() => ProductsDetailsScreen(productsId: product.id!));
       },
       child: Card(
         elevation: 5,
-        shadowColor:primary.withOpacity(0.1),
+        shadowColor: primary.withOpacity(0.1),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(8),
         ),
@@ -39,8 +48,8 @@ class FavorateProductsCard extends StatelessWidget {
                       topLeft: Radius.circular(8),
                       topRight: Radius.circular(8)),
                   color: primary.withOpacity(0.2),
-                  image: const DecorationImage(
-                    image:NetworkImage( 'https://images.unsplash.com/photo-1542291026-7eec264c27ff?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Mnx8c2hvZXN8ZW58MHx8MHx8fDA%3D&w=1000&q=80'),
+                  image: DecorationImage(
+                    image: NetworkImage(image),
                   ),
                 ),
               ),
@@ -49,10 +58,10 @@ class FavorateProductsCard extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
-                     "New year sell Shoe",
+                    Text(
+                      name,
                       maxLines: 1,
-                      style: TextStyle(
+                      style: const TextStyle(
                           overflow: TextOverflow.ellipsis,
                           fontSize: 12,
                           fontWeight: FontWeight.w700,
@@ -61,9 +70,9 @@ class FavorateProductsCard extends StatelessWidget {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text(
-                          " 2000",
-                          style: TextStyle(
+                        Text(
+                          price,
+                          style: const TextStyle(
                               color: primary,
                               fontSize: 14,
                               fontWeight: FontWeight.bold),
@@ -86,23 +95,25 @@ class FavorateProductsCard extends StatelessWidget {
                         //     ),
                         //   ],
                         // ),
-                         InkWell(
+                        InkWell(
                           child: Card(
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(6)),
                             color: primary,
-                            child:  Padding(
+                            child: Padding(
                               padding: const EdgeInsets.all(2.0),
                               child: Icon(
-                                isShowDeleteButton == false ? Icons.favorite_border : Icons.delete,
+                                isShowDeleteButton == false
+                                    ? Icons.favorite_border
+                                    : Icons.delete,
                                 size: 12,
                                 color: Colors.white70,
                               ),
                             ),
                           ),
-                          onTap: (){
-                            
-                                                      },
+                          onTap: () {
+                            MyBloc.get(context).deleteProdect(id);
+                          },
                         )
                       ],
                     )
