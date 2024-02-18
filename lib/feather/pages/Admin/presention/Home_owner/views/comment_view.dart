@@ -6,7 +6,7 @@ import 'package:handmade/cors/theme/style_text.dart';
 import 'package:handmade/feather/pages/Admin/data/model/prodect_model.dart';
 import 'package:handmade/feather/pages/Admin/mangment/comment/comment_bloc.dart';
 import 'package:handmade/feather/pages/Admin/mangment/comment/comment_state.dart';
-import 'package:handmade/feather/pages/Admin/presention/Home_owner/views/prodect_deatils.dart';
+import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/card_items_comment.dart';
 import 'package:handmade/feather/pages/Admin/presention/chat/presentaion/widgets/chat_deatils.dart';
 
 class CommentView extends StatelessWidget {

@@ -6,7 +6,7 @@ import 'package:handmade/cors/theme/padding.dart';
 import 'package:handmade/feather/pages/Admin/data/model/prodect_model.dart';
 import 'package:handmade/feather/pages/Admin/mangment/prodect/udate_prodect/udate_prodect.dart';
 import 'package:handmade/feather/pages/Admin/mangment/prodect/udate_prodect/udate_prodect_sate.dart';
-import 'package:handmade/feather/pages/Admin/presention/Home_owner/views/prodect_deatils.dart';
+import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/custom_button_owner.dart';
 import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/text_form_faild_discr.dart';
 import 'package:handmade/feather/pages/Admin/presention/Order/order_page.dart';
 import 'package:handmade/feather/pages/Auth/presentaion/widgets/custom_text_formfaild.dart';
