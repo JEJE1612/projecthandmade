@@ -90,6 +90,22 @@ class ProdectBloc extends Cubit<ProdectState> {
     });
   }
 
+  List<ProdectModel> prodectsCustomUser = [];
+  void getProdectCustomUser({required String catrgname}) {
+    FirebaseFirestore.instance
+        .collection('prodect')
+        .orderBy("date")
+        .where('catgname', isEqualTo: catrgname)
+        .snapshots()
+        .listen((event) {
+      prodectsCustomUser.clear();
+      for (var element in event.docs) {
+        prodectsCustomUser.add(ProdectModel.fromJson(element.data()));
+      }
+      emit(GetProdectModelScafull());
+    });
+  }
+
   File? imageProdect;
   ImagePicker picker = ImagePicker();
   void removeimagecatrg() {

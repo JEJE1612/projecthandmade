@@ -2,7 +2,7 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:handmade/cors/theme/style_text.dart';
-import 'package:handmade/feather/user/presentation/categoreys/productincategory/protectcatg.dart';
+import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/views/show_cat.dart';
 
 class CategoriesCard extends StatelessWidget {
   const CategoriesCard({super.key, required this.name, required this.image});
@@ -11,15 +11,15 @@ class CategoriesCard extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(
-        left: 20
-      ),
+      padding: const EdgeInsets.only(left: 20),
       child: InkWell(
           onTap: () {
             Navigator.push(
                 context,
                 MaterialPageRoute(
-                    builder: (context) => const prodectcatgScreen()));
+                    builder: (context) => ShowProdectCatroies(
+                          nameCat: name,
+                        )));
           },
           child: Column(
             children: [

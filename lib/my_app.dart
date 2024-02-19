@@ -6,6 +6,7 @@ import 'package:handmade/feather/pages/Admin/mangment/catg/bloc_catg.dart';
 import 'package:handmade/feather/pages/Admin/mangment/comment/comment_bloc.dart';
 import 'package:handmade/feather/pages/Admin/mangment/owner/owner_bloc.dart';
 import 'package:handmade/feather/pages/Admin/mangment/prodect/prodect_bloc.dart';
+import 'package:handmade/feather/pages/Admin/mangment/prodect/search_prodect/mangment/seach_prodect_bloc.dart';
 import 'package:handmade/feather/pages/Admin/mangment/user/user_bloc.dart';
 import 'package:handmade/feather/pages/Admin/presention/views/home_admin.dart';
 import 'package:handmade/feather/pages/Admin/presention/profail/edit_profail/ebit_profail_page.dart';
@@ -28,12 +29,10 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MultiBlocProvider(
       providers: <SingleChildWidget>[
-
-        BlocProvider( 
-          create: (context)=> MyBloc()
-          ..getUserData()
-          ..getCaroies(),
-
+        BlocProvider(
+          create: (context) => MyBloc()
+            ..getUserData()
+            ..getCaroies(),
         ),
         BlocProvider(
           create: (context) => UserBloc()..getUserData(),
@@ -50,6 +49,7 @@ class MyApp extends StatelessWidget {
             ..getCaroies(),
         ),
         BlocProvider(create: (context) => CommentBloc()),
+        BlocProvider(create: (context) => SearchProdetCubit()),
       ],
       child: MaterialApp(
         title: 'HandMade',

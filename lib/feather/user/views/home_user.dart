@@ -4,6 +4,7 @@ import 'package:handmade/cors/theme/assets.dart';
 import 'package:handmade/cors/theme/colors.dart';
 import 'package:handmade/cors/theme/helper.dart';
 import 'package:handmade/cors/theme/style_text.dart';
+import 'package:handmade/feather/pages/Admin/presention/views/search_screen.dart';
 import 'package:handmade/feather/user/presentation/home_screen_widgets/home_slider.dart';
 
 class HomeUser extends StatelessWidget {
@@ -94,19 +95,25 @@ class CustomAppBarUser extends StatelessWidget {
             children: [
               Text("Hand_Made", style: Styles.textStyle20),
               IconButton(
-                  onPressed: () {},
-                  icon: const Icon(
-                    Icons.shopping_cart_outlined,
-                    size: 30,
-                  )),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (context) => const SearchScreen(),
+                      ));
+                },
+                icon: getSvgIcon(AssetsData.searchicon),
+              ),
             ],
           ),
         ),
-        Padding(
-          padding: const EdgeInsets.only(left: 20),
+        const Padding(
+          padding: EdgeInsets.only(left: 20),
           child: Text(
-            "Weclom User",
-            style: Styles.textStyle16.copyWith(color: primary),
+            "All products are made by Egyptian hands",
+            style: TextStyle(
+              fontSize: 12,
+            ),
           ),
         ),
       ],
