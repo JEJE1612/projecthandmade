@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:handmade/cors/theme/colors.dart';
+import 'package:handmade/feather/pages/Admin/mangment/car_prodect/mangment/order_bloc.dart';
 import 'package:handmade/feather/pages/Admin/mangment/catg/bloc_catg.dart';
 import 'package:handmade/feather/pages/Admin/mangment/comment/comment_bloc.dart';
 import 'package:handmade/feather/pages/Admin/mangment/owner/owner_bloc.dart';
@@ -50,6 +51,7 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider(create: (context) => CommentBloc()),
         BlocProvider(create: (context) => SearchProdetCubit()),
+        BlocProvider(create: (context) => OrderCubit()..getOrders()),
       ],
       child: MaterialApp(
         title: 'HandMade',

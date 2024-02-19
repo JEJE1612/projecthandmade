@@ -2,7 +2,6 @@ class Orders {
   String? productid;
   String? price;
   String? discount;
-  
   String? title;
   int? discountPrice;
   String? image;
@@ -32,7 +31,6 @@ class Orders {
     ownerId = json["ownerId"];
     userId = json["userId"];
     orderid = json["orderuid"];
-
   }
 
   Map<String, dynamic> toMap() {
@@ -43,10 +41,9 @@ class Orders {
       "discountPrice": discountPrice,
       "image": image,
       "ownerid": ownerId,
-      "userId":userId,
-      "title":title,
-      "orderuid":orderid
-      
+      "userId": userId,
+      "title": title,
+      "orderuid": orderid
     };
   }
 }

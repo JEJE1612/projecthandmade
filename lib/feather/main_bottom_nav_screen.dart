@@ -46,8 +46,8 @@ class _BottomNavBarScreenState extends State<BottomNavBarScreen> {
                   const BottomNavigationBarItem(
                       icon: Icon(Icons.chat_bubble_outline), label: "Chat"),
                   const BottomNavigationBarItem(
-                    icon: Icon(Icons.favorite_border),
-                    label: "favorite",
+                    icon: Icon(Icons.shopping_cart_outlined),
+                    label: "Car",
                   ),
                   BottomNavigationBarItem(
                       icon: getSvgIcon(AssetsData.profile), label: "Profile"),

@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:handmade/cors/theme/colors.dart';
 import 'package:handmade/feather/pages/onbording_page/onbording.dart';
@@ -70,6 +71,7 @@ class _SplashViewbodyState extends State<SplashViewbody>
     Future.delayed(
       const Duration(seconds: 2),
       () {
+        if (FirebaseAuth.instance.currentUser != null) {}
         Navigator.pushNamed(context, Onborording.nameKey);
       },
     );

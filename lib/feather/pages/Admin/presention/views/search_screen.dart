@@ -9,7 +9,6 @@ import 'package:handmade/cors/theme/padding.dart';
 import 'package:handmade/cors/theme/style_text.dart';
 import 'package:handmade/feather/pages/Admin/mangment/prodect/search_prodect/mangment/seach_prodect_bloc.dart';
 import 'package:handmade/feather/pages/Admin/mangment/prodect/search_prodect/mangment/seach_prodect_state.dart.dart';
-import 'package:handmade/feather/pages/Admin/presention/widgets/show_catg/widgets/custom_bar.dart';
 
 class SearchScreen extends StatelessWidget {
   const SearchScreen({super.key});

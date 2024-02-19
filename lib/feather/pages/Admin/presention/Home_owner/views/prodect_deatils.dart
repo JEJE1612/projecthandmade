@@ -15,6 +15,7 @@ import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/custo
 import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/information_prdect.dart';
 import 'package:handmade/feather/pages/Admin/presention/Home_owner/widgets/udate_prodect.dart';
 import 'package:handmade/feather/pages/Admin/presention/views/home_owner.dart';
+import 'package:handmade/feather/pages/paypal/check_out.dart';
 
 import '../../../mangment/prodect/prodect_state.dart';
 
@@ -46,6 +47,7 @@ class ProdectDeatils extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 BackGroundBrodect(
+                  prodect: prodect!,
                   image: prodect?.prodectImage ?? "",
                 ),
                 InformationProdect(
@@ -105,7 +107,15 @@ class ProdectDeatils extends StatelessWidget {
                   CustomButtonOwner(
                     title: "Buy_it",
                     color: secondary,
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => CheckoutPage(
+                              model: prodect!,
+                            ),
+                          ));
+                    },
                   ),
                 if (UserBloc.get(context).usermodel?.type == 'Owner')
                   CustomButtonOwner(

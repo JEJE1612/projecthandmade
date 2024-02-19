@@ -1,31 +1,48 @@
+import 'package:cached_network_image/cached_network_image.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 import 'package:handmade/cors/theme/colors.dart';
 import 'package:handmade/cors/theme/padding.dart';
+import 'package:handmade/feather/pages/Admin/data/model/order_model.dart';
+import 'package:handmade/feather/pages/Admin/mangment/car_prodect/mangment/order_bloc.dart';
+import 'package:handmade/feather/pages/Admin/mangment/car_prodect/mangment/order_state.dart';
 
 class OrderPage extends StatelessWidget {
   const OrderPage({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: SafeArea(
-        child: Column(
-          children: [
-            const CustomAppBarOwner(text: "Orders"),
-            Expanded(
-              child: Container(
-                color: light,
-                child: ListView.separated(
-                    itemBuilder: (context, index) => const OrderListItem(),
-                    separatorBuilder: (context, index) => const SizedBox(
+    return BlocProvider(
+      create: (context) => OrderCubit()..getOrdersOwner(),
+      child: BlocConsumer<OrderCubit, OrderState>(
+        listener: (context, state) {},
+        builder: (context, state) {
+          return Scaffold(
+            body: SafeArea(
+              child: Column(
+                children: [
+                  const CustomAppBarOwner(text: "Orders"),
+                  Expanded(
+                    child: Container(
+                      color: light,
+                      child: ListView.separated(
+                        itemBuilder: (context, index) => OrderListItem(
+                          model: OrderCubit.get(context).orderOwner[index],
+                        ),
+                        separatorBuilder: (context, index) => const SizedBox(
                           height: 5,
                         ),
-                    itemCount: 3),
+                        itemCount: OrderCubit.get(context).orderOwner.length,
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          );
+        },
       ),
     );
   }
@@ -58,8 +75,9 @@ class CustomAppBarOwner extends StatelessWidget {
 class OrderListItem extends StatelessWidget {
   const OrderListItem({
     super.key,
+    required this.model,
   });
-
+  final OrdersModel model;
   @override
   Widget build(BuildContext context) {
     return Card(
@@ -73,42 +91,37 @@ class OrderListItem extends StatelessWidget {
         child: Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
           Row(
             children: [
-              const CircleAvatar(
-                radius: 25,
-                backgroundImage: AssetImage(
-                  'assets/images/man_4140037.png',
-                ),
-              ),
+              CircleAvatar(
+                  radius: 25,
+                  backgroundImage:
+                      CachedNetworkImageProvider(model.userImage ?? "")),
               const Gap(5),
-              const Text(
-                "Ahmed",
-                style: TextStyle(
+              Text(
+                model.userName ?? "",
+                style: const TextStyle(
                   fontSize: 18,
                   color: textBlack,
                 ),
               ),
               const Spacer(),
-              IconButton(
-                  onPressed: () {},
-                  icon: const Icon(Icons.chat_bubble_outline)),
             ],
           ),
           const Gap(20),
-          const Row(
+          Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
               Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "prodect Name",
-                    style: TextStyle(
+                    model.productname ?? "",
+                    style: const TextStyle(
                         fontSize: 18,
                         color: textBlack,
                         fontWeight: FontWeight.w600),
                   ),
                   Text(
-                    "20/5/2020",
+                    model.date ?? "",
                     style: TextStyle(
                       fontSize: 14,
                       color: grey,
@@ -117,7 +130,7 @@ class OrderListItem extends StatelessWidget {
                 ],
               ),
               Text(
-                "Price:" "220",
+                "Price:" "${model.price ?? ""}",
                 style: TextStyle(
                     fontSize: 18,
                     color: secondary,

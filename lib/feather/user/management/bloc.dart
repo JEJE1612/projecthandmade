@@ -5,12 +5,12 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:handmade/feather/pages/Admin/data/favprodect.dart';
 import 'package:handmade/feather/pages/Admin/data/model/catrg_model.dart';
+import 'package:handmade/feather/pages/Admin/mangment/car_prodect/presention/car_prodect_view.dart';
 import 'package:handmade/feather/pages/Admin/presention/chat/presentaion/views/chat.dart';
 import 'package:handmade/feather/pages/Admin/presention/profail/profail.dart';
 import 'package:handmade/feather/pages/Admin/presention/views/home_custum_user.dart';
 import 'package:handmade/feather/pages/Auth/data/model/user_model.dart';
 import 'package:handmade/feather/user/management/my_state.dart';
-import 'package:handmade/feather/user/presentation/favourte/product/favorateprotect.dart';
 
 class MyBloc extends Cubit<MyState> {
   MyBloc() : super(InitalMyState());
@@ -21,7 +21,7 @@ class MyBloc extends Cubit<MyState> {
   final List<Widget> screens = [
     const HomeCustomUser(),
     const ChatPage(),
-    const FavourateprodectScreen(),
+    const CarProdectPage(),
     const ProfailpageAdmin(),
   ];
 

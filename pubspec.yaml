@@ -54,6 +54,7 @@ dependencies:
   flutter_easyloading: ^3.0.5
   shimmer: ^3.0.0
   pay: ^1.1.2
+  
 
 dev_dependencies:
 
