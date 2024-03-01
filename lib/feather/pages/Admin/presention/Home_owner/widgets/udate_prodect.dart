@@ -107,6 +107,11 @@ class UdateProdectPage extends StatelessWidget {
                               prodectUid: model.prodectuid!,
                               catgname: model.catgname,
                               prodectImage: model.prodectImage,
+                              titlefrom:model.prodectname!,
+                              desciptionfrom:model.text!,
+                              pricefrom:model.price!,
+                              pacefrom:model.pace!
+
                             );
                           },
                         ),

@@ -27,7 +27,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
         return Scaffold(
           appBar: AppBar(
             title: const Text(
-              "PayPal Checkout",
+              "PayPal ",
               style: TextStyle(fontSize: 20),
             ),
           ),
@@ -124,7 +124,7 @@ class _CheckoutPageState extends State<CheckoutPage> {
                   ),
                 ),
               ),
-              child: const Text('Checkout'),
+              child: const Text('By_Now'),
             ),
           ),
         );

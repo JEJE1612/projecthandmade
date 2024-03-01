@@ -9,6 +9,7 @@ import 'package:handmade/feather/pages/Admin/mangment/user/user_bloc.dart';
 import 'package:handmade/feather/pages/Admin/mangment/user/user_state.dart';
 import 'package:handmade/feather/pages/Admin/presention/profail/edit_profail/ebit_profail_page.dart';
 import 'package:handmade/feather/pages/Auth/presentaion/views/login_page.dart';
+import 'package:handmade/feather/user/presentation/favourte/product/favorateprotect.dart';
 
 class ProfailpageAdmin extends StatelessWidget {
   const ProfailpageAdmin({super.key});
@@ -108,20 +109,25 @@ class ProfailpageAdmin extends StatelessWidget {
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.04,
                           ),
-                          Row(
-                            children: [
-                              getSvgIcon(AssetsData.hearticon),
-                              const SizedBox(
-                                width: 15,
-                              ),
-                              const Text(
-                                "Wishlists",
-                                style: TextStyle(
-                                  color: grey,
-                                  fontSize: 16,
+                              InkWell(
+                                onTap: (){
+                                  Navigator.push(context, MaterialPageRoute(builder: (context) =>FavourateprodectScreen()));
+                                },
+                            child: Row(
+                              children: [
+                                getSvgIcon(AssetsData.hearticon),
+                                const SizedBox(
+                                  width: 15,
                                 ),
-                              ),
-                            ],
+                                const Text(
+                                  "Wishlists",
+                                  style: TextStyle(
+                                    color: grey,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                              ],
+                            ),
                           ),
                           SizedBox(
                             height: MediaQuery.of(context).size.height * 0.04,

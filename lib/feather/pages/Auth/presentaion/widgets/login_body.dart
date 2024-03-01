@@ -24,8 +24,8 @@ class LoginBody extends StatelessWidget {
       create: (context) => LoginBloc(),
       child: BlocConsumer<LoginBloc, LoginState>(
         listener: (context, state) async {
-          if (state is LoginSucssesState) {
-          } else if (state is LoginFailureState) {
+          if (state is LoginSucssesState) 
+          {} else if (state is LoginFailureState) {
           } else if (state is LoginAsClint) {
             EasyLoading.showSuccess("Welcom back");
             Navigator.pushAndRemoveUntil(

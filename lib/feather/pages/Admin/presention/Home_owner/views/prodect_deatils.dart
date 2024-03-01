@@ -57,16 +57,28 @@ class ProdectDeatils extends StatelessWidget {
                   padding: const EdgeInsets.only(right: 20, bottom: 10),
                   child: Row(
                     children: [
-                      Spacer(),
-                      Text(
-                        "Show_All_comment",
-                        style: Styles.textStyle16.copyWith(color: primary),
+                      const Spacer(),
+                      InkWell(
+                        onTap: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: (context) => CommentView(
+                                  model: prodect!,
+                                ),
+                              ));
+                        },
+                        child: Text(
+                          "Show_All_comment",
+                          style: Styles.textStyle16.copyWith(color: primary),
+                        ),
                       ),
                     ],
                   ),
                 ),
+                Gap(20),
                 SizedBox(
-                  height: MediaQuery.of(context).size.height * 0.14,
+                  height: MediaQuery.of(context).size.height * 0.26,
                   child: BlocBuilder<CommentBloc, CommentState>(
                     builder: (context, state) {
                       if (state is GetMessageScafull) {
@@ -108,13 +120,12 @@ class ProdectDeatils extends StatelessWidget {
                     title: "Buy_it",
                     color: secondary,
                     onPressed: () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                            builder: (context) => CheckoutPage(
-                              model: prodect!,
-                            ),
-                          ));
+                      showModalBottomSheet(
+                        context: context,
+                        builder: (context) => CheckoutPage(
+                          model: prodect!,
+                        ),
+                      );
                     },
                   ),
                 if (UserBloc.get(context).usermodel?.type == 'Owner')

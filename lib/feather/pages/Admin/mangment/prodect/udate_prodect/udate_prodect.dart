@@ -21,17 +21,21 @@ class UdateProdectBloc extends Cubit<UdateProdetState> {
     required String prodectUid,
     String? prodectImage,
     String? catgname,
+    String? titlefrom,    
+    String? desciptionfrom,    
+    String? pricefrom,
+    String? pacefrom,
   }) async {
     emit(LodingUpdateProdect());
 
     ProdectModel updatedModel = ProdectModel(
       prodectuid: prodectUid,
-      prodectname: title.text,
+      prodectname: title.text =="" ?titlefrom!:title.text,
       catgname: catgname,
       prodectImage: prodectImage,
-      text: descipton.text,
-      price: price.text,
-      pace: paces.text,
+      text: descipton.text==""?desciptionfrom!:descipton.text,
+      price: price.text ==""?pricefrom!:price.text ,
+      pace: paces.text==""?pacefrom!:paces.text,
       date: time.toString(),
       uid: uid,
     );

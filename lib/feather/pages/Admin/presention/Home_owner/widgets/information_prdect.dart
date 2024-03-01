@@ -62,29 +62,12 @@ class InformationProdect extends StatelessWidget {
                     "${model?.price}",
                     style: Styles.textStyle18.copyWith(color: primary),
                   ),
-                  Gap(5),
+                  const Gap(5),
                   const Icon(
                     Icons.attach_money,
                     color: secondary,
                   ),
-                  Gap(5),
-                ],
-              ),
-            ],
-          ),
-          const Gap(15),
-          Row(
-            children: [
-              const Icon(
-                Icons.category,
-                color: grey,
-              ),
-              const Gap(5),
-              Row(
-                children: [
-                  Text("${model?.pace}", style: Styles.textStyle18),
-                  Gap(5),
-                  Text("piece", style: Styles.textStyle16),
+                  const Gap(5),
                 ],
               ),
             ],

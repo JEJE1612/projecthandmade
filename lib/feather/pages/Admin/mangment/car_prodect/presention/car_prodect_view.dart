@@ -81,7 +81,7 @@ class CarItems extends StatelessWidget {
           Container(
             clipBehavior: Clip.none,
             decoration: BoxDecoration(
-                borderRadius: BorderRadiusDirectional.only(
+                borderRadius: const BorderRadiusDirectional.only(
                     topStart: Radius.circular(12),
                     bottomStart: Radius.circular(12)),
                 image: DecorationImage(
@@ -99,24 +99,28 @@ class CarItems extends StatelessWidget {
                 children: [
                   Align(
                     alignment: AlignmentDirectional.topEnd,
-                    child: Container(
-                      decoration: BoxDecoration(
-                          color: primary,
-                          borderRadius: BorderRadius.circular(12)),
-                      padding:
-                          EdgeInsets.symmetric(horizontal: 10, vertical: 3),
-                      child: Text(
-                        "By_it",
-                        style: Styles.textStyle16.copyWith(color: Colors.white),
+                    child: InkWell(
+                      onTap: () {},
+                      child: Container(
+                        decoration: BoxDecoration(
+                            color: primary,
+                            borderRadius: BorderRadius.circular(12)),
+                        padding: const EdgeInsets.symmetric(
+                            horizontal: 10, vertical: 3),
+                        child: Text(
+                          "By_it",
+                          style:
+                              Styles.textStyle16.copyWith(color: Colors.white),
+                        ),
                       ),
                     ),
                   ),
-                  Gap(20),
+                  const Gap(20),
                   Text(
                     model.productname ?? "",
                     style: Styles.textStyle16,
                   ),
-                  Spacer(),
+                  const Spacer(),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [

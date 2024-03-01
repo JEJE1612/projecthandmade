@@ -151,10 +151,9 @@ class MyBloc extends Cubit<MyState> {
 
     try {
       await favprodect.doc(docId).delete();
-
-      emit(SuccessDeletefavProect());
       getfavourateProducttouser();
       EasyLoading.dismiss();
+      emit(SuccessDeletefavProect());
     } catch (e) {}
   }
 }

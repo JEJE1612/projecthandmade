@@ -3,27 +3,36 @@ import 'package:flutter/material.dart';
 import 'package:handmade/cors/theme/colors.dart';
 import 'package:handmade/cors/theme/style_text.dart';
 import 'package:handmade/feather/pages/Admin/data/model/prodect_model.dart';
-import 'package:handmade/feather/pages/Admin/presention/Home_owner/views/prodect_deatils.dart';
 import 'package:handmade/feather/user/management/bloc.dart';
 
-class CardItemsProdectUser extends StatelessWidget {
-  const CardItemsProdectUser({
+class CardItemsFavProdectUser extends StatelessWidget {
+  const CardItemsFavProdectUser({
     super.key,
-    required this.prodect,
+    required this.image,
+    required this.name,
+    required this.price,
+    required this.id,
+    required this.isShowDeleteButton,
   });
-  final ProdectModel prodect;
+  //final ProdectModel prodect;
+  final String image;
+  final String price;
+  final String name;
+
+  final String id;
+  final bool isShowDeleteButton;
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
       onTap: () {
-        Navigator.push(
-            context,
-            MaterialPageRoute(
-              builder: (context) => ProdectDeatils(
-                prodect: prodect,
-              ),
-            ));
+        // Navigator.push(
+        //     context,
+        //     MaterialPageRoute(
+        //       builder: (context) => ProdectDeatils(
+        //         prodect: prodect,
+        //       ),
+        //     ));
       },
       child: Card(
         child: Column(
@@ -35,7 +44,7 @@ class CardItemsProdectUser extends StatelessWidget {
                   image: DecorationImage(
                     fit: BoxFit.cover,
                     image: CachedNetworkImageProvider(
-                      prodect.prodectImage ?? "",
+                      image ?? "",
                     ),
                   ),
                 ),
@@ -59,7 +68,7 @@ class CardItemsProdectUser extends StatelessWidget {
                         Row(
                           children: [
                             Text(
-                              prodect.price ?? "",
+                              price ?? "",
                               style:
                                   Styles.textStyle16.copyWith(color: primary),
                             ),
@@ -71,25 +80,18 @@ class CardItemsProdectUser extends StatelessWidget {
                         ),
                         IconButton(
                             onPressed: () {
-                              MyBloc.get(context).creatfavProdect(
-                                  prodect.prodectImage      ,
-                                  prodect.catgname,
-                                  prodect.prodectname,
-                                  prodect.text,
-                                  prodect.price,
-                                  prodect.uid,
-                                  prodect.pace);
+                              MyBloc.get(context).deleteProdect(id);
                             },
                             icon: const Icon(
                               Icons.favorite,
-                              color: Colors.green,
+                              color: Colors.red,
                               size: 25,
                             ))
                       ],
                     ),
                   ),
                   Text(
-                    prodect.prodectname ?? "",
+                    name ?? "",
                     style: Styles.textStyle16,
                   ),
                 ],
